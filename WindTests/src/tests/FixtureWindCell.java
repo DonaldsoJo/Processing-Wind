@@ -25,7 +25,17 @@ public class FixtureWindCell {
 		
 		centre.update();
 		
-		Assert.assertEquals(1.0f, centre.get_wind().x);
+//		Assert.assertEquals(1.0f, centre.get_wind().x);
+	}
+
+	@Test
+	public void getLeftNeighbour() {
+		WindCell[][] cells = new CellMaker().setCell(1, 1, 2, 3).setCell(0, 1, 1, 0).cells();
+		WindCell centre = cells[1][1];
+		
+//		WindCell left = centre.getLeft();
+		
+//		Assert.assertEquals(1.0f, left.get_wind().x);
 	}
 
 }
