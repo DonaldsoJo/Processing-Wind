@@ -1,5 +1,7 @@
 package tests;
 
+import java.io.Console;
+
 import junit.framework.Assert;
 
 
@@ -10,7 +12,7 @@ import wind.WindMatrix;
 
 
 
-public class FixtureWindArray {
+public class FixtureWindMatrix {
 	
 	@Test
 	public void noWind() {
@@ -42,5 +44,26 @@ public class FixtureWindArray {
 		Assert.assertEquals(1.0f, left.get_wind().x);
 	}
 
+	@Test
+	public void outOfBounds() {
+		WindMatrix matrix = new MatrixMaker().matrix();
+		int colMax = matrix.cells().length;
+		int rowMax = matrix.cells()[0].length;
+		Assert.assertFalse(matrix.indexInBounds(-1, 0));
+		Assert.assertFalse(matrix.indexInBounds(0, rowMax));
+		Assert.assertFalse(matrix.indexInBounds(0, -1));
+		Assert.assertFalse(matrix.indexInBounds(colMax, 0));
+	}
+
+	@Test
+	public void inBounds() {
+		WindMatrix matrix = new MatrixMaker().matrix();
+		int colMax = matrix.cells().length;
+		int rowMax = matrix.cells()[0].length;
+		Assert.assertTrue(matrix.indexInBounds(0, 1));
+		Assert.assertTrue(matrix.indexInBounds(1, 0));
+		Assert.assertTrue(matrix.indexInBounds(0, rowMax-1));
+		Assert.assertTrue(matrix.indexInBounds(colMax-1, 0));
+	}
 
 }

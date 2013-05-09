@@ -17,9 +17,9 @@ public class MyProcessingSketch extends PApplet
 	    background(0);
 	    
 	    _matrix = new WindMatrix(3,3);
-	    _matrix.setCell(0,0,10,0);
-	    _matrix.setCell(0,1,10,0);
-	    _matrix.setCell(0,2,10,0);
+	    _matrix.setCell(0,0,3,0);
+	    _matrix.setCell(0,1,4,0);
+	    _matrix.setCell(0,2,5,0);
 	}
 	
 	public void draw() {

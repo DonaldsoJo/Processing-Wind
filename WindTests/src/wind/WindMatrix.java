@@ -28,7 +28,13 @@ public class WindMatrix
 	}
 
 	public WindCell getCell(int col, int row) {
-		return _cells[col][row];
+		if (indexInBounds(col, row)) return _cells[col][row];
+		return new WindCell(this, col, row);
+	}
+
+	public boolean indexInBounds(int col, int row) {
+		if ((col < 0) || (col >= _cells.length) || (row < 0) || (row >= _cells[0].length)) return false;
+		return true;
 	}
 
 	public WindCell getLeft(int col, int row) {
@@ -40,12 +46,13 @@ public class WindMatrix
 	}
 
 	public void updateCells() {
-		// TODO Auto-generated method stub
-		
+		for(WindCell[] cols : _cells)
+			for(WindCell cell: cols)
+				cell.update();
 	}
 
-	public void setCell(int i, int j, int k, int l) {
-		// TODO Auto-generated method stub
-		
+	public void setCell(int col, int row, int xval, int yval) {
+		_cells[col][row].get_wind().x = xval;
+		_cells[col][row].get_wind().y = yval;
 	}
 }
