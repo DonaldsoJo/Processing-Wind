@@ -1,4 +1,4 @@
-package main;
+package wind;
 
 import processing.core.PVector;
 
@@ -32,6 +32,10 @@ public class WindCell {
 
 	public WindCell getLeft() {
 		return _parent.getLeft(_col, _row);
+	}
+
+	public WindCell getRight() {
+		return _parent.getRight(_col, _row);
 	}
 
 }

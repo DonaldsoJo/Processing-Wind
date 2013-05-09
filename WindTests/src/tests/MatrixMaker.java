@@ -1,6 +1,6 @@
 package tests;
 
-import main.WindMatrix;
+import wind.WindMatrix;
 
 public class MatrixMaker
 {
@@ -26,5 +26,10 @@ public class MatrixMaker
 	public WindMatrix matrix()
 	{
 		return _matrix;
+	}
+
+	public MatrixMaker centre(int xval, int yval) {
+		setCell(1, 1, xval, yval);
+		return this;
 	}
 }

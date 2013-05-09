@@ -1,4 +1,4 @@
-package main;
+package wind;
 
 
 public class WindMatrix
@@ -23,11 +23,29 @@ public class WindMatrix
 	
 	private WindCell[][] _cells;
 
+	public WindCell[][] cells() {
+		return _cells;
+	}
+
 	public WindCell getCell(int col, int row) {
 		return _cells[col][row];
 	}
 
 	public WindCell getLeft(int col, int row) {
 		return getCell(col-1,row);
+	}
+
+	public WindCell getRight(int col, int row) {
+		return getCell(col+1,row);
+	}
+
+	public void updateCells() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setCell(int i, int j, int k, int l) {
+		// TODO Auto-generated method stub
+		
 	}
 }
