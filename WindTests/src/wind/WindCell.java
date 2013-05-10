@@ -13,9 +13,17 @@ public class WindCell {
 	
 	private PVector _wind = new PVector();
 	private WindMatrix _parent;
-	private int _col;
-	private int _row;
 	
+	private int _col;
+	public int getCol() {
+		return _col;
+	}
+
+	private int _row;
+	public int getRow() {
+		return _row;
+	}
+
 	public PVector get_wind() {
 		return _wind;
 	}

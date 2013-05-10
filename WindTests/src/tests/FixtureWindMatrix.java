@@ -65,5 +65,28 @@ public class FixtureWindMatrix {
 		Assert.assertTrue(matrix.indexInBounds(0, rowMax-1));
 		Assert.assertTrue(matrix.indexInBounds(colMax-1, 0));
 	}
+	
+	@Test
+	public void CurrentAndOtherMatrix()
+	{
+		WindMatrix matrix = new MatrixMaker().matrix();
+		Assert.assertEquals(0, matrix.currentMatrix());
+		Assert.assertEquals(1, matrix.otherMatrix());
+		matrix.flipMatrix();
+		Assert.assertEquals(1, matrix.currentMatrix());
+		Assert.assertEquals(0, matrix.otherMatrix());
+	}
+
+	@Test
+	public void FlipCurrentMatrix()
+	{
+		WindMatrix current = new MatrixMaker().setCell(0,1,1,1).matrix();
+		Assert.assertEquals(1.0f, current.getLeft(1,1).get_wind().x);
+		current.flipMatrix();
+		Assert.assertEquals(0.0f, current.getLeft(1,1).get_wind().x);
+		current.flipMatrix();
+		Assert.assertEquals(1.0f, current.getLeft(1,1).get_wind().x);
+
+	}
 
 }
