@@ -39,5 +39,6 @@ public class MyProcessingSketch extends PApplet
 	private void drawCell(WindCell cell) {
 		println("draw cell");
 		// John modified this from the family machine as JohnMD
+		// more mods
 	}
 }
