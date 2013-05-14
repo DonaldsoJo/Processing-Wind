@@ -1,31 +1,33 @@
 package tests;
 
+import wind.WindMatrices;
 import wind.WindMatrix;
 
 public class MatrixMaker
 {
 	public MatrixMaker()
 	{
-		_matrix = getWindCells();
+		_matrices = getWindCells();
 	}
 	
-	private WindMatrix _matrix;
+	private WindMatrices _matrices;
 	
-	private WindMatrix getWindCells() {
-		WindMatrix matrix = new WindMatrix(3,3);
+	private WindMatrices getWindCells() {
+		WindMatrices matrix = new WindMatrices(3,3);
 		return matrix;
 	}
 	
 	public MatrixMaker setCell(int col, int row, float xval, float yval)
 	{
-		_matrix.getCell(col, row).get_wind().x = xval;
-		_matrix.getCell(col, row).get_wind().y = yval;
+		WindMatrix current = _matrices.currentMatrix();
+		current.getCell(col, row).get_wind().x = xval;
+		current.getCell(col, row).get_wind().y = yval;
 		return this;
 	}
 	
-	public WindMatrix matrix()
+	public WindMatrices matrices()
 	{
-		return _matrix;
+		return _matrices;
 	}
 
 	public MatrixMaker centre(int xval, int yval) {
@@ -34,8 +36,9 @@ public class MatrixMaker
 	}
 
 	public MatrixMaker setOtherCell(int col, int row, float xval, float yval) {
-		_matrix.otherCells()[col][row].get_wind().x = xval;
-		_matrix.otherCells()[col][row].get_wind().y = yval;
+		WindMatrix other = _matrices.otherMatrix();
+		other.getCell(col, row).get_wind().x = xval;
+		other.getCell(col, row).get_wind().y = yval;
 		return this;
 	}
 

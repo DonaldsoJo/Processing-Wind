@@ -4,9 +4,9 @@ import processing.core.PVector;
 
 public class WindCell {
 	
-	public WindCell( WindMatrix parent, int col, int row)
+	public WindCell( WindMatrix windMatrix, int col, int row)
 	{
-		_parent = parent;
+		_parent = windMatrix;
 		_col = col;
 		_row = row;
 	}
@@ -29,15 +29,15 @@ public class WindCell {
 	}
 
 	public void update() {
-		clearNext();
-		// go round all neighbours
-		// update the other matrix
-		System.out.println("current left x " + _parent.getLeft(_col, _row).get_wind().x);
-		_parent.otherCells()[_col][_row].get_wind().add(_parent.getLeft(_col, _row).get_wind());		
-	}
-
-	private void clearNext() {
-		_parent.clearNext( _col, _row);
+		// clear the other cell
+		_parent.clearOther( _col, _row);
+		
+		// add all inbound vectors
+		PVector v = new PVector();
+		v.add( getLeft().get_wind());
+		
+		// update other
+		_parent.updateOther(_col, _row, v);
 	}
 
 	public WindCell getLeft() {
@@ -46,6 +46,11 @@ public class WindCell {
 
 	public WindCell getRight() {
 		return _parent.getRight(_col, _row);
+	}
+
+	public void clearCell() {
+		_wind.x = 0;
+		_wind.y = 0;
 	}
 
 }
