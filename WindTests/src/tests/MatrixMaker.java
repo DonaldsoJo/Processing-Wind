@@ -5,17 +5,25 @@ import wind.WindMatrix;
 
 public class MatrixMaker
 {
+
 	public MatrixMaker()
 	{
-		_matrices = getWindCells();
+		createMatrices(3, 3);
 	}
 	
+	public MatrixMaker(int cols, int rows) {
+		createMatrices(cols, rows);
+	}
+
+	public void createMatrices(int cols, int rows) {
+		_cols = cols;
+		_rows = rows;
+		_matrices = new WindMatrices(cols,rows);
+	}
+
 	private WindMatrices _matrices;
-	
-	private WindMatrices getWindCells() {
-		WindMatrices matrix = new WindMatrices(3,3);
-		return matrix;
-	}
+	private int _cols;
+	private int _rows;
 	
 	public MatrixMaker setCell(int col, int row, float xval, float yval)
 	{
@@ -30,7 +38,8 @@ public class MatrixMaker
 		return _matrices;
 	}
 
-	public MatrixMaker centre(int xval, int yval) {
+	public MatrixMaker centre(int xval, int yval) throws Exception {
+		if ((_cols != 3)||(_rows != 3)) throw new Exception("Centre can only be used from a 3*3 matrix");
 		setCell(1, 1, xval, yval);
 		return this;
 	}
@@ -42,7 +51,8 @@ public class MatrixMaker
 		return this;
 	}
 
-	public MatrixMaker left( float xval, float yval) {
+	public MatrixMaker left( float xval, float yval) throws Exception {
+		if ((_cols != 3)||(_rows != 3)) throw new Exception("Centre can only be used from a 3*3 matrix");
 		setCell(0, 1, xval, yval);
 		return this;
 	}

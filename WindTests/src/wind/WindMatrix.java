@@ -4,11 +4,11 @@ import processing.core.PVector;
 
 public class WindMatrix {
 	private WindCell[][] _cells;
-	private WindMatrices _parent;
+	private BaseMatrices _parent;
 
-	public WindMatrix(int cols, int rows, WindMatrices parent) {
+	public WindMatrix(int cols, int rows, BaseMatrices baseMatrices) {
 		_cells = new WindCell[cols][rows];
-		_parent = parent;
+		_parent = baseMatrices;
 	}
 	
 	public WindCell[][] getCells() {
@@ -40,7 +40,25 @@ public class WindMatrix {
 	public void updateCells() {
 		for(WindCell[] cols : _cells)
 			for(WindCell cell: cols)
+			{
+				NeighbourhoodMatrices neighbours = getNeighbours( cell);
 				cell.update();
+			}
+	}
+
+	public NeighbourhoodMatrices getNeighbours( WindCell cell) {
+		NeighbourhoodMatrices neighbours = new NeighbourhoodMatrices(3, 3);
+		for(int col=0; col<3; col++)
+			for (int row=0; row<3; row++)
+			{
+				WindCell c = getCell(col + cell.getCol() - 1, row + cell.getRow() - 1);
+				neighbours.currentMatrix().replaceCell(col,row,c);
+			}
+		return neighbours;
+	}
+
+	private void replaceCell(int col, int row, WindCell cell) {
+		_cells[col][row] = cell;
 	}
 
 	public void setCell(int col, int row, float x, float y) {

@@ -1,10 +1,6 @@
 package tests;
 
-import java.io.Console;
-
 import junit.framework.Assert;
-
-
 import org.junit.Test;
 
 import wind.BaseMatrices;
@@ -25,7 +21,7 @@ public class FixtureWindMatrix {
 	}
 
 	@Test
-	public void someWind() {
+	public void someWind() throws Exception {
 		WindMatrix matrix = new MatrixMaker().centre(1,1).matrices().currentMatrix();
 		
 		Assert.assertNotSame(0.0f, matrix.getCell(1, 1).get_wind().x);
@@ -73,10 +69,10 @@ public class FixtureWindMatrix {
 	@Test
 	public void currentAndOtherMatrix()
 	{
-		BaseMatrices matrix = new MatrixMaker().matrices();
+		WindMatrices matrix = new MatrixMaker().matrices();
 		Assert.assertEquals(0, matrix.currentMatrixIndex());
 		Assert.assertEquals(1, matrix.otherMatrixIndex());
-		matrix.flipMatrix();
+		matrix.flipMatrices();
 		Assert.assertEquals(1, matrix.currentMatrixIndex());
 		Assert.assertEquals(0, matrix.otherMatrixIndex());
 	}
@@ -87,9 +83,9 @@ public class FixtureWindMatrix {
 		WindMatrices matrices = new MatrixMaker().setCell(0,1,1,1).matrices();
 		
 		Assert.assertEquals(1.0f, matrices.currentMatrix().getLeft(1,1).get_wind().x);
-		matrices.flipMatrix();
+		matrices.flipMatrices();
 		Assert.assertEquals(0.0f, matrices.currentMatrix().getLeft(1,1).get_wind().x);
-		matrices.flipMatrix();
+		matrices.flipMatrices();
 		Assert.assertEquals(1.0f, matrices.currentMatrix().getLeft(1,1).get_wind().x);
 
 	}

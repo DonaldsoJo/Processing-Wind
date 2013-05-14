@@ -26,14 +26,19 @@ public class MyProcessingSketch extends PApplet
 		// draw matrix
 		WindCell[][] cells = _matrices.currentMatrix().getCells();
 		
+		drawWindMatrix(cells);			
+		
+		// update matrix and flip
+		_matrices.currentMatrix().updateCells();
+		_matrices.flipMatrices();
+	}
+
+	public void drawWindMatrix(WindCell[][] cells) {
 		for(int col=0; col<cells.length; col++ )
 			for(int row=0; row<cells[col].length; row++)
 			{
 				drawCell( cells[col][row]);
-			}			
-		
-		// update matrix
-		_matrices.currentMatrix().updateCells();
+			}
 	}
 
 	private void drawCell(WindCell cell) {
