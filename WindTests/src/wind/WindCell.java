@@ -12,6 +12,10 @@ public class WindCell {
 	}
 	
 	private PVector _wind = new PVector();
+	public PVector get_wind() {
+		return _wind;
+	}
+
 	private WindMatrix _parent;
 	
 	private int _col;
@@ -24,18 +28,16 @@ public class WindCell {
 		return _row;
 	}
 
-	public PVector get_wind() {
-		return _wind;
-	}
-
 	public void update() {
-		clearWind();
-		_wind.add(_parent.getLeft(_col, _row).get_wind());		
+		clearNext();
+		// go round all neighbours
+		// update the other matrix
+		System.out.println("current left x " + _parent.getLeft(_col, _row).get_wind().x);
+		_parent.otherCells()[_col][_row].get_wind().add(_parent.getLeft(_col, _row).get_wind());		
 	}
 
-	private void clearWind() {
-		_wind.x = 0;
-		_wind.y = 0;
+	private void clearNext() {
+		_parent.clearNext( _col, _row);
 	}
 
 	public WindCell getLeft() {

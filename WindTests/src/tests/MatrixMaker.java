@@ -32,4 +32,15 @@ public class MatrixMaker
 		setCell(1, 1, xval, yval);
 		return this;
 	}
+
+	public MatrixMaker setOtherCell(int col, int row, float xval, float yval) {
+		_matrix.otherCells()[col][row].get_wind().x = xval;
+		_matrix.otherCells()[col][row].get_wind().y = yval;
+		return this;
+	}
+
+	public MatrixMaker left( float xval, float yval) {
+		setCell(0, 1, xval, yval);
+		return this;
+	}
 }

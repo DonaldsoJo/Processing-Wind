@@ -67,18 +67,18 @@ public class FixtureWindMatrix {
 	}
 	
 	@Test
-	public void CurrentAndOtherMatrix()
+	public void currentAndOtherMatrix()
 	{
 		WindMatrix matrix = new MatrixMaker().matrix();
-		Assert.assertEquals(0, matrix.currentMatrix());
-		Assert.assertEquals(1, matrix.otherMatrix());
+		Assert.assertEquals(0, matrix.currentMatrixIndex());
+		Assert.assertEquals(1, matrix.otherMatrixIndex());
 		matrix.flipMatrix();
-		Assert.assertEquals(1, matrix.currentMatrix());
-		Assert.assertEquals(0, matrix.otherMatrix());
+		Assert.assertEquals(1, matrix.currentMatrixIndex());
+		Assert.assertEquals(0, matrix.otherMatrixIndex());
 	}
 
 	@Test
-	public void FlipCurrentMatrix()
+	public void flipCurrentMatrix()
 	{
 		WindMatrix current = new MatrixMaker().setCell(0,1,1,1).matrix();
 		Assert.assertEquals(1.0f, current.getLeft(1,1).get_wind().x);
@@ -87,6 +87,18 @@ public class FixtureWindMatrix {
 		current.flipMatrix();
 		Assert.assertEquals(1.0f, current.getLeft(1,1).get_wind().x);
 
+	}
+
+	@Test
+	public void clearNext()
+	{
+		WindMatrix current = new MatrixMaker().setOtherCell(1,1,1,1).matrix();
+		WindCell[][] otherCells = current.otherCells();
+		
+		Assert.assertEquals(1.0f, otherCells[1][1].get_wind().x);
+		current.clearNext(1, 1);
+		Assert.assertEquals(0.0f, otherCells[1][1].get_wind().x);
+		
 	}
 
 }

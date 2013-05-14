@@ -8,11 +8,9 @@ public class MyProcessingSketch extends PApplet
 	
 	private static final long serialVersionUID = 1L;
 	
-	WindMatrix _matrix;
+	private WindMatrix _matrix;
 
 	public void setup() {
-		// TODO Auto-generated method stub
-		
 	    size(200,200);
 	    background(0);
 	    

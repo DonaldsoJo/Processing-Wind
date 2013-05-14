@@ -5,7 +5,7 @@ public class WindMatrix
 {
 	public WindMatrix(WindCell[][] cells)
 	{
-		_cells[_currentMatrix] = cells;
+		_cells[_currentMatrixIndex] = cells;
 	}
 	
 	public WindMatrix(int cols, int rows)
@@ -17,24 +17,28 @@ public class WindMatrix
 		{
 			for(int row=0; row<rows; row++)
 			{
-				_cells[_currentMatrix][col][row] = new WindCell( this, col, row);;
-				_cells[otherMatrix()][col][row] = new WindCell( this, col, row);;
+				_cells[_currentMatrixIndex][col][row] = new WindCell( this, col, row);
+				_cells[otherMatrixIndex()][col][row] = new WindCell( this, col, row);
 			}
 		}
 	}
 	
-	private int _currentMatrix = 0;
-	public int currentMatrix() {
-		return _currentMatrix;
+	private int _currentMatrixIndex = 0;
+	public int currentMatrixIndex() {
+		return _currentMatrixIndex;
 	}
-	public int otherMatrix() {
-		return 1-_currentMatrix;
+	public int otherMatrixIndex() {
+		return 1-_currentMatrixIndex;
 	}
 
 	private WindCell[][][] _cells;
 
 	public WindCell[][] cells() {
-		return _cells[_currentMatrix];
+		return _cells[_currentMatrixIndex];
+	}
+
+	public WindCell[][] otherCells() {
+		return _cells[otherMatrixIndex()];
 	}
 
 	public WindCell getCell(int col, int row) {
@@ -43,7 +47,7 @@ public class WindMatrix
 	}
 
 	public boolean indexInBounds(int col, int row) {
-		if ((col < 0) || (col >= cells().length) || (row < 0) || (row >= cells().length)) return false;
+		if ((col < 0) || (col >= cells().length) || (row < 0) || (row >= cells()[0].length)) return false;
 		return true;
 	}
 
@@ -67,6 +71,11 @@ public class WindMatrix
 	}
 
 	public void flipMatrix() {
-		_currentMatrix = otherMatrix();
+		_currentMatrixIndex = otherMatrixIndex();
+	}
+
+	public void clearNext(int col, int row) {
+		otherCells()[col][row].get_wind().x = 0;
+		otherCells()[col][row].get_wind().y = 0;
 	}
 }

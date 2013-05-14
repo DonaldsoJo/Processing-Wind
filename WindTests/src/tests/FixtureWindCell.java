@@ -12,12 +12,17 @@ public class FixtureWindCell {
 
 	@Test
 	public void neighboursAreZero_centreUpdatesToZero() {
-		WindMatrix matrix = new MatrixMaker().centre(2, 3).matrix();
-		WindCell centre = matrix.getCell(1,1);
+		WindMatrix matrix = new MatrixMaker().centre(2, 3).left(4, 5).matrix();
 		
+		WindCell centre = matrix.getCell(1,1);
+		Assert.assertEquals(2.0f, centre.get_wind().x);
+		WindCell otherCell = matrix.otherCells()[1][1];
+		Assert.assertEquals(0.0f, otherCell.get_wind().x);
+
 		centre.update();
 		
-		Assert.assertEquals(0.0f, centre.get_wind().x);
+		Assert.assertEquals(2.0f, centre.get_wind().x);
+		Assert.assertEquals(4.0f, otherCell.get_wind().x);
 	}
 
 	@Test
@@ -27,7 +32,8 @@ public class FixtureWindCell {
 		
 		centre.update();
 		
-		Assert.assertEquals(1.0f, centre.get_wind().x);
+		WindCell otherCell = matrix.otherCells()[1][1];
+		Assert.assertEquals(1.0f, otherCell.get_wind().x);
 	}
 
 	@Test
