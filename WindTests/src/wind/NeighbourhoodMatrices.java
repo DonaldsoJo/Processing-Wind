@@ -1,6 +1,7 @@
 package wind;
 
-// just a change to try the commit
+// just a change to try the commit - and another small change
+
 public class NeighbourhoodMatrices extends BaseMatrices {
 
 	public NeighbourhoodMatrices(int cols, int rows) {
