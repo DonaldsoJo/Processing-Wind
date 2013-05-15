@@ -65,4 +65,19 @@ public class FixtureNeighbours {
 		return current;
 	}
 
+	@Test
+	public void neighboursAreZero_centreUpdatesToZero() throws Exception {
+		NeighbourhoodMatrices neighbours = new MatrixMaker().centre(2, 3).neighbours(1,1);
+		neighbours.update();
+		Assert.assertEquals(0.0f, neighbours.otherMatrix().getCell(1, 1).get_wind().x);
+	}
+
+	@Test
+	public void leftNeighboursIsOne_centreUpdatesToOne() throws Exception {
+		NeighbourhoodMatrices neighbours = new MatrixMaker().centre(2, 3).setCell(0, 1, 1, 0).neighbours(1,1);
+		Assert.assertEquals(0.0f, neighbours.otherMatrix().getCell(1, 1).get_wind().x);
+		neighbours.update();
+		Assert.assertEquals(1.0f, neighbours.otherMatrix().getCell(1, 1).get_wind().x);
+	}
+
 }

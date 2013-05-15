@@ -1,5 +1,9 @@
 package wind;
 
+import javax.print.attribute.standard.MediaSize.Other;
+
+import processing.core.PVector;
+
 // just a change to try the commit - and another small change
 
 public class NeighbourhoodMatrices extends BaseMatrices {
@@ -42,6 +46,20 @@ public class NeighbourhoodMatrices extends BaseMatrices {
 
 	public WindCell bottomRight() {
 		return currentMatrix().getCell(2, 2);
+	}
+
+	public void update() {
+		WindCell c = this.otherMatrix().getCell(1, 1);
+		c.clearCell();
+		PVector v = c.get_wind();
+		v.add(topLeft().get_wind());
+		v.add(topMiddle().get_wind());
+		v.add(topRight().get_wind());
+		v.add(left().get_wind());
+		v.add(right().get_wind());
+		v.add(bottomLeft().get_wind());
+		v.add(bottomMiddle().get_wind());
+		v.add(bottomRight().get_wind());
 	}
 
 

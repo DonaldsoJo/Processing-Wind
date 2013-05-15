@@ -42,7 +42,6 @@ public class WindMatrix {
 			for(WindCell cell: cols)
 			{
 				NeighbourhoodMatrices neighbours = getNeighbours( cell);
-				cell.update();
 			}
 	}
 

@@ -1,5 +1,7 @@
 package tests;
 
+import wind.NeighbourhoodMatrices;
+import wind.WindCell;
 import wind.WindMatrices;
 import wind.WindMatrix;
 
@@ -55,5 +57,9 @@ public class MatrixMaker
 		if ((_cols != 3)||(_rows != 3)) throw new Exception("Centre can only be used from a 3*3 matrix");
 		setCell(0, 1, xval, yval);
 		return this;
+	}
+
+	public NeighbourhoodMatrices neighbours(int i, int j) {
+		return _matrices.currentMatrix().getNeighbours(new WindCell(1,1));
 	}
 }
