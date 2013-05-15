@@ -1,5 +1,6 @@
 package wind;
 
+// just a change to try the commit
 public class NeighbourhoodMatrices extends BaseMatrices {
 
 	public NeighbourhoodMatrices(int cols, int rows) {
