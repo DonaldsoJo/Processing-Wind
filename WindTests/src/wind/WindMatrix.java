@@ -1,7 +1,5 @@
 package wind;
 
-import processing.core.PVector;
-
 public class WindMatrix {
 	private WindCell[][] _cells;
 
@@ -40,7 +38,7 @@ public class WindMatrix {
 			for(WindCell cell: cols)
 			{
 				NeighbourhoodMatrices neighbours = getNeighbours( cell);
-				// TODO: working here...
+				neighbours.update();
 			}
 	}
 

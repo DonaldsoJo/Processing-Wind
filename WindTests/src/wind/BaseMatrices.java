@@ -11,12 +11,6 @@ public abstract class BaseMatrices {
 	}
 
 	public abstract WindMatrix[] setupMatrices(int cols, int rows);
-//	public WindMatrix[] setupMatrices(int cols, int rows) {
-//		WindMatrix matrices[] = new WindMatrix[2];
-//		matrices[0] = new WindMatrix(cols, rows);
-//		matrices[1] = new WindMatrix(cols, rows);
-//		return matrices;
-//	}
 
 	public void initMatrices(int cols, int rows) {
 		for(int col=0; col<cols; col++)
