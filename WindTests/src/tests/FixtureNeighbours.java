@@ -19,7 +19,7 @@ public class FixtureNeighbours {
 		WindMatrices matrices = new MatrixMaker(5, 8).matrices();
 		WindMatrix current = updateCurrent(matrices);
 //		Utils.printMatrix(current, "current");
-		NeighbourhoodMatrices neighbours = current.getNeighbours( new WindCell(current, 2, 5));
+		NeighbourhoodMatrices neighbours = current.getNeighbours( new WindCell(2, 5));
 //		Utils.printMatrix(neighbours.currentMatrix(), "neighbours");
 		
 		Assert.assertEquals(1.0f, neighbours.topLeft().get_wind().x);

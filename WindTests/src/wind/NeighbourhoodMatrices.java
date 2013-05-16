@@ -62,5 +62,19 @@ public class NeighbourhoodMatrices extends BaseMatrices {
 		v.add(bottomRight().get_wind());
 	}
 
+	@Override
+	public WindMatrix[] setupMatrices(int cols, int rows) {
+		WindMatrix matrices[] = new WindMatrix[2];
+		matrices[0] = new WindMatrix(cols, rows);
+		matrices[1] = new WindMatrix(cols, rows);
+		return matrices;
+	}
+
+//	public WindMatrix[] setupMatrices(int cols, int rows) {
+//	WindMatrix matrices[] = new WindMatrix[2];
+//	matrices[0] = new WindMatrix(cols, rows);
+//	matrices[1] = new WindMatrix(cols, rows);
+//	return matrices;
+//}
 
 }

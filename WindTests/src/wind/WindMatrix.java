@@ -4,11 +4,9 @@ import processing.core.PVector;
 
 public class WindMatrix {
 	private WindCell[][] _cells;
-	private BaseMatrices _parent;
 
-	public WindMatrix(int cols, int rows, BaseMatrices baseMatrices) {
+	public WindMatrix(int cols, int rows) {
 		_cells = new WindCell[cols][rows];
-		_parent = baseMatrices;
 	}
 	
 	public WindCell[][] getCells() {
@@ -21,7 +19,7 @@ public class WindMatrix {
 
 	public WindCell getCell(int col, int row) {
 		if (indexInBounds(col, row)) return _cells[col][row];
-		return new WindCell(this, col, row);
+		return new WindCell(col, row);
 	}
 
 	public boolean indexInBounds(int col, int row) {
@@ -42,6 +40,7 @@ public class WindMatrix {
 			for(WindCell cell: cols)
 			{
 				NeighbourhoodMatrices neighbours = getNeighbours( cell);
+				// TODO: working here...
 			}
 	}
 
@@ -65,11 +64,4 @@ public class WindMatrix {
 		_cells[col][row].get_wind().y = y;
 	}
 
-	public void clearOther(int col, int row) {
-		_parent.clearOther(col, row);
-	}
-
-	public void updateOther( int col, int row, PVector newWind) {
-		_parent.updateOther( col, row, newWind);
-	}
 }
