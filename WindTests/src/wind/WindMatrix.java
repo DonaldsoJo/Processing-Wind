@@ -33,27 +33,7 @@ public class WindMatrix {
 		return getCell(col+1,row);
 	}
 
-	public void updateCells() {
-		for(WindCell[] cols : _cells)
-			for(WindCell cell: cols)
-			{
-				NeighbourhoodMatrices neighbours = getNeighbours( cell);
-				neighbours.update();
-			}
-	}
-
-	public NeighbourhoodMatrices getNeighbours( WindCell cell) {
-		NeighbourhoodMatrices neighbours = new NeighbourhoodMatrices(3, 3);
-		for(int col=0; col<3; col++)
-			for (int row=0; row<3; row++)
-			{
-				WindCell c = getCell(col + cell.getCol() - 1, row + cell.getRow() - 1);
-				neighbours.currentMatrix().replaceCell(col,row,c);
-			}
-		return neighbours;
-	}
-
-	private void replaceCell(int col, int row, WindCell cell) {
+	public void replaceCell(int col, int row, WindCell cell) {
 		_cells[col][row] = cell;
 	}
 

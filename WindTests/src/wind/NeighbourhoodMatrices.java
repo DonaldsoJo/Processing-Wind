@@ -1,7 +1,5 @@
 package wind;
 
-import javax.print.attribute.standard.MediaSize.Other;
-
 import processing.core.PVector;
 
 public class NeighbourhoodMatrices extends BaseMatrices {
@@ -11,9 +9,9 @@ public class NeighbourhoodMatrices extends BaseMatrices {
 	}
 
 	public void update() {
-		WindCell c = this.otherMatrix().getCell(1, 1);
-		c.clearCell();
-		PVector v = c.get_wind();
+		WindCell targetCell = this.otherMatrix().getCell(1, 1);
+		targetCell.clearCell();
+		PVector v = targetCell.get_wind();
 		NeighbourhoodMatrix current = (NeighbourhoodMatrix) currentMatrix();
 		v.add(current.topLeft().get_wind());
 		v.add(current.topMiddle().get_wind());

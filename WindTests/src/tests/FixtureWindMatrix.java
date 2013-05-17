@@ -83,10 +83,13 @@ public class FixtureWindMatrix {
 		WindMatrices matrices = new MatrixMaker().setCell(0,1,1,1).matrices();
 		
 		Assert.assertEquals(1.0f, matrices.currentMatrix().getLeft(1,1).get_wind().x);
+		Assert.assertEquals(0.0f, matrices.otherMatrix().getLeft(1,1).get_wind().x);
 		matrices.flipMatrices();
 		Assert.assertEquals(0.0f, matrices.currentMatrix().getLeft(1,1).get_wind().x);
+		Assert.assertEquals(1.0f, matrices.otherMatrix().getLeft(1,1).get_wind().x);
 		matrices.flipMatrices();
 		Assert.assertEquals(1.0f, matrices.currentMatrix().getLeft(1,1).get_wind().x);
+		Assert.assertEquals(0.0f, matrices.otherMatrix().getLeft(1,1).get_wind().x);
 
 	}
 

@@ -60,6 +60,6 @@ public class MatrixMaker
 	}
 
 	public NeighbourhoodMatrices neighbours(int i, int j) {
-		return _matrices.currentMatrix().getNeighbours(new WindCell(1,1));
+		return _matrices.getNeighbours(new WindCell(1,1));
 	}
 }
