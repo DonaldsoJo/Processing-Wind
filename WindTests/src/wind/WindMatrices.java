@@ -1,7 +1,5 @@
 package wind;
 
-import processing.core.PVector;
-
 
 public class WindMatrices extends BaseMatrices
 {

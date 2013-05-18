@@ -13,7 +13,7 @@ public class MyProcessingSketch extends PApplet
 	private WindMatrices _matrices;
 
 	public void setup() {
-	    size(300,200);
+	    size(400,200);
 	    background(200);
 	    
 	    _matrices = new WindMatrices(20,20);

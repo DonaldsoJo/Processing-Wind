@@ -1,26 +1,22 @@
 package wind;
 
 import processing.core.PVector;
+import wind.AlgorithmBase.AlgorithmType;
 
 public class NeighbourhoodMatrices extends BaseMatrices {
 
 	public NeighbourhoodMatrices(int cols, int rows) {
 		super(cols, rows);
 	}
+	
+	private AlgorithmBase _algorithm = AlgorithmBase.SelectAlgorithm(AlgorithmType.addAll);
 
 	public void update() {
 		WindCell targetCell = this.otherMatrix().getCell(1, 1);
 		targetCell.clearCell();
 		PVector v = targetCell.get_wind();
 		NeighbourhoodMatrix current = (NeighbourhoodMatrix) currentMatrix();
-		v.add(current.topLeft().get_wind());
-		v.add(current.topMiddle().get_wind());
-		v.add(current.topRight().get_wind());
-		v.add(current.left().get_wind());
-		v.add(current.right().get_wind());
-		v.add(current.bottomLeft().get_wind());
-		v.add(current.bottomMiddle().get_wind());
-		v.add(current.bottomRight().get_wind());
+		_algorithm.calculateResultVector(v, current);
 	}
 
 	@Override

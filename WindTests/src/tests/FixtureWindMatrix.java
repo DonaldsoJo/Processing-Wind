@@ -3,7 +3,6 @@ package tests;
 import junit.framework.Assert;
 import org.junit.Test;
 
-import wind.BaseMatrices;
 import wind.WindCell;
 import wind.WindMatrices;
 import wind.WindMatrix;
