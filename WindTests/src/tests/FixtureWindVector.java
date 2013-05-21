@@ -108,13 +108,13 @@ public class FixtureWindVector {
 		
 		v = new PVector(1,0);
 		w = AlgorithmBase.resolveTopLeft(v);
-		Assert.assertEquals( 0.0f, w.x);
-		Assert.assertEquals( 0.0f, w.y);
+		Assert.assertEquals( (float)Math.cos(Math.PI/4), w.x);
+		Assert.assertEquals( (float)Math.sin(Math.PI/4), w.y);
 		
 		v = new PVector(0,1);
 		w = AlgorithmBase.resolveTopLeft(v);
-		Assert.assertEquals( 0.0f, w.x);
-		Assert.assertEquals( 0.0f, w.y);
+		Assert.assertEquals( (float)Math.cos(Math.PI/4), w.x);
+		Assert.assertEquals( (float)Math.sin(Math.PI/4), w.y);
 		
 		v = new PVector(-1,1);
 		w = AlgorithmBase.resolveTopLeft(v);
@@ -157,8 +157,8 @@ public class FixtureWindVector {
 		
 		v = new PVector(0,1);
 		w = AlgorithmBase.resolveTopRight(v);
-		Assert.assertEquals( 0.0f, w.x);
-		Assert.assertEquals( 0.0f, w.y);
+		Assert.assertEquals( -(float)Math.cos(Math.PI/4), w.x);
+		Assert.assertEquals( (float)Math.sin(Math.PI/4), w.y);
 		
 		v = new PVector(-1,1);
 		w = AlgorithmBase.resolveTopRight(v);
@@ -167,8 +167,8 @@ public class FixtureWindVector {
 		
 		v = new PVector(-1,0);
 		w = AlgorithmBase.resolveTopRight(v);
-		Assert.assertEquals( 0.0f, w.x);
-		Assert.assertEquals( 0.0f, w.y);
+		Assert.assertEquals( -(float)Math.cos(Math.PI/4), w.x);
+		Assert.assertEquals( (float)Math.sin(Math.PI/4), w.y);
 		
 		v = new PVector(-1,-1);
 		w = AlgorithmBase.resolveTopRight(v);
@@ -196,8 +196,8 @@ public class FixtureWindVector {
 		
 		v = new PVector(1,0);
 		w = AlgorithmBase.resolveBottomLeft(v);
-		Assert.assertEquals( 0.0f, w.x);
-		Assert.assertEquals( 0.0f, w.y);
+		Assert.assertEquals( (float)Math.cos(Math.PI/4), w.x);
+		Assert.assertEquals( -(float)Math.sin(Math.PI/4), w.y);
 		
 		v = new PVector(0,1);
 		w = AlgorithmBase.resolveBottomLeft(v);
@@ -221,8 +221,8 @@ public class FixtureWindVector {
 		
 		v = new PVector(0,-1);
 		w = AlgorithmBase.resolveBottomLeft(v);
-		Assert.assertEquals( 0.0f, w.x);
-		Assert.assertEquals( 0.0f, w.y);
+		Assert.assertEquals( (float)Math.cos(Math.PI/4), w.x);
+		Assert.assertEquals( -(float)Math.sin(Math.PI/4), w.y);
 		
 		v = new PVector(1,-1);
 		w = AlgorithmBase.resolveBottomLeft(v);
@@ -255,8 +255,8 @@ public class FixtureWindVector {
 		
 		v = new PVector(-1,0);
 		w = AlgorithmBase.resolveBottomRight(v);
-		Assert.assertEquals( 0.0f, w.x);
-		Assert.assertEquals( 0.0f, w.y);
+		Assert.assertEquals( -(float)Math.cos(Math.PI/4), w.x);
+		Assert.assertEquals( -(float)Math.sin(Math.PI/4), w.y);
 		
 		v = new PVector(-1,-1);
 		w = AlgorithmBase.resolveBottomRight(v);
@@ -265,8 +265,8 @@ public class FixtureWindVector {
 		
 		v = new PVector(0,-1);
 		w = AlgorithmBase.resolveBottomRight(v);
-		Assert.assertEquals( 0.0f, w.x);
-		Assert.assertEquals( 0.0f, w.y);
+		Assert.assertEquals( -(float)Math.cos(Math.PI/4), w.x);
+		Assert.assertEquals( -(float)Math.sin(Math.PI/4), w.y);
 		
 		v = new PVector(1,-1);
 		w = AlgorithmBase.resolveBottomRight(v);
