@@ -99,7 +99,7 @@ public class FixtureWindMatrix {
 		WindCell[][] otherCells = matrices.otherMatrix().getCells();
 		
 		Assert.assertEquals(1.0f, otherCells[1][1].get_wind().x);
-		matrices.clearOther(1,1);
+		matrices.clearOtherCell(1,1);
 		Assert.assertEquals(0.0f, otherCells[1][1].get_wind().x);
 		
 	}

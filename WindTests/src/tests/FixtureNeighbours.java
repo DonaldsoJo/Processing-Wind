@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import processing.core.PVector;
 
+import wind.BaseMatrices;
 import wind.NeighbourhoodMatrices;
 import wind.NeighbourhoodMatrix;
 import wind.WindCell;
@@ -103,7 +104,7 @@ public class FixtureNeighbours {
 	public void writeToOtherNeighbours_getSameBack() throws Exception {
 		
 		WindMatrices matrices = new MatrixMaker(5,5).setCell(1, 1, 11, 0).matrices();
-		NeighbourhoodMatrices neighbours = matrices.getNeighbours(new WindCell(1,1));
+		BaseMatrices neighbours = matrices.getNeighbours(new WindCell(1,1));
 		
 //		Utils.printMatrix(neighbours.currentMatrix(), "neighbours current");
 //		Utils.printMatrix(neighbours.otherMatrix(), "neighbours other");

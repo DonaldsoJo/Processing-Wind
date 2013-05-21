@@ -1,11 +1,13 @@
 package wind;
 
+import wind.AlgorithmBase.AlgorithmType;
+
 
 public class WindMatrices extends BaseMatrices
 {
-	public WindMatrices(int cols, int rows)
+	public WindMatrices(int cols, int rows, AlgorithmBase updateAlgorithm)
 	{
-		super( cols, rows);
+		super( cols, rows, updateAlgorithm);
 	}
 	
 	public void flipMatrices() {
@@ -30,7 +32,7 @@ public class WindMatrices extends BaseMatrices
 	}
 
 	public NeighbourhoodMatrices getNeighbours( WindCell cell) {
-		NeighbourhoodMatrices neighbours = new NeighbourhoodMatrices(3, 3);
+		NeighbourhoodMatrices neighbours = new NeighbourhoodMatrices(3, 3, _algorithm);
 		for(int col=0; col<3; col++)
 			for (int row=0; row<3; row++)
 			{
@@ -41,6 +43,12 @@ public class WindMatrices extends BaseMatrices
 				neighbours.otherMatrix().replaceCell(col,row,c);
 			}
 		return neighbours;
+	}
+
+	public void clearOtherMatrix() {
+		for (WindCell[] cols : otherMatrix().getCells())
+			for (WindCell cell : cols)
+				cell.clearCell();
 	}
 
 }

@@ -1,9 +1,11 @@
 package tests;
 
+import wind.AlgorithmBase;
 import wind.NeighbourhoodMatrices;
 import wind.WindCell;
 import wind.WindMatrices;
 import wind.WindMatrix;
+import wind.AlgorithmBase.AlgorithmType;
 
 public class MatrixMaker
 {
@@ -20,7 +22,7 @@ public class MatrixMaker
 	public void createMatrices(int cols, int rows) {
 		_cols = cols;
 		_rows = rows;
-		_matrices = new WindMatrices(cols,rows);
+		_matrices = new WindMatrices(cols,rows, AlgorithmBase.SelectAlgorithm(AlgorithmType.addAll));
 	}
 
 	private WindMatrices _matrices;

@@ -1,16 +1,18 @@
 package wind;
 
 import processing.core.PVector;
+import wind.AlgorithmBase.AlgorithmType;
 
 public abstract class BaseMatrices {
 
-	public BaseMatrices(int cols, int rows) {
+	public BaseMatrices(int cols, int rows, AlgorithmBase updateAlgorithm) {
 		super();
+		_algorithm = updateAlgorithm;
 		_matrices = setupMatrices(cols, rows);
 		initMatrices(cols, rows);
 	}
 
-	public abstract WindMatrix[] setupMatrices(int cols, int rows);
+	protected abstract WindMatrix[] setupMatrices(int cols, int rows);
 
 	public void initMatrices(int cols, int rows) {
 		for(int col=0; col<cols; col++)
@@ -26,6 +28,8 @@ public abstract class BaseMatrices {
 	int _currentMatrixIndex = 0;
 
 	protected WindMatrix[] _matrices;
+
+	protected AlgorithmBase _algorithm = AlgorithmBase.SelectAlgorithm(AlgorithmType.doNothing);
 	
 	public int currentMatrixIndex() {
 		return _currentMatrixIndex;
@@ -45,11 +49,11 @@ public abstract class BaseMatrices {
 		return _matrices[otherMatrixIndex()];
 	}
 
-	public void clearOther(int col, int row) {
+	public void clearOtherCell(int col, int row) {
 		otherMatrix().getCell(col, row).clearCell();
 	}
 
-	public void updateOther(int col, int row, PVector newWind) {
+	public void updateOtherCell(int col, int row, PVector newWind) {
 		otherMatrix().setCell(col, row, newWind.x, newWind.y);
 	}
 }

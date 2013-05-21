@@ -1,16 +1,13 @@
 package wind;
 
 import processing.core.PVector;
-import wind.AlgorithmBase.AlgorithmType;
 
 public class NeighbourhoodMatrices extends BaseMatrices {
 
-	public NeighbourhoodMatrices(int cols, int rows) {
-		super(cols, rows);
+	public NeighbourhoodMatrices(int cols, int rows, AlgorithmBase updateAlgorithm) {
+		super(cols, rows, updateAlgorithm);
 	}
 	
-	private AlgorithmBase _algorithm = AlgorithmBase.SelectAlgorithm(AlgorithmType.addAll);
-
 	public void update() {
 		WindCell targetCell = this.otherMatrix().getCell(1, 1);
 		targetCell.clearCell();
