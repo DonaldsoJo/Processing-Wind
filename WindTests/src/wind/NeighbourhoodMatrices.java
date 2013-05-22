@@ -12,8 +12,8 @@ public class NeighbourhoodMatrices extends BaseMatrices {
 		WindCell targetCell = this.otherMatrix().getCell(1, 1);
 		targetCell.clearCell();
 		PVector v = targetCell.get_wind();
-		NeighbourhoodMatrix current = (NeighbourhoodMatrix) currentMatrix();
-		_algorithm.calculateResultVector(v, current);
+//		NeighbourhoodMatrix current = (NeighbourhoodMatrix) currentMatrix();
+		_algorithm.calculateResultVector(v, this);
 	}
 
 	@Override

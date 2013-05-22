@@ -11,11 +11,13 @@ public class MyProcessingSketch extends PApplet
 	
 	private static final long serialVersionUID = 1L;
 	private int _resolution = 10;
+	private int _xOffset = 50;
 	
 	private WindMatrices _matrices;
 
 	public void setup() {
-	    size(displayWidth,displayHeight);
+//	    size(displayWidth,displayHeight);
+	    size(300,200);
 	    frameRate(1);
 	    background(100);
 	    
@@ -28,29 +30,37 @@ public class MyProcessingSketch extends PApplet
 //	    current.setCell(20,10,1,1);
 //	    current.setCell(10,10,20,0);
 //	    current.setCell(0,0,4,4);
+//	    current.setCell(0,10,4,0);
+//	    current.setCell(10,0,0,4);
 
-	    current.setCell(0,0,3,0);
-	    current.setCell(0,1,4,0);
-	    current.setCell(0,2,5,0);
-	    current.setCell(4,0,3,12);
-	    current.setCell(5,1,4,12);
-	    current.setCell(6,2,5,12);
-	    current.setCell(7,0,3,6);
-	    current.setCell(8,1,4,6);
-	    current.setCell(9,2,5,6);
+//	    current.setCell(0,0,3,0);
+//	    current.setCell(0,1,4,0);
+//	    current.setCell(0,2,5,0);
+//	    current.setCell(4,0,3,12);
+//	    current.setCell(5,1,4,12);
+//	    current.setCell(6,2,5,12);
+//	    current.setCell(7,0,3,6);
+//	    current.setCell(8,1,4,6);
+//	    current.setCell(9,2,5,6);
+//	    current.setCell(15,15,-3,0);
+//	    current.setCell(17,17,0,-3);
+//	    current.setCell(0,18,-5,-5);
+	    
+	    current.setCell(0,8,3,3);
+	    current.setCell(0,10,3,3);
+	    
+	    current.setCell(0,13,3,-3);
+	    current.setCell(0,15,3,-3);
 	}
 	
 	public void draw() {
 //	    background(100); // reset
 
 		// draw matrix
-		WindCell[][] cells = _matrices.currentMatrix().getCells();
-		drawWindMatrix(cells);
+		drawWindMatrix(_matrices.currentMatrix().getCells());
 		
-		// update matrix and flip
-		_matrices.clearOtherMatrix();
-		_matrices.updateCells();
-		_matrices.flipMatrices();
+		// process the matrix
+		_matrices.process();
 	}
 
 	private int _colorIndex = 0;
@@ -65,7 +75,8 @@ public class MyProcessingSketch extends PApplet
 
 	private void drawCell(WindCell cell) {
 		pushMatrix();		
-		translate(cell.getCol()*_resolution + _resolution, cell.getRow()*_resolution + _resolution);
+//		translate(cell.getCol()*_resolution + _resolution + _xOffset, cell.getRow()*_resolution + _resolution);
+		translate(cell.getCol()*_resolution + _xOffset, cell.getRow()*_resolution);
 		line(0,0,cell.get_wind().x,cell.get_wind().y);
 		popMatrix();
 	}

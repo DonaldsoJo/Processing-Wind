@@ -50,5 +50,13 @@ public class WindMatrices extends BaseMatrices
 			for (WindCell cell : cols)
 				cell.clearCell();
 	}
+	
+	public void process()
+	{
+		clearOtherMatrix();
+		updateCells();
+		flipMatrices();
+
+	}
 
 }
