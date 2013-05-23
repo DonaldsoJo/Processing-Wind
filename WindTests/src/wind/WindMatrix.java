@@ -47,8 +47,8 @@ public class WindMatrix {
 
 	public float energy() {
 		float energy = 0.0f;
-		for(WindCell[] cols : _cells)
-			for(WindCell cell : cols)
+		for(WindCell[] col : _cells)
+			for(WindCell cell : col)
 				energy = energy + cell.get_wind().mag();
 		return energy;
 	}
