@@ -274,4 +274,18 @@ public class FixtureWindVector {
 		Assert.assertEquals( 0.0f, w.y);
 		
 	}
+	
+	@Test
+	public void vectorReduction() {
+		PVector v = new PVector(1,1);
+		float initialMag = v.mag();
+		float scaleFactor = 0.8f;
+		
+		v.mult(scaleFactor);
+		
+		Assert.assertEquals(0.8f, v.x);
+		Assert.assertEquals(0.8f, v.y);
+		Assert.assertEquals(initialMag*scaleFactor, v.mag());
+	}
+
 }

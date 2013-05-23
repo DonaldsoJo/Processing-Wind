@@ -1,8 +1,5 @@
 package wind;
 
-import wind.AlgorithmBase.AlgorithmType;
-
-
 public class WindMatrices extends BaseMatrices
 {
 	public WindMatrices(int cols, int rows, AlgorithmBase updateAlgorithm)

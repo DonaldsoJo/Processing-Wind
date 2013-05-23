@@ -17,16 +17,19 @@ public class MyProcessingSketch extends PApplet
 
 	public void setup() {
 //	    size(displayWidth,displayHeight);
-	    size(300,200);
-	    frameRate(1);
+	    size(310,210);
+	    frameRate(0.2f);
 	    background(100);
 	    
 	    int arrayWidth = 21; 
 	    int arrayHeight = 21; 
 //	    int arrayWidth = width/_resolution; 
 //	    int arrayHeight = height/_resolution; 
-	    _matrices = new WindMatrices(arrayWidth,arrayHeight, AlgorithmBase.SelectAlgorithm(AlgorithmType.addAll));
+	    _matrices = new WindMatrices(arrayWidth,arrayHeight, AlgorithmBase.SelectAlgorithm(AlgorithmType.fractionalFlowAndSideSpills));
 	    WindMatrix current = _matrices.currentMatrix();
+	    
+	    current.setCell(10, 10, 10, 10);
+	    
 //	    current.setCell(20,10,1,1);
 //	    current.setCell(10,10,20,0);
 //	    current.setCell(0,0,4,4);
@@ -46,17 +49,18 @@ public class MyProcessingSketch extends PApplet
 //	    current.setCell(17,17,0,-3);
 //	    current.setCell(0,18,-5,-5);
 	    
-	    current.setCell(0,8,3,3);
-	    current.setCell(0,10,3,3);
-	    
-	    current.setCell(0,13,3,-3);
-	    current.setCell(0,15,3,-3);
+//	    current.setCell(0,8,3,3);
+//	    current.setCell(0,10,3,3);
+//	    
+//	    current.setCell(0,13,3,-3);
+//	    current.setCell(0,15,3,-3);
 	}
 	
 	public void draw() {
-//	    background(100); // reset
+	    background(100); // reset
 
 		// draw matrix
+	    System.out.println("Energy: " + _matrices.currentMatrix().energy());
 		drawWindMatrix(_matrices.currentMatrix().getCells());
 		
 		// process the matrix

@@ -5,6 +5,9 @@ public class WindMatrix {
 
 	public WindMatrix(int cols, int rows) {
 		_cells = new WindCell[cols][rows];
+		for(int c=0; c<cols; c++)
+			for (int r=0; r<rows; r++)
+				_cells[c][r] = new WindCell(c, r);
 	}
 	
 	public WindCell[][] getCells() {
@@ -40,6 +43,14 @@ public class WindMatrix {
 	public void setCell(int col, int row, float x, float y) {
 		_cells[col][row].get_wind().x = x;
 		_cells[col][row].get_wind().y = y;
+	}
+
+	public float energy() {
+		float energy = 0.0f;
+		for(WindCell[] cols : _cells)
+			for(WindCell cell : cols)
+				energy = energy + cell.get_wind().mag();
+		return energy;
 	}
 
 }

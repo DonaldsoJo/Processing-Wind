@@ -10,7 +10,7 @@ public class NeighbourhoodMatrices extends BaseMatrices {
 	
 	public void update() {
 		WindCell targetCell = this.otherMatrix().getCell(1, 1);
-		targetCell.clearCell();
+//		targetCell.clearCell();
 		PVector v = targetCell.get_wind();
 //		NeighbourhoodMatrix current = (NeighbourhoodMatrix) currentMatrix();
 		_algorithm.calculateResultVector(v, this);
