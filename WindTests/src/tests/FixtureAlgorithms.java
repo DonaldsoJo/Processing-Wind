@@ -12,6 +12,7 @@ import org.junit.Test;
 import wind.AlgorithmBase;
 import wind.AlgorithmFractionalFlowAndSideSpills;
 import wind.AlgorithmFractionalFlowAndSideSpills.EDirection;
+import wind.BaseMatrices;
 import wind.ENeighbour;
 import wind.NeighbourhoodMatrices;
 import wind.AlgorithmBase.AlgorithmType;
@@ -19,6 +20,7 @@ import wind.NeighbourhoodMatrix;
 
 public class FixtureAlgorithms {
 	
+	private static final float SINPIOVER4 = (float)(0.1*Math.sin(Math.PI/4));
 	private AlgorithmFractionalFlowAndSideSpills _alg;
 	private NeighbourhoodMatrices _ms;
 	
@@ -65,19 +67,68 @@ public class FixtureAlgorithms {
 	public void bottomRightHandling() {
 		_ms.currentMatrix().setCell(2, 2, -1, -1);		
 		
-//		Utils.printMatrix(ms.currentMatrix(), "current");
-//		Utils.printMatrix(ms.otherMatrix(), "other");
-		
 		_alg.handleAny(ENeighbour.BOTRIGHT, (NeighbourhoodMatrix)_ms.currentMatrix(), (NeighbourhoodMatrix)_ms.otherMatrix());
-//		_alg.bottomLeftHandling((NeighbourhoodMatrix)_ms.currentMatrix(), (NeighbourhoodMatrix)_ms.otherMatrix());
 
-//		Utils.printMatrix(_ms.currentMatrix(), "current");
-//		Utils.printMatrix(_ms.otherMatrix(), "other");
-		
 		Assert.assertEquals(-0.8f, _ms.otherMatrix().getCell(1, 1).get_wind().x);
 		Assert.assertEquals(-0.8f, _ms.otherMatrix().getCell(1, 1).get_wind().y);
 		Assert.assertEquals(-0.1f, _ms.otherMatrix().getCell(2, 1).get_wind().y);
 		Assert.assertEquals(-0.1f, _ms.otherMatrix().getCell(1, 2).get_wind().x);
+	}
+
+	@Test
+	public void topMiddleHandling() {
+		_ms.currentMatrix().setCell(1, 0, 0, 1);		
+		
+		_alg.handleAny(ENeighbour.TOP, (NeighbourhoodMatrix)_ms.currentMatrix(), (NeighbourhoodMatrix)_ms.otherMatrix());
+
+		Assert.assertEquals(0.0f, _ms.otherMatrix().getCell(1, 1).get_wind().x);
+		Assert.assertEquals(0.8f, _ms.otherMatrix().getCell(1, 1).get_wind().y);
+		Assert.assertEquals(SINPIOVER4, _ms.otherMatrix().getCell(2, 1).get_wind().y);
+		Assert.assertEquals(SINPIOVER4, _ms.otherMatrix().getCell(2, 1).get_wind().x);
+		Assert.assertEquals(SINPIOVER4, _ms.otherMatrix().getCell(0, 1).get_wind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.otherMatrix().getCell(0, 1).get_wind().x);
+	}
+	
+	@Test
+	public void rightHandling() {
+		_ms.currentMatrix().setCell(2, 1, -1, 0);		
+		
+		_alg.handleAny(ENeighbour.RIGHT, (NeighbourhoodMatrix)_ms.currentMatrix(), (NeighbourhoodMatrix)_ms.otherMatrix());
+
+		Assert.assertEquals(-0.8f, _ms.otherMatrix().getCell(1, 1).get_wind().x);
+		Assert.assertEquals(0.0f, _ms.otherMatrix().getCell(1, 1).get_wind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.otherMatrix().getCell(1, 0).get_wind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.otherMatrix().getCell(1, 0).get_wind().x);
+		Assert.assertEquals(SINPIOVER4, _ms.otherMatrix().getCell(1, 2).get_wind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.otherMatrix().getCell(1, 2).get_wind().x);
+	}
+	
+	@Test
+	public void bottomHandling() {
+		_ms.currentMatrix().setCell(1, 2, 0, -1);		
+		
+		_alg.handleAny(ENeighbour.BOTTOM, (NeighbourhoodMatrix)_ms.currentMatrix(), (NeighbourhoodMatrix)_ms.otherMatrix());
+
+		Assert.assertEquals(0.0f, _ms.otherMatrix().getCell(1, 1).get_wind().x);
+		Assert.assertEquals(-0.8f, _ms.otherMatrix().getCell(1, 1).get_wind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.otherMatrix().getCell(0, 1).get_wind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.otherMatrix().getCell(0, 1).get_wind().x);
+		Assert.assertEquals(-SINPIOVER4, _ms.otherMatrix().getCell(2, 1).get_wind().y);
+		Assert.assertEquals(SINPIOVER4, _ms.otherMatrix().getCell(2, 1).get_wind().x);
+	}
+	
+	@Test
+	public void leftHandling() {
+		_ms.currentMatrix().setCell(0, 1, 1, 0);		
+		
+		_alg.handleAny(ENeighbour.LEFT, (NeighbourhoodMatrix)_ms.currentMatrix(), (NeighbourhoodMatrix)_ms.otherMatrix());
+
+		Assert.assertEquals(0.8f, _ms.otherMatrix().getCell(1, 1).get_wind().x);
+		Assert.assertEquals(0.0f, _ms.otherMatrix().getCell(1, 1).get_wind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.otherMatrix().getCell(1, 0).get_wind().y);
+		Assert.assertEquals(SINPIOVER4, _ms.otherMatrix().getCell(1, 0).get_wind().x);
+		Assert.assertEquals(SINPIOVER4, _ms.otherMatrix().getCell(1, 2).get_wind().y);
+		Assert.assertEquals(SINPIOVER4, _ms.otherMatrix().getCell(1, 2).get_wind().x);
 	}
 	
 	@Test

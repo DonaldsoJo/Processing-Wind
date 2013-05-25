@@ -30,7 +30,7 @@ public class AlgorithmFractionalFlowAndSideSpills extends AlgorithmBase {
 			NeighbourhoodMatrix other) {
 		
 		WindCell cSource = current.getCell(Utils.col(neighbourName), Utils.row(neighbourName)); 
-		System.out.println("col " + cSource.getCol() + " row " + cSource.getRow());
+//		System.out.println("col " + cSource.getCol() + " row " + cSource.getRow());
 		PVector vSource = cSource.get_wind();
 		
 		updateSpill(neighbourName, other, vSource, EDirection.clockwise);
@@ -59,10 +59,28 @@ public class AlgorithmFractionalFlowAndSideSpills extends AlgorithmBase {
 		vSpill.mult(0.1f);
 
 		ENeighbour updateNeighbour = getNeighbour( neighbourName, direction); 
+		if (isMiddleCell(neighbourName)) updateNeighbour = getNeighbour( updateNeighbour, direction); // step to next cell
 		WindCell updateCell = getTargetCell( other, updateNeighbour);
-		System.out.println("source " + neighbourName + " direction " + direction + " neighbour " + updateNeighbour + " target col " + updateCell.getCol() + " row " + updateCell.getRow() );
-		System.out.println("x " + vSpill.x + " y " + vSpill.y);
+//		System.out.println("source " + neighbourName + " direction " + direction + " neighbour " + updateNeighbour + " target col " + updateCell.getCol() + " row " + updateCell.getRow() );
+//		System.out.println("x " + vSpill.x + " y " + vSpill.y);
 		updateCell.get_wind().add(vSpill);
+	}
+
+	private boolean isMiddleCell(ENeighbour neighbourName) {
+		switch( neighbourName) {
+		case TOPLEFT: 
+		case TOPRIGHT: 
+		case BOTLEFT: 
+		case BOTRIGHT: 
+			return false;
+		case TOP: 
+		case RIGHT: 
+		case BOTTOM: 
+		case LEFT: 
+			return true;
+		default:
+			return false;
+		}
 	}
 
 	private EDirection oppositeDirection(EDirection direction) {
@@ -106,14 +124,22 @@ public class AlgorithmFractionalFlowAndSideSpills extends AlgorithmBase {
 	
 	public static ENeighbour getNeighbour(ENeighbour neighbourCell, EDirection direction) {
 		switch( neighbourCell) {
-		case TOPLEFT: if (direction == EDirection.clockwise) {return ENeighbour.TOP;} else return ENeighbour.LEFT;
-		case TOP: if (direction == EDirection.clockwise) {return ENeighbour.TOPRIGHT;} else return ENeighbour.TOPLEFT;
-		case TOPRIGHT: if (direction == EDirection.clockwise) {return ENeighbour.RIGHT;} else return ENeighbour.TOP;
-		case RIGHT: if (direction == EDirection.clockwise) {return ENeighbour.BOTRIGHT;} else return ENeighbour.TOPRIGHT;
-		case BOTRIGHT: if (direction == EDirection.clockwise) {return ENeighbour.BOTTOM;} else return ENeighbour.RIGHT;
-		case BOTTOM: if (direction == EDirection.clockwise) {return ENeighbour.BOTLEFT;} else return ENeighbour.BOTRIGHT;
-		case BOTLEFT: if (direction == EDirection.clockwise) {return ENeighbour.LEFT;} else return ENeighbour.BOTTOM;
-		case LEFT: if (direction == EDirection.clockwise) {return ENeighbour.TOPLEFT;} else return ENeighbour.BOTLEFT;
+		case TOPLEFT: 
+			if (direction == EDirection.clockwise) {return ENeighbour.TOP;} else return ENeighbour.LEFT;
+		case TOP: 
+			if (direction == EDirection.clockwise) {return ENeighbour.TOPRIGHT;} else return ENeighbour.TOPLEFT;
+		case TOPRIGHT: 
+			if (direction == EDirection.clockwise) {return ENeighbour.RIGHT;} else return ENeighbour.TOP;
+		case RIGHT: 
+			if (direction == EDirection.clockwise) {return ENeighbour.BOTRIGHT;} else return ENeighbour.TOPRIGHT;
+		case BOTRIGHT: 
+			if (direction == EDirection.clockwise) {return ENeighbour.BOTTOM;} else return ENeighbour.RIGHT;
+		case BOTTOM: 
+			if (direction == EDirection.clockwise) {return ENeighbour.BOTLEFT;} else return ENeighbour.BOTRIGHT;
+		case BOTLEFT: 
+			if (direction == EDirection.clockwise) {return ENeighbour.LEFT;} else return ENeighbour.BOTTOM;
+		case LEFT: 
+			if (direction == EDirection.clockwise) {return ENeighbour.TOPLEFT;} else return ENeighbour.BOTLEFT;
 		}
 		return null;
 	}
