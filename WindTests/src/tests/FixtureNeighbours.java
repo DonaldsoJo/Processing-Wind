@@ -79,7 +79,7 @@ public class FixtureNeighbours {
 		NeighbourhoodMatrices neighbours = new MatrixMaker().centre(2, 3).setCell(0, 1, 1, 0).neighbours(1,1);
 		Assert.assertEquals(0.0f, neighbours.otherMatrix().getCell(1, 1).get_wind().x);
 		neighbours.update();
-		Assert.assertEquals(1.0f, neighbours.otherMatrix().getCell(1, 1).get_wind().x);
+		Assert.assertEquals(0.8f, neighbours.otherMatrix().getCell(1, 1).get_wind().x);
 	}
 
 	@Test
@@ -96,8 +96,8 @@ public class FixtureNeighbours {
 //		Utils.printMatrix(matrices.currentMatrix(), "matrices current");
 //		Utils.printMatrix(matrices.otherMatrix(), "matrices other");
 
-		Assert.assertEquals(11.0f, neighbours.otherMatrix().getCell(1, 1).get_wind().x);
-		Assert.assertEquals(11.0f, matrices.otherMatrix().getCell(2, 2).get_wind().x);
+		Assert.assertEquals(8.8f, neighbours.otherMatrix().getCell(1, 1).get_wind().x);
+		Assert.assertEquals(8.8f, matrices.otherMatrix().getCell(2, 2).get_wind().x);
 	}
 
 	@Test

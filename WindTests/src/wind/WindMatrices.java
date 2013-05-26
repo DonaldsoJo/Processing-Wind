@@ -23,8 +23,16 @@ public class WindMatrices extends BaseMatrices
 		for(WindCell[] cols : currentMatrix().getCells())
 			for(WindCell cell: cols)
 			{
+//				System.out.println();
+//				System.out.println("  in updateCells of WindMatrices - before handling cell " + cell.getCol() + "," + cell.getRow());
+
 				NeighbourhoodMatrices neighbours = getNeighbours( cell);
 				neighbours.update();
+				
+//				System.out.println();
+//				System.out.println("  in updateCells of WindMatrices - just handled cell " + cell.getCol() + "," + cell.getRow());
+//				tests.Utils.printMatrixNonZeroValues(neighbours.currentMatrix(), "  Current");
+//				tests.Utils.printMatrixNonZeroValues(neighbours.otherMatrix(), "  Other");
 			}
 	}
 

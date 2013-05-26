@@ -16,19 +16,26 @@ public class MyProcessingSketch extends PApplet
 	private WindMatrices _matrices;
 
 	public void setup() {
-//	    size(displayWidth,displayHeight);
-	    size(310,210);
-	    frameRate(0.2f);
+	    size(displayWidth,displayHeight);
+//	    size(310,210);
+	    frameRate(1);
+//	    frameRate(0.2f);
 	    background(100);
 	    
-	    int arrayWidth = 21; 
-	    int arrayHeight = 21; 
-//	    int arrayWidth = width/_resolution; 
-//	    int arrayHeight = height/_resolution; 
+//	    int arrayWidth = 21; 
+//	    int arrayHeight = 21; 
+	    int arrayWidth = width/_resolution; 
+	    int arrayHeight = height/_resolution; 
 	    _matrices = new WindMatrices(arrayWidth,arrayHeight, AlgorithmBase.SelectAlgorithm(AlgorithmType.fractionalFlowAndSideSpills));
 	    WindMatrix current = _matrices.currentMatrix();
 	    
-	    current.setCell(10, 10, 10, 10);
+//	    current.setCell(10, 10, 10, 10);
+//	    current.setCell(10, 10, 0, 10);
+	    
+	    current.setCell(60, 60, -10, -10);
+	    current.setCell(100, 60, 10, -10);
+	    current.setCell(100, 100, 10, 10);
+	    current.setCell(60, 100, -10, 10);
 	    
 //	    current.setCell(20,10,1,1);
 //	    current.setCell(10,10,20,0);

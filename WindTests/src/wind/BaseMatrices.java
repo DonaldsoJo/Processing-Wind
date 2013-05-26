@@ -31,6 +31,14 @@ public abstract class BaseMatrices {
 
 	protected AlgorithmBase _algorithm = AlgorithmBase.SelectAlgorithm(AlgorithmType.doNothing);
 	
+	public void setAlgorithm(AlgorithmBase algorithm) {
+		_algorithm = algorithm;
+	}
+
+	public AlgorithmBase getAlgorithm() {
+		return _algorithm;
+	}
+
 	public int currentMatrixIndex() {
 		return _currentMatrixIndex;
 	}

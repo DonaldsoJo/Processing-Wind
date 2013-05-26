@@ -22,4 +22,17 @@ public class Utils {
 			}
 		}
 	}
+
+	public static void printMatrixNonZeroValues(WindMatrix matrix, String title) {
+		System.out.println();
+		System.out.println(title);
+		for(WindCell[] cols : matrix.getCells())
+		{
+			for(WindCell cell : cols)
+			{
+				if (cell.get_wind().mag() > 0)
+					System.out.println( "Col " + cell.getCol() + ", Row " + cell.getRow() + ", xval " + cell.get_wind().x + ", yval " + cell.get_wind().y);
+			}
+		}
+	}
 }

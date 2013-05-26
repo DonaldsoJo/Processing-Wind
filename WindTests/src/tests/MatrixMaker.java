@@ -1,6 +1,7 @@
 package tests;
 
 import wind.AlgorithmBase;
+import wind.AlgorithmFractionalFlowAndSideSpills;
 import wind.NeighbourhoodMatrices;
 import wind.WindCell;
 import wind.WindMatrices;
@@ -22,7 +23,7 @@ public class MatrixMaker
 	public void createMatrices(int cols, int rows) {
 		_cols = cols;
 		_rows = rows;
-		_matrices = new WindMatrices(cols,rows, AlgorithmBase.SelectAlgorithm(AlgorithmType.addAll));
+		_matrices = new WindMatrices(cols,rows, AlgorithmBase.SelectAlgorithm(AlgorithmType.fractionalFlowAndSideSpills));
 	}
 
 	private WindMatrices _matrices;
@@ -63,5 +64,10 @@ public class MatrixMaker
 
 	public NeighbourhoodMatrices neighbours(int i, int j) {
 		return _matrices.getNeighbours(new WindCell(1,1));
+	}
+
+	public MatrixMaker setAlgorithm( AlgorithmBase algorithm) {
+		_matrices.setAlgorithm(algorithm);
+		return this;
 	}
 }

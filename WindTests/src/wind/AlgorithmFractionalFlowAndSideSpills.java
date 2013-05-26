@@ -9,20 +9,25 @@ public class AlgorithmFractionalFlowAndSideSpills extends AlgorithmBase {
 //		AlgorithmBase onlyPositive = new AlgorithmOnlyPositive();
 //		onlyPositive.calculateResultVector(v, neighbours);
 		
+//		System.out.println("  Starting calculateResultVector in AlgorithmFractionalFlowAndSideSpills");
 		NeighbourhoodMatrix current = (NeighbourhoodMatrix) neighbours.currentMatrix();
 		NeighbourhoodMatrix other = (NeighbourhoodMatrix) neighbours.otherMatrix();
-		PVector v = other.getCell(1, 1).get_wind();
+//		PVector v = other.getCell(1, 1).get_wind();
 		
 		handleAny(ENeighbour.TOPLEFT, current, other);
 		handleAny(ENeighbour.TOPRIGHT, current, other);
 		handleAny(ENeighbour.BOTRIGHT, current, other);
 		handleAny(ENeighbour.BOTLEFT, current, other);
+		handleAny(ENeighbour.TOP, current, other);
+		handleAny(ENeighbour.RIGHT, current, other);
+		handleAny(ENeighbour.BOTTOM, current, other);
+		handleAny(ENeighbour.LEFT, current, other);
 		
 		
-		v.add( resolveTopMiddle(current.topMiddle().get_wind()));
-		v.add( resolveLeft(current.left().get_wind()));
-		v.add( resolveRight(current.right().get_wind()));
-		v.add( resolveBottomMiddle(current.bottomMiddle().get_wind()));
+//		v.add( resolveTopMiddle(current.topMiddle().get_wind()));
+//		v.add( resolveLeft(current.left().get_wind()));
+//		v.add( resolveRight(current.right().get_wind()));
+//		v.add( resolveBottomMiddle(current.bottomMiddle().get_wind()));
 
 	}
 	
@@ -36,19 +41,9 @@ public class AlgorithmFractionalFlowAndSideSpills extends AlgorithmBase {
 		updateSpill(neighbourName, other, vSource, EDirection.clockwise);
 		updateSpill(neighbourName, other, vSource, EDirection.anticlockwise);
 		
-//		ENeighbour nAntiClockwise = getNeighbour( neighbourName, EDirection.anticlockwise);
-//		PVector vSpill2 = resolveAny(nAntiClockwise, vSource);
-//		vSpill2.mult(0.1f);
-//		WindCell updateCell2 = getTargetCell( other, nAntiClockwise);
-//		updateCell2.get_wind().add(vSpill2);
-		
-//		ENeighbour nAntiClockwise = getNeighbour( neighbourName, EDirection.anticlockwise);
-//		vSpill = resolveAny(nAntiClockwise, vSource);
-//		vSpill.mult(0.1f);
-//		other.left().get_wind().add(vSpill);
-		
 		PVector vMain = resolveAny(neighbourName, cSource.get_wind());
 		vMain.mult(0.8f);
+//		if (vMain.mag() > 0) System.out.println("    handleAny for " + neighbourName + " " + vMain.toString());
 		PVector vTarget = other.getCell(1, 1).get_wind();
 		vTarget.add( vMain);
 	}
@@ -61,8 +56,8 @@ public class AlgorithmFractionalFlowAndSideSpills extends AlgorithmBase {
 		ENeighbour updateNeighbour = getNeighbour( neighbourName, direction); 
 		if (isMiddleCell(neighbourName)) updateNeighbour = getNeighbour( updateNeighbour, direction); // step to next cell
 		WindCell updateCell = getTargetCell( other, updateNeighbour);
-//		System.out.println("source " + neighbourName + " direction " + direction + " neighbour " + updateNeighbour + " target col " + updateCell.getCol() + " row " + updateCell.getRow() );
-//		System.out.println("x " + vSpill.x + " y " + vSpill.y);
+//		System.out.println("    source " + neighbourName + " direction " + direction + " neighbour " + updateNeighbour + " target col " + updateCell.getCol() + " row " + updateCell.getRow() );
+//		System.out.println("    x " + vSpill.x + " y " + vSpill.y);
 		updateCell.get_wind().add(vSpill);
 	}
 
