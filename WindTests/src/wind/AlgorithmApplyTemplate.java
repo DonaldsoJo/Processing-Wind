@@ -30,7 +30,8 @@ public class AlgorithmApplyTemplate extends AlgorithmBase {
 			for (int row=0; row<3; row++) {
 				PVector v = result.getCell(col, row).get_wind();
 				if (v.mag() > 0){
-					PVector t = nextgen.getCell(oct.rotatedCol(col), oct.rotatedRow(row)).get_wind();
+					ColAndRow cr = oct.rotatedColAndRow(col, row);
+					PVector t = nextgen.getCell(cr.c, cr.r).get_wind();
 					t.x = v.x;
 					t.y = v.y;
 				}
