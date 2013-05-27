@@ -20,7 +20,7 @@ public class WindMatrices extends BaseMatrices
 	}
 
 	public void updateCells() {
-		for(WindCell[] cols : currentMatrix().getCells())
+		for(WindCell[] cols : currentGenMatrix().getCells())
 			for(WindCell cell: cols)
 			{
 //				System.out.println();
@@ -41,17 +41,17 @@ public class WindMatrices extends BaseMatrices
 		for(int col=0; col<3; col++)
 			for (int row=0; row<3; row++)
 			{
-				WindCell c = currentMatrix().getCell(col + cell.getCol() - 1, row + cell.getRow() - 1);
-				neighbours.currentMatrix().replaceCell(col,row,c);
+				WindCell c = currentGenMatrix().getCell(col + cell.getCol() - 1, row + cell.getRow() - 1);
+				neighbours.currentGenMatrix().replaceCell(col,row,c);
 				
-				c = otherMatrix().getCell(col + cell.getCol() - 1, row + cell.getRow() - 1);
-				neighbours.otherMatrix().replaceCell(col,row,c);
+				c = nextGenMatrix().getCell(col + cell.getCol() - 1, row + cell.getRow() - 1);
+				neighbours.nextGenMatrix().replaceCell(col,row,c);
 			}
 		return neighbours;
 	}
 
 	public void clearOtherMatrix() {
-		for (WindCell[] cols : otherMatrix().getCells())
+		for (WindCell[] cols : nextGenMatrix().getCells())
 			for (WindCell cell : cols)
 				cell.clearCell();
 	}

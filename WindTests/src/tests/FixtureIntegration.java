@@ -18,9 +18,9 @@ public class FixtureIntegration {
 //		System.out.println("Energy " + matrices.currentMatrix().energy());
 		
 		// check where the vector is
-		Assert.assertEquals(11.0f, matrices.currentMatrix().getCell(2, 2).get_wind().x);
-		Assert.assertEquals(0.0f, matrices.currentMatrix().getCell(3, 2).get_wind().x);
-		Assert.assertEquals(0.0f, matrices.currentMatrix().getCell(4, 2).get_wind().x);
+		Assert.assertEquals(11.0f, matrices.currentGenMatrix().getCell(2, 2).get_wind().x);
+		Assert.assertEquals(0.0f, matrices.currentGenMatrix().getCell(3, 2).get_wind().x);
+		Assert.assertEquals(0.0f, matrices.currentGenMatrix().getCell(4, 2).get_wind().x);
 
 		// update and flip
 		matrices.updateCells();
@@ -51,7 +51,7 @@ public class FixtureIntegration {
 //		Utils.printMatrixNonZeroValues(matrices.currentMatrix(), "after setup");
 		
 //		System.out.println("Energy " + matrices.currentMatrix().energy());
-		Assert.assertEquals(10.0f, matrices.currentMatrix().energy());
+		Assert.assertEquals(10.0f, matrices.currentGenMatrix().energy());
 		
 		// update and flip
 		matrices.updateCells();

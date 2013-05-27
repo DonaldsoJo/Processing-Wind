@@ -10,8 +10,8 @@ public class AlgorithmAddAll extends AlgorithmBase {
 	}
 
 	public void calculateResultVector(NeighbourhoodMatrices neighbours) {
-		NeighbourhoodMatrix current = (NeighbourhoodMatrix) neighbours.currentMatrix();
-		PVector v = neighbours.otherMatrix().getCell(1, 1).get_wind();
+		NeighbourhoodMatrix current = (NeighbourhoodMatrix) neighbours.currentGenMatrix();
+		PVector v = neighbours.nextGenMatrix().getCell(1, 1).get_wind();
 		v.add(current.topLeft().get_wind());
 		v.add(current.topMiddle().get_wind());
 		v.add(current.topRight().get_wind());

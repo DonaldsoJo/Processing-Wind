@@ -13,7 +13,7 @@ public class FixtureWindMatrix {
 	
 	@Test
 	public void noWind() {
-		WindMatrix matrix = new MatrixMaker().matrices().currentMatrix();
+		WindMatrix matrix = new MatrixMaker().matrices().currentGenMatrix();
 		
 		Assert.assertEquals(0.0f, matrix.getCell(1, 1).get_wind().x);
 		Assert.assertEquals(0.0f, matrix.getCell(1, 1).get_wind().y);
@@ -21,7 +21,7 @@ public class FixtureWindMatrix {
 
 	@Test
 	public void someWind() throws Exception {
-		WindMatrix matrix = new MatrixMaker().centre(1,1).matrices().currentMatrix();
+		WindMatrix matrix = new MatrixMaker().centre(1,1).matrices().currentGenMatrix();
 		
 		Assert.assertNotSame(0.0f, matrix.getCell(1, 1).get_wind().x);
 		Assert.assertNotSame(0.0f, matrix.getCell(1, 1).get_wind().y);
@@ -29,14 +29,14 @@ public class FixtureWindMatrix {
 
 	@Test
 	public void getCellFromMatrix() {
-		WindMatrix matrix = new MatrixMaker().setCell(0,1,1,1).matrices().currentMatrix();
+		WindMatrix matrix = new MatrixMaker().setCell(0,1,1,1).matrices().currentGenMatrix();
 		WindCell left = matrix.getCell(0,1);
 		Assert.assertEquals(1.0f, left.get_wind().x);
 	}
 
 	@Test
 	public void getLeft() {
-		WindMatrix matrix = new MatrixMaker().setCell(0,1,1,1).matrices().currentMatrix();
+		WindMatrix matrix = new MatrixMaker().setCell(0,1,1,1).matrices().currentGenMatrix();
 		WindCell left = matrix.getLeft(1,1);
 		Assert.assertEquals(1.0f, left.get_wind().x);
 	}
@@ -44,7 +44,7 @@ public class FixtureWindMatrix {
 	@Test
 	public void outOfBounds() {
 		WindMatrices matrices = new MatrixMaker().matrices();
-		WindMatrix current = matrices.currentMatrix();
+		WindMatrix current = matrices.currentGenMatrix();
 		int colMax = current.getCells().length;
 		int rowMax = current.getCells()[0].length;
 		Assert.assertFalse(current.indexInBounds(-1, 0));
@@ -56,7 +56,7 @@ public class FixtureWindMatrix {
 	@Test
 	public void inBounds() {
 		WindMatrices matrices = new MatrixMaker().matrices();
-		WindMatrix current = matrices.currentMatrix();
+		WindMatrix current = matrices.currentGenMatrix();
 		int colMax = current.getCells().length;
 		int rowMax = current.getCells()[0].length;
 		Assert.assertTrue(current.indexInBounds(0, 1));
@@ -81,14 +81,14 @@ public class FixtureWindMatrix {
 	{
 		WindMatrices matrices = new MatrixMaker().setCell(0,1,1,1).matrices();
 		
-		Assert.assertEquals(1.0f, matrices.currentMatrix().getLeft(1,1).get_wind().x);
-		Assert.assertEquals(0.0f, matrices.otherMatrix().getLeft(1,1).get_wind().x);
+		Assert.assertEquals(1.0f, matrices.currentGenMatrix().getLeft(1,1).get_wind().x);
+		Assert.assertEquals(0.0f, matrices.nextGenMatrix().getLeft(1,1).get_wind().x);
 		matrices.flipMatrices();
-		Assert.assertEquals(0.0f, matrices.currentMatrix().getLeft(1,1).get_wind().x);
-		Assert.assertEquals(1.0f, matrices.otherMatrix().getLeft(1,1).get_wind().x);
+		Assert.assertEquals(0.0f, matrices.currentGenMatrix().getLeft(1,1).get_wind().x);
+		Assert.assertEquals(1.0f, matrices.nextGenMatrix().getLeft(1,1).get_wind().x);
 		matrices.flipMatrices();
-		Assert.assertEquals(1.0f, matrices.currentMatrix().getLeft(1,1).get_wind().x);
-		Assert.assertEquals(0.0f, matrices.otherMatrix().getLeft(1,1).get_wind().x);
+		Assert.assertEquals(1.0f, matrices.currentGenMatrix().getLeft(1,1).get_wind().x);
+		Assert.assertEquals(0.0f, matrices.nextGenMatrix().getLeft(1,1).get_wind().x);
 
 	}
 
@@ -96,7 +96,7 @@ public class FixtureWindMatrix {
 	public void clearNext()
 	{
 		WindMatrices matrices = new MatrixMaker().setOtherCell(1,1,1,1).matrices();
-		WindCell[][] otherCells = matrices.otherMatrix().getCells();
+		WindCell[][] otherCells = matrices.nextGenMatrix().getCells();
 		
 		Assert.assertEquals(1.0f, otherCells[1][1].get_wind().x);
 		matrices.clearOtherCell(1,1);

@@ -10,8 +10,8 @@ public class AlgorithmFractionalFlowAndSideSpills extends AlgorithmBase {
 //		onlyPositive.calculateResultVector(v, neighbours);
 		
 //		System.out.println("  Starting calculateResultVector in AlgorithmFractionalFlowAndSideSpills");
-		NeighbourhoodMatrix current = (NeighbourhoodMatrix) neighbours.currentMatrix();
-		NeighbourhoodMatrix other = (NeighbourhoodMatrix) neighbours.otherMatrix();
+		NeighbourhoodMatrix current = (NeighbourhoodMatrix) neighbours.currentGenMatrix();
+		NeighbourhoodMatrix other = (NeighbourhoodMatrix) neighbours.nextGenMatrix();
 //		PVector v = other.getCell(1, 1).get_wind();
 		
 		handleAny(ENeighbour.TOPLEFT, current, other);
@@ -93,6 +93,10 @@ public class AlgorithmFractionalFlowAndSideSpills extends AlgorithmBase {
 		case BOTTOM: return other.bottomMiddle();
 		case BOTLEFT: return other.bottomLeft();
 		case LEFT: return other.left();
+		case CENTRE:
+			break;
+		default:
+			break;
 		}
 		return null;
 	}
@@ -135,6 +139,10 @@ public class AlgorithmFractionalFlowAndSideSpills extends AlgorithmBase {
 			if (direction == EDirection.clockwise) {return ENeighbour.LEFT;} else return ENeighbour.BOTTOM;
 		case LEFT: 
 			if (direction == EDirection.clockwise) {return ENeighbour.TOPLEFT;} else return ENeighbour.BOTLEFT;
+		case CENTRE:
+			break;
+		default:
+			break;
 		}
 		return null;
 	}

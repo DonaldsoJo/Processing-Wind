@@ -4,9 +4,6 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import processing.core.PVector;
-
-import wind.WindCell;
 import wind.WindMatrix;
 
 public class FixtureWindEnergy {

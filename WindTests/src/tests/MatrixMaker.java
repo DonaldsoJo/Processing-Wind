@@ -1,7 +1,6 @@
 package tests;
 
 import wind.AlgorithmBase;
-import wind.AlgorithmFractionalFlowAndSideSpills;
 import wind.NeighbourhoodMatrices;
 import wind.WindCell;
 import wind.WindMatrices;
@@ -32,7 +31,7 @@ public class MatrixMaker
 	
 	public MatrixMaker setCell(int col, int row, float xval, float yval)
 	{
-		WindMatrix current = _matrices.currentMatrix();
+		WindMatrix current = _matrices.currentGenMatrix();
 		current.getCell(col, row).get_wind().x = xval;
 		current.getCell(col, row).get_wind().y = yval;
 		return this;
@@ -50,7 +49,7 @@ public class MatrixMaker
 	}
 
 	public MatrixMaker setOtherCell(int col, int row, float xval, float yval) {
-		WindMatrix other = _matrices.otherMatrix();
+		WindMatrix other = _matrices.nextGenMatrix();
 		other.getCell(col, row).get_wind().x = xval;
 		other.getCell(col, row).get_wind().y = yval;
 		return this;

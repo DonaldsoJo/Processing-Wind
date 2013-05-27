@@ -10,11 +10,19 @@ public abstract class AlgorithmBase {
 
 	public abstract void calculateResultVector(NeighbourhoodMatrices neighbours);
 
-	public enum AlgorithmType{addAll, onlyPositive, doNothing, fractionalFlowAndSideSpills};
+	public enum AlgorithmType{addAll, onlyPositive, doNothing, fractionalFlowAndSideSpills, applyTemplate};
+	
+	public static AlgorithmBase SelectAlgorithm(AlgorithmType atype, NeighbourhoodMatrix template) {
+		AlgorithmApplyTemplate a = (AlgorithmApplyTemplate) SelectAlgorithm(atype);
+		a.set_template(template);
+		return a;
+	}
 	
 	public static AlgorithmBase SelectAlgorithm(AlgorithmType atype) {
 		switch(atype)
 		{
+		case applyTemplate:
+			return new AlgorithmApplyTemplate();
 		case addAll:
 			return new AlgorithmAddAll();
 		case onlyPositive:
@@ -38,6 +46,10 @@ public abstract class AlgorithmBase {
 		case BOTTOM: return resolveBottomMiddle(v);
 		case BOTLEFT: return resolveBottomLeft(v);
 		case LEFT: return resolveLeft(v);
+		case CENTRE:
+			break;
+		default:
+			break;
 		}
 		return null;
 	}

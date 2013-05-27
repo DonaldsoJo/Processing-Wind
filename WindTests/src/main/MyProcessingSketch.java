@@ -27,7 +27,7 @@ public class MyProcessingSketch extends PApplet
 	    int arrayWidth = width/_resolution; 
 	    int arrayHeight = height/_resolution; 
 	    _matrices = new WindMatrices(arrayWidth,arrayHeight, AlgorithmBase.SelectAlgorithm(AlgorithmType.fractionalFlowAndSideSpills));
-	    WindMatrix current = _matrices.currentMatrix();
+	    WindMatrix current = _matrices.currentGenMatrix();
 	    
 //	    current.setCell(10, 10, 10, 10);
 //	    current.setCell(10, 10, 0, 10);
@@ -67,8 +67,8 @@ public class MyProcessingSketch extends PApplet
 	    background(100); // reset
 
 		// draw matrix
-	    System.out.println("Energy: " + _matrices.currentMatrix().energy());
-		drawWindMatrix(_matrices.currentMatrix().getCells());
+	    System.out.println("Energy: " + _matrices.currentGenMatrix().energy());
+		drawWindMatrix(_matrices.currentGenMatrix().getCells());
 		
 		// process the matrix
 		_matrices.process();

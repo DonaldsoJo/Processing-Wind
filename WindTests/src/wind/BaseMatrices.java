@@ -47,21 +47,21 @@ public abstract class BaseMatrices {
 		return 1-_currentMatrixIndex;
 	}
 
-	public WindMatrix currentMatrix()
+	public WindMatrix currentGenMatrix()
 	{
 		return _matrices[currentMatrixIndex()];
 	}
 
-	public WindMatrix otherMatrix()
+	public WindMatrix nextGenMatrix()
 	{
 		return _matrices[otherMatrixIndex()];
 	}
 
 	public void clearOtherCell(int col, int row) {
-		otherMatrix().getCell(col, row).clearCell();
+		nextGenMatrix().getCell(col, row).clearCell();
 	}
 
 	public void updateOtherCell(int col, int row, PVector newWind) {
-		otherMatrix().setCell(col, row, newWind.x, newWind.y);
+		nextGenMatrix().setCell(col, row, newWind.x, newWind.y);
 	}
 }
