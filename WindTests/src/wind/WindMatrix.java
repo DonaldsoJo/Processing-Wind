@@ -45,6 +45,11 @@ public class WindMatrix {
 		_cells[col][row].get_wind().y = y;
 	}
 
+	public void setCell(int col, int row, float x, float y, float mag) {
+		setCell(col, row, x, y);
+		_cells[col][row].get_wind().setMag(mag);
+	}
+
 	public float energy() {
 		float energy = 0.0f;
 		for(WindCell[] col : _cells)
