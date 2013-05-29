@@ -36,15 +36,15 @@ public class AlgorithmFractionalFlowAndSideSpills extends AlgorithmBase {
 		
 		WindCell cSource = current.getCell(Utils.col(neighbourName), Utils.row(neighbourName)); 
 //		System.out.println("col " + cSource.getCol() + " row " + cSource.getRow());
-		PVector vSource = cSource.get_wind();
+		PVector vSource = cSource.getWind();
 		
 		updateSpill(neighbourName, other, vSource, EDirection.clockwise);
 		updateSpill(neighbourName, other, vSource, EDirection.anticlockwise);
 		
-		PVector vMain = resolveAny(neighbourName, cSource.get_wind());
+		PVector vMain = resolveAny(neighbourName, cSource.getWind());
 		vMain.mult(0.8f);
 //		if (vMain.mag() > 0) System.out.println("    handleAny for " + neighbourName + " " + vMain.toString());
-		PVector vTarget = other.getCell(1, 1).get_wind();
+		PVector vTarget = other.getCell(1, 1).getWind();
 		vTarget.add( vMain);
 	}
 
@@ -58,7 +58,7 @@ public class AlgorithmFractionalFlowAndSideSpills extends AlgorithmBase {
 		WindCell updateCell = getTargetCell( other, updateNeighbour);
 //		System.out.println("    source " + neighbourName + " direction " + direction + " neighbour " + updateNeighbour + " target col " + updateCell.getCol() + " row " + updateCell.getRow() );
 //		System.out.println("    x " + vSpill.x + " y " + vSpill.y);
-		updateCell.get_wind().add(vSpill);
+		updateCell.getWind().add(vSpill);
 	}
 
 	private boolean isMiddleCell(ENeighbour neighbourName) {

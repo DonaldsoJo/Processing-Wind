@@ -32,8 +32,8 @@ public class MatrixMaker
 	public MatrixMaker setCell(int col, int row, float xval, float yval)
 	{
 		WindMatrix current = _matrices.currentGenMatrix();
-		current.getCell(col, row).get_wind().x = xval;
-		current.getCell(col, row).get_wind().y = yval;
+		current.getCell(col, row).getWind().x = xval;
+		current.getCell(col, row).getWind().y = yval;
 		return this;
 	}
 	
@@ -50,8 +50,8 @@ public class MatrixMaker
 
 	public MatrixMaker setOtherCell(int col, int row, float xval, float yval) {
 		WindMatrix other = _matrices.nextGenMatrix();
-		other.getCell(col, row).get_wind().x = xval;
-		other.getCell(col, row).get_wind().y = yval;
+		other.getCell(col, row).getWind().x = xval;
+		other.getCell(col, row).getWind().y = yval;
 		return this;
 	}
 

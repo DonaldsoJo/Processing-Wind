@@ -43,7 +43,7 @@ public abstract class BaseMatrices {
 		return _currentMatrixIndex;
 	}
 
-	public int otherMatrixIndex() {
+	public int nextGenMatrixIndex() {
 		return 1-_currentMatrixIndex;
 	}
 
@@ -54,14 +54,14 @@ public abstract class BaseMatrices {
 
 	public WindMatrix nextGenMatrix()
 	{
-		return _matrices[otherMatrixIndex()];
+		return _matrices[nextGenMatrixIndex()];
 	}
 
-	public void clearOtherCell(int col, int row) {
+	public void clearNextGenCell(int col, int row) {
 		nextGenMatrix().getCell(col, row).clearCell();
 	}
 
-	public void updateOtherCell(int col, int row, PVector newWind) {
+	public void updateNextGenCell(int col, int row, PVector newWind) {
 		nextGenMatrix().setCell(col, row, newWind.x, newWind.y);
 	}
 }

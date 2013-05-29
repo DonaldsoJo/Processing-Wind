@@ -30,38 +30,39 @@ public class FixtureOctant {
 
 	@Test
 	public void headingOctants() {
+		// bottom=2, left=4, top=6, right=0
 		PVector p = new PVector(0,1);
 		Octant o = new Octant(p.heading());
 		Assert.assertEquals(2, o.octant());
 		
-		p = new PVector(-1,1);
-		o = new Octant(p.heading());
-		Assert.assertEquals(3, o.octant());
-
 		p = new PVector(-1,0);
-		o = new Octant(p.heading());
-		Assert.assertEquals((float)Math.PI, p.heading());
-		Assert.assertEquals(3, o.octant());
-
-		p = new PVector(-1,-0.01f);
-		o = new Octant(p.heading());
-		Assert.assertEquals(4, o.octant());
-
-		p = new PVector(-1,-1);
 		o = new Octant(p.heading());
 		Assert.assertEquals(4, o.octant());
 
 		p = new PVector(0,-1);
 		o = new Octant(p.heading());
-		Assert.assertEquals(5, o.octant());
-
-		p = new PVector(1,-1);
-		o = new Octant(p.heading());
 		Assert.assertEquals(6, o.octant());
 
-		p = new PVector(1,-0.01f);
+		p = new PVector(0, 0);
+		o = new Octant(p.heading());
+		Assert.assertEquals(0, o.octant());
+
+		// topright=7, botright=1, botleft=3, topleft=5
+		p = new PVector(1,-1);
 		o = new Octant(p.heading());
 		Assert.assertEquals(7, o.octant());
+
+		p = new PVector(1,1);
+		o = new Octant(p.heading());
+		Assert.assertEquals(1, o.octant());
+
+		p = new PVector(-1,1);
+		o = new Octant(p.heading());
+		Assert.assertEquals(3, o.octant());
+
+		p = new PVector(-1,-1);
+		o = new Octant(p.heading());
+		Assert.assertEquals(5, o.octant());
 
 	}
 

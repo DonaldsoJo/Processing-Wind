@@ -1,6 +1,8 @@
 package main;
 import processing.core.*;
+import wind.AlgorithmApplyTemplate;
 import wind.AlgorithmBase;
+import wind.NeighbourhoodMatrix;
 import wind.WindCell;
 import wind.WindMatrices;
 import wind.WindMatrix;
@@ -16,26 +18,62 @@ public class MyProcessingSketch extends PApplet
 	private WindMatrices _matrices;
 
 	public void setup() {
-	    size(displayWidth,displayHeight);
-//	    size(310,210);
+//	    size(displayWidth,displayHeight);
+	    size(310,210);
 	    frameRate(1);
 //	    frameRate(0.2f);
 	    background(100);
 	    
-//	    int arrayWidth = 21; 
-//	    int arrayHeight = 21; 
-	    int arrayWidth = width/_resolution; 
-	    int arrayHeight = height/_resolution; 
-	    _matrices = new WindMatrices(arrayWidth,arrayHeight, AlgorithmBase.SelectAlgorithm(AlgorithmType.fractionalFlowAndSideSpills));
+	    int arrayWidth = 21; 
+	    int arrayHeight = 21; 
+//	    int arrayWidth = width/_resolution; 
+//	    int arrayHeight = height/_resolution; 
+	    
+	    AlgorithmBase alg = getAlgorithm();
+	    
+	    _matrices = new WindMatrices(arrayWidth,arrayHeight, alg);
 	    WindMatrix current = _matrices.currentGenMatrix();
 	    
+	    // TODO: check fan out - not working
+	    // TODO: prune very small vectors
+	    // TODO: think about friction
+	    // TODO: think about tail winds
+	    // TODO: draw bolder lines
+	    // TODO: load tests and demos in a friendlier way
+	    // TODO: inject wind continuously
+	    // TODO: colliding winds - cancel out? Push sideways?
+	    // TODO: introduce obstacles
+	    
+	    loadInitialVectors(current);
+	    
+	}
+
+	public void loadInitialVectors(WindMatrix current) {
+
+		current.setCell(8, 10, -30, 0);
+		current.setCell(12, 10, 30, 0);
+		current.setCell(10, 8, 0, -30);
+		current.setCell(10, 12, 0, 30);
+
+//		current.setCell(0, 8, 20, 0);
+//	    current.setCell(0, 9, 20, 0);
+//	    current.setCell(0, 10, 20, 0);
+//	    current.setCell(0, 11, 20, 0);
+//	    current.setCell(0, 12, 20, 0);
+//
+//		current.setCell(20, 8, -20, 0);
+//	    current.setCell(20, 9, -20, 0);
+//	    current.setCell(20, 10, -20, 0);
+//	    current.setCell(20, 11, -20, 0);
+//	    current.setCell(20, 12, -20, 0);
+
 //	    current.setCell(10, 10, 10, 10);
 //	    current.setCell(10, 10, 0, 10);
 	    
-	    current.setCell(60, 60, -10, -10);
-	    current.setCell(100, 60, 10, -10);
-	    current.setCell(100, 100, 10, 10);
-	    current.setCell(60, 100, -10, 10);
+//	    current.setCell(60, 60, -10, -10);
+//	    current.setCell(100, 60, 10, -10);
+//	    current.setCell(100, 100, 10, 10);
+//	    current.setCell(60, 100, -10, 10);
 	    
 //	    current.setCell(20,10,1,1);
 //	    current.setCell(10,10,20,0);
@@ -62,9 +100,19 @@ public class MyProcessingSketch extends PApplet
 //	    current.setCell(0,13,3,-3);
 //	    current.setCell(0,15,3,-3);
 	}
+
+	public AlgorithmBase getAlgorithm() {
+		AlgorithmBase alg = AlgorithmBase.SelectAlgorithm(AlgorithmType.applyTemplate);
+	    NeighbourhoodMatrix template = new NeighbourhoodMatrix();
+		template.setCell(2, 0, 1, 1, 0.1f);
+		template.setCell(2, 1, 0.8f, 0);
+		template.setCell(2, 2, 1, 1, 0.1f);
+	    ((AlgorithmApplyTemplate) alg).set_template(template);
+		return alg;
+	}
 	
 	public void draw() {
-	    background(100); // reset
+	    // background(100); // reset
 
 		// draw matrix
 	    System.out.println("Energy: " + _matrices.currentGenMatrix().energy());
@@ -88,7 +136,7 @@ public class MyProcessingSketch extends PApplet
 		pushMatrix();		
 //		translate(cell.getCol()*_resolution + _resolution + _xOffset, cell.getRow()*_resolution + _resolution);
 		translate(cell.getCol()*_resolution + _xOffset, cell.getRow()*_resolution);
-		line(0,0,cell.get_wind().x,cell.get_wind().y);
+		line(0,0,cell.getWind().x,cell.getWind().y);
 		popMatrix();
 	}
 	

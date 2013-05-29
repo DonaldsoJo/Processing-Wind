@@ -18,9 +18,9 @@ public class FixtureIntegration {
 //		System.out.println("Energy " + matrices.currentMatrix().energy());
 		
 		// check where the vector is
-		Assert.assertEquals(11.0f, matrices.currentGenMatrix().getCell(2, 2).get_wind().x);
-		Assert.assertEquals(0.0f, matrices.currentGenMatrix().getCell(3, 2).get_wind().x);
-		Assert.assertEquals(0.0f, matrices.currentGenMatrix().getCell(4, 2).get_wind().x);
+		Assert.assertEquals(11.0f, matrices.currentGenMatrix().getCell(2, 2).getWind().x);
+		Assert.assertEquals(0.0f, matrices.currentGenMatrix().getCell(3, 2).getWind().x);
+		Assert.assertEquals(0.0f, matrices.currentGenMatrix().getCell(4, 2).getWind().x);
 
 		// update and flip
 		matrices.updateCells();

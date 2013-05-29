@@ -34,19 +34,24 @@ public class Octant {
 	public ColAndRow rotatedColAndRow(int col, int row) {
 		int startOctant = _octantIndexedByColAndRow[row][col];
 		int targetOctant = (startOctant + _octant) % 8;
-		System.out.println("start=" + startOctant + " target=" + targetOctant);
+//		System.out.println("start=" + startOctant + " target=" + targetOctant);
 		return _colsAndRowsIndexedByOctant[targetOctant];
 	}
+	
+	private final float onePiOver8 = (float)(Math.PI/8);
+	private final float threePiOver8 = (float)(3*Math.PI/8);
+	private final float fivePiOver8 = (float)(5*Math.PI/8);
+	private final float sevenPiOver8 = (float)(7*Math.PI/8);
 
 	private int fromHeadingToOctant() {
-		if ((_heading >= 0) && (_heading < Math.PI/4)) return 0;
-		if ((_heading >= Math.PI/4) && (_heading < Math.PI/2)) return 1;
-		if ((_heading >= Math.PI/2) && (_heading < 3*Math.PI/4)) return 2;
-		if ((_heading >= 3*Math.PI/4) && (_heading <= (float)Math.PI)) return 3;
-		if ((_heading >= (float)-Math.PI) && (_heading <= -3*Math.PI/4)) return 4;
-		if ((_heading > -3*Math.PI/4) && (_heading <= -Math.PI/2)) return 5;
-		if ((_heading > -Math.PI/2) && (_heading <= -Math.PI/4)) return 6;
-		if ((_heading > -Math.PI/4) && (_heading < 0)) return 7;
+		if ((_heading > -onePiOver8) && (_heading <= onePiOver8)) return 0;
+		if ((_heading > onePiOver8) && (_heading <= threePiOver8)) return 1;
+		if ((_heading > threePiOver8) && (_heading <= fivePiOver8)) return 2;
+		if ((_heading > fivePiOver8) && (_heading <= sevenPiOver8)) return 3;
+		if ((_heading > sevenPiOver8) && (_heading <= (float)Math.PI) || (_heading >= -(float)Math.PI) && (_heading <= -sevenPiOver8)) return 4;
+		if ((_heading > -sevenPiOver8) && (_heading <= -fivePiOver8)) return 5;
+		if ((_heading > -fivePiOver8) && (_heading <= -threePiOver8)) return 6;
+		if ((_heading > -threePiOver8) && (_heading <= -onePiOver8)) return 7;
 		return 0;
 	}
 

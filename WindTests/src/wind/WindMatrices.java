@@ -8,7 +8,7 @@ public class WindMatrices extends BaseMatrices
 	}
 	
 	public void flipMatrices() {
-		_currentMatrixIndex = otherMatrixIndex();
+		_currentMatrixIndex = nextGenMatrixIndex();
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class WindMatrices extends BaseMatrices
 		return neighbours;
 	}
 
-	public void clearOtherMatrix() {
+	public void clearNextGenMatrix() {
 		for (WindCell[] cols : nextGenMatrix().getCells())
 			for (WindCell cell : cols)
 				cell.clearCell();
@@ -58,7 +58,7 @@ public class WindMatrices extends BaseMatrices
 	
 	public void process()
 	{
-		clearOtherMatrix();
+		clearNextGenMatrix();
 		updateCells();
 		flipMatrices();
 

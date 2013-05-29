@@ -18,7 +18,7 @@ public class Utils {
 		{
 			for(WindCell cell : cols)
 			{
-				System.out.println( "Col " + cell.getCol() + ", Row " + cell.getRow() + ", xval " + cell.get_wind().x + ", yval " + cell.get_wind().y);
+				System.out.println( "Col " + cell.getCol() + ", Row " + cell.getRow() + ", xval " + cell.getWind().x + ", yval " + cell.getWind().y);
 			}
 		}
 	}
@@ -30,8 +30,14 @@ public class Utils {
 		{
 			for(WindCell cell : cols)
 			{
-				if (cell.get_wind().mag() > 0)
-					System.out.println( "Col " + cell.getCol() + ", Row " + cell.getRow() + ", xval " + cell.get_wind().x + ", yval " + cell.get_wind().y);
+				if (cell.getWind().mag() > 0)
+					System.out.println( 
+							"col=" + cell.getCol() + 
+							", row=" + cell.getRow() + 
+							", xval=" + cell.getWind().x + 
+							", yval=" + cell.getWind().y +
+							", mag=" + cell.getWind().mag() +
+							", head=" + cell.getWind().heading());
 			}
 		}
 	}

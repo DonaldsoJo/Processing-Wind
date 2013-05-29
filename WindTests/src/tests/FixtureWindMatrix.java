@@ -1,13 +1,13 @@
 package tests;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
+
+import processing.core.PVector;
 
 import wind.WindCell;
 import wind.WindMatrices;
 import wind.WindMatrix;
-
-
 
 public class FixtureWindMatrix {
 	
@@ -15,30 +15,30 @@ public class FixtureWindMatrix {
 	public void noWind() {
 		WindMatrix matrix = new MatrixMaker().matrices().currentGenMatrix();
 		
-		Assert.assertEquals(0.0f, matrix.getCell(1, 1).get_wind().x);
-		Assert.assertEquals(0.0f, matrix.getCell(1, 1).get_wind().y);
+		Assert.assertEquals(0.0f, matrix.getCell(1, 1).getWind().x, 0);
+		Assert.assertEquals(0.0f, matrix.getCell(1, 1).getWind().y, 0);
 	}
 
 	@Test
 	public void someWind() throws Exception {
 		WindMatrix matrix = new MatrixMaker().centre(1,1).matrices().currentGenMatrix();
 		
-		Assert.assertNotSame(0.0f, matrix.getCell(1, 1).get_wind().x);
-		Assert.assertNotSame(0.0f, matrix.getCell(1, 1).get_wind().y);
+		Assert.assertNotSame(0.0f, matrix.getCell(1, 1).getWind().x);
+		Assert.assertNotSame(0.0f, matrix.getCell(1, 1).getWind().y);
 	}
 
 	@Test
 	public void getCellFromMatrix() {
 		WindMatrix matrix = new MatrixMaker().setCell(0,1,1,1).matrices().currentGenMatrix();
 		WindCell left = matrix.getCell(0,1);
-		Assert.assertEquals(1.0f, left.get_wind().x);
+		Assert.assertEquals(1.0f, left.getWind().x, 0);
 	}
 
 	@Test
 	public void getLeft() {
 		WindMatrix matrix = new MatrixMaker().setCell(0,1,1,1).matrices().currentGenMatrix();
 		WindCell left = matrix.getLeft(1,1);
-		Assert.assertEquals(1.0f, left.get_wind().x);
+		Assert.assertEquals(1.0f, left.getWind().x, 0);
 	}
 
 	@Test
@@ -70,10 +70,10 @@ public class FixtureWindMatrix {
 	{
 		WindMatrices matrix = new MatrixMaker().matrices();
 		Assert.assertEquals(0, matrix.currentMatrixIndex());
-		Assert.assertEquals(1, matrix.otherMatrixIndex());
+		Assert.assertEquals(1, matrix.nextGenMatrixIndex());
 		matrix.flipMatrices();
 		Assert.assertEquals(1, matrix.currentMatrixIndex());
-		Assert.assertEquals(0, matrix.otherMatrixIndex());
+		Assert.assertEquals(0, matrix.nextGenMatrixIndex());
 	}
 
 	@Test
@@ -81,14 +81,14 @@ public class FixtureWindMatrix {
 	{
 		WindMatrices matrices = new MatrixMaker().setCell(0,1,1,1).matrices();
 		
-		Assert.assertEquals(1.0f, matrices.currentGenMatrix().getLeft(1,1).get_wind().x);
-		Assert.assertEquals(0.0f, matrices.nextGenMatrix().getLeft(1,1).get_wind().x);
+		Assert.assertEquals(1.0f, matrices.currentGenMatrix().getLeft(1,1).getWind().x, 0);
+		Assert.assertEquals(0.0f, matrices.nextGenMatrix().getLeft(1,1).getWind().x, 0);
 		matrices.flipMatrices();
-		Assert.assertEquals(0.0f, matrices.currentGenMatrix().getLeft(1,1).get_wind().x);
-		Assert.assertEquals(1.0f, matrices.nextGenMatrix().getLeft(1,1).get_wind().x);
+		Assert.assertEquals(0.0f, matrices.currentGenMatrix().getLeft(1,1).getWind().x, 0);
+		Assert.assertEquals(1.0f, matrices.nextGenMatrix().getLeft(1,1).getWind().x, 0);
 		matrices.flipMatrices();
-		Assert.assertEquals(1.0f, matrices.currentGenMatrix().getLeft(1,1).get_wind().x);
-		Assert.assertEquals(0.0f, matrices.nextGenMatrix().getLeft(1,1).get_wind().x);
+		Assert.assertEquals(1.0f, matrices.currentGenMatrix().getLeft(1,1).getWind().x, 0);
+		Assert.assertEquals(0.0f, matrices.nextGenMatrix().getLeft(1,1).getWind().x, 0);
 
 	}
 
@@ -98,9 +98,33 @@ public class FixtureWindMatrix {
 		WindMatrices matrices = new MatrixMaker().setOtherCell(1,1,1,1).matrices();
 		WindCell[][] otherCells = matrices.nextGenMatrix().getCells();
 		
-		Assert.assertEquals(1.0f, otherCells[1][1].get_wind().x);
-		matrices.clearOtherCell(1,1);
-		Assert.assertEquals(0.0f, otherCells[1][1].get_wind().x);
+		Assert.assertEquals(1.0f, otherCells[1][1].getWind().x, 0);
+		matrices.clearNextGenCell(1,1);
+		Assert.assertEquals(0.0f, otherCells[1][1].getWind().x, 0);
+	}
+	
+	@Test
+	public void canChangeHeading(){
+		PVector v = new PVector(1,0);
+		Assert.assertEquals(0, v.heading(),0);
+		v.rotate(1);
+		Assert.assertEquals(1, v.heading(),0);
+		v.rotate(1);
+		Assert.assertEquals(2, v.heading(),0);
+		v.rotate(1);
+		Assert.assertEquals(3, v.heading(),0);
+		v.rotate(1);
+		Assert.assertEquals((float)(4-2*Math.PI), v.heading(),0);
+		
+		WindCell c = new WindCell(1, 0);
+		c.getWind().x = 1;
+		Assert.assertEquals(0.0f, c.getWind().heading(), 0);
+		c.changeHeading( 1.0f);
+		Assert.assertEquals(1.0f, c.getWind().heading(), 0);
+		c.changeHeading( 2.0f);
+		Assert.assertEquals(3.0f, c.getWind().heading(), 0);
+		c.changeHeading( -2.0f);
+		Assert.assertEquals(1.0f, c.getWind().heading(), 0);
 		
 	}
 

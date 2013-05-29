@@ -41,20 +41,20 @@ public class WindMatrix {
 	}
 
 	public void setCell(int col, int row, float x, float y) {
-		_cells[col][row].get_wind().x = x;
-		_cells[col][row].get_wind().y = y;
+		_cells[col][row].getWind().x = x;
+		_cells[col][row].getWind().y = y;
 	}
 
 	public void setCell(int col, int row, float x, float y, float mag) {
 		setCell(col, row, x, y);
-		_cells[col][row].get_wind().setMag(mag);
+		_cells[col][row].getWind().setMag(mag);
 	}
 
 	public float energy() {
 		float energy = 0.0f;
 		for(WindCell[] col : _cells)
 			for(WindCell cell : col)
-				energy = energy + cell.get_wind().mag();
+				energy = energy + cell.getWind().mag();
 		return energy;
 	}
 

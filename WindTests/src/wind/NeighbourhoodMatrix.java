@@ -14,7 +14,8 @@ public class NeighbourhoodMatrix extends WindMatrix {
 		NeighbourhoodMatrix m = new NeighbourhoodMatrix();
 		for(int col=0; col<m.getCells().length; col++)
 			for (int row=0; row<getCells()[0].length; row++)
-				m.setCell(col, row, this.getCell(col, row).get_wind().x, this.getCell(col, row).get_wind().y);
+				// TODO: use .get()?
+				m.setCell(col, row, this.getCell(col, row).getWind().x, this.getCell(col, row).getWind().y);
 		return m;
 	}
 

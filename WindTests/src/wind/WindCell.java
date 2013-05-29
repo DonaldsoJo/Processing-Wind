@@ -10,7 +10,7 @@ public class WindCell {
 	}
 
 	private PVector _wind = new PVector();
-	public PVector get_wind() {
+	public PVector getWind() {
 		return _wind;
 	}
 
@@ -27,6 +27,12 @@ public class WindCell {
 	public void clearCell() {
 		_wind.x = 0;
 		_wind.y = 0;
+	}
+
+	public void changeHeading(float headingChange) {
+		System.out.println("Heading before:" + _wind.heading() + ", change:" + headingChange);
+		_wind.rotate(headingChange);
+		System.out.println("Heading after:" + _wind.heading());
 	}
 
 }

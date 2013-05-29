@@ -29,9 +29,9 @@ public class FixtureSpillAlgorithm {
 		_ms.currentGenMatrix().setCell(0, 0, 1, 1);		
 		_alg.handleAny(ENeighbour.TOPLEFT, (NeighbourhoodMatrix)_ms.currentGenMatrix(), (NeighbourhoodMatrix)_ms.nextGenMatrix());
 		
-		Assert.assertEquals(0.8f, _ms.nextGenMatrix().getCell(1, 1).get_wind().x);
-		Assert.assertEquals(0.1f, _ms.nextGenMatrix().getCell(1, 0).get_wind().x);
-		Assert.assertEquals(0.1f, _ms.nextGenMatrix().getCell(0, 1).get_wind().y);
+		Assert.assertEquals(0.8f, _ms.nextGenMatrix().getCell(1, 1).getWind().x);
+		Assert.assertEquals(0.1f, _ms.nextGenMatrix().getCell(1, 0).getWind().x);
+		Assert.assertEquals(0.1f, _ms.nextGenMatrix().getCell(0, 1).getWind().y);
 	}
 	
 	@Test
@@ -39,10 +39,10 @@ public class FixtureSpillAlgorithm {
 		_ms.currentGenMatrix().setCell(0, 2, 1, -1);		
 		_alg.handleAny(ENeighbour.BOTLEFT, (NeighbourhoodMatrix)_ms.currentGenMatrix(), (NeighbourhoodMatrix)_ms.nextGenMatrix());
 
-		Assert.assertEquals(0.8f, _ms.nextGenMatrix().getCell(1, 1).get_wind().x);
-		Assert.assertEquals(-0.8f, _ms.nextGenMatrix().getCell(1, 1).get_wind().y);
-		Assert.assertEquals(-0.1f, _ms.nextGenMatrix().getCell(0, 1).get_wind().y);
-		Assert.assertEquals(0.1f, _ms.nextGenMatrix().getCell(1, 2).get_wind().x);
+		Assert.assertEquals(0.8f, _ms.nextGenMatrix().getCell(1, 1).getWind().x);
+		Assert.assertEquals(-0.8f, _ms.nextGenMatrix().getCell(1, 1).getWind().y);
+		Assert.assertEquals(-0.1f, _ms.nextGenMatrix().getCell(0, 1).getWind().y);
+		Assert.assertEquals(0.1f, _ms.nextGenMatrix().getCell(1, 2).getWind().x);
 	}
 	
 	@Test
@@ -50,10 +50,10 @@ public class FixtureSpillAlgorithm {
 		_ms.currentGenMatrix().setCell(2, 0, -1, 1);		
 		_alg.handleAny(ENeighbour.TOPRIGHT, (NeighbourhoodMatrix)_ms.currentGenMatrix(), (NeighbourhoodMatrix)_ms.nextGenMatrix());
 
-		Assert.assertEquals(-0.8f, _ms.nextGenMatrix().getCell(1, 1).get_wind().x);
-		Assert.assertEquals(0.8f, _ms.nextGenMatrix().getCell(1, 1).get_wind().y);
-		Assert.assertEquals(0.1f, _ms.nextGenMatrix().getCell(2, 1).get_wind().y);
-		Assert.assertEquals(-0.1f, _ms.nextGenMatrix().getCell(1, 0).get_wind().x);
+		Assert.assertEquals(-0.8f, _ms.nextGenMatrix().getCell(1, 1).getWind().x);
+		Assert.assertEquals(0.8f, _ms.nextGenMatrix().getCell(1, 1).getWind().y);
+		Assert.assertEquals(0.1f, _ms.nextGenMatrix().getCell(2, 1).getWind().y);
+		Assert.assertEquals(-0.1f, _ms.nextGenMatrix().getCell(1, 0).getWind().x);
 	}
 	
 	@Test
@@ -62,10 +62,10 @@ public class FixtureSpillAlgorithm {
 		
 		_alg.handleAny(ENeighbour.BOTRIGHT, (NeighbourhoodMatrix)_ms.currentGenMatrix(), (NeighbourhoodMatrix)_ms.nextGenMatrix());
 
-		Assert.assertEquals(-0.8f, _ms.nextGenMatrix().getCell(1, 1).get_wind().x);
-		Assert.assertEquals(-0.8f, _ms.nextGenMatrix().getCell(1, 1).get_wind().y);
-		Assert.assertEquals(-0.1f, _ms.nextGenMatrix().getCell(2, 1).get_wind().y);
-		Assert.assertEquals(-0.1f, _ms.nextGenMatrix().getCell(1, 2).get_wind().x);
+		Assert.assertEquals(-0.8f, _ms.nextGenMatrix().getCell(1, 1).getWind().x);
+		Assert.assertEquals(-0.8f, _ms.nextGenMatrix().getCell(1, 1).getWind().y);
+		Assert.assertEquals(-0.1f, _ms.nextGenMatrix().getCell(2, 1).getWind().y);
+		Assert.assertEquals(-0.1f, _ms.nextGenMatrix().getCell(1, 2).getWind().x);
 	}
 
 	@Test
@@ -74,12 +74,12 @@ public class FixtureSpillAlgorithm {
 		
 		_alg.handleAny(ENeighbour.TOP, (NeighbourhoodMatrix)_ms.currentGenMatrix(), (NeighbourhoodMatrix)_ms.nextGenMatrix());
 
-		Assert.assertEquals(0.0f, _ms.nextGenMatrix().getCell(1, 1).get_wind().x);
-		Assert.assertEquals(0.8f, _ms.nextGenMatrix().getCell(1, 1).get_wind().y);
-		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(2, 1).get_wind().y);
-		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(2, 1).get_wind().x);
-		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(0, 1).get_wind().y);
-		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(0, 1).get_wind().x);
+		Assert.assertEquals(0.0f, _ms.nextGenMatrix().getCell(1, 1).getWind().x);
+		Assert.assertEquals(0.8f, _ms.nextGenMatrix().getCell(1, 1).getWind().y);
+		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(2, 1).getWind().y);
+		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(2, 1).getWind().x);
+		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(0, 1).getWind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(0, 1).getWind().x);
 	}
 	
 	@Test
@@ -88,12 +88,12 @@ public class FixtureSpillAlgorithm {
 		
 		_alg.handleAny(ENeighbour.RIGHT, (NeighbourhoodMatrix)_ms.currentGenMatrix(), (NeighbourhoodMatrix)_ms.nextGenMatrix());
 
-		Assert.assertEquals(-0.8f, _ms.nextGenMatrix().getCell(1, 1).get_wind().x);
-		Assert.assertEquals(0.0f, _ms.nextGenMatrix().getCell(1, 1).get_wind().y);
-		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(1, 0).get_wind().y);
-		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(1, 0).get_wind().x);
-		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(1, 2).get_wind().y);
-		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(1, 2).get_wind().x);
+		Assert.assertEquals(-0.8f, _ms.nextGenMatrix().getCell(1, 1).getWind().x);
+		Assert.assertEquals(0.0f, _ms.nextGenMatrix().getCell(1, 1).getWind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(1, 0).getWind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(1, 0).getWind().x);
+		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(1, 2).getWind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(1, 2).getWind().x);
 	}
 	
 	@Test
@@ -102,12 +102,12 @@ public class FixtureSpillAlgorithm {
 		
 		_alg.handleAny(ENeighbour.BOTTOM, (NeighbourhoodMatrix)_ms.currentGenMatrix(), (NeighbourhoodMatrix)_ms.nextGenMatrix());
 
-		Assert.assertEquals(0.0f, _ms.nextGenMatrix().getCell(1, 1).get_wind().x);
-		Assert.assertEquals(-0.8f, _ms.nextGenMatrix().getCell(1, 1).get_wind().y);
-		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(0, 1).get_wind().y);
-		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(0, 1).get_wind().x);
-		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(2, 1).get_wind().y);
-		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(2, 1).get_wind().x);
+		Assert.assertEquals(0.0f, _ms.nextGenMatrix().getCell(1, 1).getWind().x);
+		Assert.assertEquals(-0.8f, _ms.nextGenMatrix().getCell(1, 1).getWind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(0, 1).getWind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(0, 1).getWind().x);
+		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(2, 1).getWind().y);
+		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(2, 1).getWind().x);
 	}
 	
 	@Test
@@ -116,12 +116,12 @@ public class FixtureSpillAlgorithm {
 		
 		_alg.handleAny(ENeighbour.LEFT, (NeighbourhoodMatrix)_ms.currentGenMatrix(), (NeighbourhoodMatrix)_ms.nextGenMatrix());
 
-		Assert.assertEquals(0.8f, _ms.nextGenMatrix().getCell(1, 1).get_wind().x);
-		Assert.assertEquals(0.0f, _ms.nextGenMatrix().getCell(1, 1).get_wind().y);
-		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(1, 0).get_wind().y);
-		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(1, 0).get_wind().x);
-		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(1, 2).get_wind().y);
-		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(1, 2).get_wind().x);
+		Assert.assertEquals(0.8f, _ms.nextGenMatrix().getCell(1, 1).getWind().x);
+		Assert.assertEquals(0.0f, _ms.nextGenMatrix().getCell(1, 1).getWind().y);
+		Assert.assertEquals(-SINPIOVER4, _ms.nextGenMatrix().getCell(1, 0).getWind().y);
+		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(1, 0).getWind().x);
+		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(1, 2).getWind().y);
+		Assert.assertEquals(SINPIOVER4, _ms.nextGenMatrix().getCell(1, 2).getWind().x);
 	}
 	
 	@Test

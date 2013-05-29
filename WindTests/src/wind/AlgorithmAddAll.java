@@ -11,15 +11,15 @@ public class AlgorithmAddAll extends AlgorithmBase {
 
 	public void calculateResultVector(NeighbourhoodMatrices neighbours) {
 		NeighbourhoodMatrix current = (NeighbourhoodMatrix) neighbours.currentGenMatrix();
-		PVector v = neighbours.nextGenMatrix().getCell(1, 1).get_wind();
-		v.add(current.topLeft().get_wind());
-		v.add(current.topMiddle().get_wind());
-		v.add(current.topRight().get_wind());
-		v.add(current.left().get_wind());
-		v.add(current.right().get_wind());
-		v.add(current.bottomLeft().get_wind());
-		v.add(current.bottomMiddle().get_wind());
-		v.add(current.bottomRight().get_wind());
+		PVector v = neighbours.nextGenMatrix().getCell(1, 1).getWind();
+		v.add(current.topLeft().getWind());
+		v.add(current.topMiddle().getWind());
+		v.add(current.topRight().getWind());
+		v.add(current.left().getWind());
+		v.add(current.right().getWind());
+		v.add(current.bottomLeft().getWind());
+		v.add(current.bottomMiddle().getWind());
+		v.add(current.bottomRight().getWind());
 	}
 
 }
