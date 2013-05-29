@@ -23,8 +23,7 @@ public class FixtureIntegration {
 		Assert.assertEquals(0.0f, matrices.currentGenMatrix().getCell(4, 2).getWind().x);
 
 		// update and flip
-		matrices.updateCells();
-		matrices.flipMatrices();
+		matrices.process();
 //		System.out.println("Energy " + matrices.currentMatrix().energy());
 		
 		// check the vector has moved
@@ -33,8 +32,7 @@ public class FixtureIntegration {
 //		Assert.assertEquals(0.0f, matrices.currentMatrix().getCell(4, 2).get_wind().x);
 		
 		// update and flip
-		matrices.updateCells();
-		matrices.flipMatrices();
+		matrices.process();
 //		System.out.println("Energy " + matrices.currentMatrix().energy());
 		
 	}

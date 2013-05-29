@@ -37,7 +37,8 @@ public class Utils {
 							", xval=" + cell.getWind().x + 
 							", yval=" + cell.getWind().y +
 							", mag=" + cell.getWind().mag() +
-							", head=" + cell.getWind().heading());
+							", head=" + cell.getWind().heading() +
+							", degrees=" + Math.toDegrees(cell.getWind().heading()));
 			}
 		}
 	}

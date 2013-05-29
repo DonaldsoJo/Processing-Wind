@@ -30,9 +30,9 @@ public class WindCell {
 	}
 
 	public void changeHeading(float headingChange) {
-		System.out.println("Heading before:" + _wind.heading() + ", change:" + headingChange);
+//		System.out.println("Heading before:" + _wind.heading() + ", change:" + headingChange);
 		_wind.rotate(headingChange);
-		System.out.println("Heading after:" + _wind.heading());
+//		System.out.println("Heading after:" + _wind.heading());
 	}
 
 }

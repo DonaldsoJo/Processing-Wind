@@ -61,7 +61,6 @@ public class WindMatrices extends BaseMatrices
 		clearNextGenMatrix();
 		updateCells();
 		flipMatrices();
-
 	}
 
 }

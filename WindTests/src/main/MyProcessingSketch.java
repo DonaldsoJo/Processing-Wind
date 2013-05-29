@@ -50,22 +50,22 @@ public class MyProcessingSketch extends PApplet
 
 	public void loadInitialVectors(WindMatrix current) {
 
-		current.setCell(8, 10, -30, 0);
-		current.setCell(12, 10, 30, 0);
-		current.setCell(10, 8, 0, -30);
-		current.setCell(10, 12, 0, 30);
+//		current.setCell(8, 10, -30, 0);
+//		current.setCell(12, 10, 30, 0);
+//		current.setCell(10, 8, 0, -30);
+//		current.setCell(10, 12, 0, 30);
 
-//		current.setCell(0, 8, 20, 0);
-//	    current.setCell(0, 9, 20, 0);
-//	    current.setCell(0, 10, 20, 0);
-//	    current.setCell(0, 11, 20, 0);
-//	    current.setCell(0, 12, 20, 0);
-//
-//		current.setCell(20, 8, -20, 0);
-//	    current.setCell(20, 9, -20, 0);
-//	    current.setCell(20, 10, -20, 0);
-//	    current.setCell(20, 11, -20, 0);
-//	    current.setCell(20, 12, -20, 0);
+		current.setCell(0, 8, 20, 0);
+	    current.setCell(0, 9, 20, 0);
+	    current.setCell(0, 10, 20, 0);
+	    current.setCell(0, 11, 20, 0);
+	    current.setCell(0, 12, 20, 0);
+
+		current.setCell(20, 8, -20, 0);
+	    current.setCell(20, 9, -20, 0);
+	    current.setCell(20, 10, -20, 0);
+	    current.setCell(20, 11, -20, 0);
+	    current.setCell(20, 12, -20, 0);
 
 //	    current.setCell(10, 10, 10, 10);
 //	    current.setCell(10, 10, 0, 10);
@@ -104,7 +104,7 @@ public class MyProcessingSketch extends PApplet
 	public AlgorithmBase getAlgorithm() {
 		AlgorithmBase alg = AlgorithmBase.SelectAlgorithm(AlgorithmType.applyTemplate);
 	    NeighbourhoodMatrix template = new NeighbourhoodMatrix();
-		template.setCell(2, 0, 1, 1, 0.1f);
+		template.setCell(2, 0, 1, -1, 0.1f);
 		template.setCell(2, 1, 0.8f, 0);
 		template.setCell(2, 2, 1, 1, 0.1f);
 	    ((AlgorithmApplyTemplate) alg).set_template(template);
