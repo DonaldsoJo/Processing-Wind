@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import processing.core.PVector;
 
+import wind.AlgorithmApplyTemplate;
 import wind.BaseMatrices;
 import wind.NeighbourhoodMatrices;
 import wind.NeighbourhoodMatrix;
@@ -14,43 +15,6 @@ import wind.WindMatrices;
 import wind.WindMatrix;
 
 public class FixtureNeighbours {
-
-	@Test
-	public void getNeighboursFromMiddle() {
-		WindMatrices matrices = new MatrixMaker(5, 8).matrices();
-		WindMatrix current = updateCurrent(matrices);
-//		Utils.printMatrix(current, "current");
-		NeighbourhoodMatrix neighbours = (NeighbourhoodMatrix) matrices.getNeighbours( new WindCell(2, 5)).currentGenMatrix();
-//		Utils.printMatrix(neighbours.currentMatrix(), "neighbours");
-		
-		Assert.assertEquals(1.0f, neighbours.topLeft().getWind().x, 0);
-		Assert.assertEquals(4.0f, neighbours.topLeft().getWind().y, 0);
-		/*
-		Assert.assertEquals(2.0f, neighbours.topMiddle().get_wind().x);
-		Assert.assertEquals(4.0f, neighbours.topMiddle().get_wind().y);
-		
-		Assert.assertEquals(3.0f, neighbours.topRight().get_wind().x);
-		Assert.assertEquals(4.0f, neighbours.topRight().get_wind().y);
-		
-		Assert.assertEquals(1.0f, neighbours.left().get_wind().x);
-		Assert.assertEquals(5.0f, neighbours.left().get_wind().y);
-
-		Assert.assertEquals(2.0f, neighbours.centre().get_wind().x);
-		Assert.assertEquals(5.0f, neighbours.centre().get_wind().y);
-
-		Assert.assertEquals(3.0f, neighbours.right().get_wind().x);
-		Assert.assertEquals(5.0f, neighbours.right().get_wind().y);
-
-		Assert.assertEquals(1.0f, neighbours.bottomLeft().get_wind().x);
-		Assert.assertEquals(6.0f, neighbours.bottomLeft().get_wind().y);
-		
-		Assert.assertEquals(2.0f, neighbours.bottomMiddle().get_wind().x);
-		Assert.assertEquals(6.0f, neighbours.bottomMiddle().get_wind().y);
-		
-		Assert.assertEquals(3.0f, neighbours.bottomRight().get_wind().x);
-		Assert.assertEquals(6.0f, neighbours.bottomRight().get_wind().y);
-		*/
-	}
 
 	public WindMatrix updateCurrent(WindMatrices matrices) {
 		WindMatrix current = matrices.currentGenMatrix();
@@ -75,29 +39,35 @@ public class FixtureNeighbours {
 	}
 
 	@Test
-	public void leftNeighboursIsOne_centreUpdatesToOne() throws Exception {
-		NeighbourhoodMatrices neighbours = new MatrixMaker().centre(2, 3).setCell(0, 1, 1, 0).neighbours(1,1);
+	public void cetreIsOne_rightUpdatesToOne() throws Exception {
+		NeighbourhoodMatrices neighbours = new MatrixMaker().setCell(1, 1, 1, 0).neighbours(1,1);
 		Assert.assertEquals(0.0f, neighbours.nextGenMatrix().getCell(1, 1).getWind().x, 0);
+
 		neighbours.update();
-		Assert.assertEquals(0.8f, neighbours.nextGenMatrix().getCell(1, 1).getWind().x, 0);
+
+		Assert.assertEquals(1, neighbours.nextGenMatrix().getCell(2, 1).getWind().x, 0);
 	}
 
 	@Test
 	public void updateNeightboursMatrices_updatesAssociatedWindMatrix() throws Exception {
 		
-		WindMatrices matrices = new MatrixMaker(5,5).setCell(1, 2, 11, 0).matrices();
+		WindMatrices matrices = new MatrixMaker(5,5).setCell(2, 2, 11, 0).matrices();
+		AlgorithmApplyTemplate alg = new AlgorithmApplyTemplate();
+		NeighbourhoodMatrix template = new NeighbourhoodMatrix();
+		template.setCell(2, 1, 1, 0);
+		alg.set_template(template);
+		matrices.setAlgorithm(alg);
 		NeighbourhoodMatrices neighbours = matrices.getNeighbours(new WindCell(2,2));
 		Assert.assertEquals(0.0f, neighbours.nextGenMatrix().getCell(1, 1).getWind().x, 0);
 		
+//		Utils.printMatrix(neighbours.currentGenMatrix(), "neighbours current");
+//		Utils.printMatrix(neighbours.nextGenMatrix(), "neighbours other");
 		neighbours.update();
+//		Utils.printMatrix(neighbours.currentGenMatrix(), "neighbours current after");
+//		Utils.printMatrix(neighbours.nextGenMatrix(), "neighbours other after");
 		
-//		Utils.printMatrix(neighbours.currentMatrix(), "neighbours current");
-//		Utils.printMatrix(neighbours.otherMatrix(), "neighbours other");
-//		Utils.printMatrix(matrices.currentMatrix(), "matrices current");
-//		Utils.printMatrix(matrices.otherMatrix(), "matrices other");
-
-		Assert.assertEquals(8.8f, neighbours.nextGenMatrix().getCell(1, 1).getWind().x, 0);
-		Assert.assertEquals(8.8f, matrices.nextGenMatrix().getCell(2, 2).getWind().x, 0);
+		Assert.assertEquals(11, neighbours.nextGenMatrix().getCell(2, 1).getWind().x, 0);
+		Assert.assertEquals(11, matrices.nextGenMatrix().getCell(3, 2).getWind().x, 0);
 	}
 
 	@Test
@@ -106,20 +76,10 @@ public class FixtureNeighbours {
 		WindMatrices matrices = new MatrixMaker(5,5).setCell(1, 1, 11, 0).matrices();
 		BaseMatrices neighbours = matrices.getNeighbours(new WindCell(1,1));
 		
-//		Utils.printMatrix(neighbours.currentMatrix(), "neighbours current");
-//		Utils.printMatrix(neighbours.otherMatrix(), "neighbours other");
-//		Utils.printMatrix(matrices.currentMatrix(), "matrices current");
-//		Utils.printMatrix(matrices.otherMatrix(), "matrices other");
-		
 		Assert.assertEquals(0.0f, neighbours.nextGenMatrix().getCell(1, 1).getWind().x, 0);
 		
 		neighbours.nextGenMatrix().setCell(1, 1, 12, 6);
 		
-//		Utils.printMatrix(neighbours.currentMatrix(), "neighbours current");
-//		Utils.printMatrix(neighbours.otherMatrix(), "neighbours other");
-//		Utils.printMatrix(matrices.currentMatrix(), "matrices current");
-//		Utils.printMatrix(matrices.otherMatrix(), "matrices other");
-
 		Assert.assertEquals(12.0f, neighbours.nextGenMatrix().getCell(1, 1).getWind().x, 0);
 		Assert.assertEquals(12.0f, matrices.nextGenMatrix().getCell(1, 1).getWind().x, 0);		
 	}

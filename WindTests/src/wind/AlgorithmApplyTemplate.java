@@ -10,7 +10,7 @@ public class AlgorithmApplyTemplate extends AlgorithmBase {
 		// get mag of source
 		NeighbourhoodMatrix thisGen = (NeighbourhoodMatrix) neighbours.currentGenMatrix();
 		NeighbourhoodMatrix nextgen = (NeighbourhoodMatrix) neighbours.nextGenMatrix();
-		PVector source = thisGen.centre().getWind();
+		PVector source = thisGen.getCell(1, 1).getWind();
 		
 		// clone template as rectified matrix
 		// TODO: do I really need this clone? Use the template as a readonly reference and have a new matrix instead? Returned from getRectified

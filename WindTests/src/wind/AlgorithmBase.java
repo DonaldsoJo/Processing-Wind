@@ -10,7 +10,7 @@ public abstract class AlgorithmBase {
 
 	public abstract void calculateResultVector(NeighbourhoodMatrices neighbours);
 
-	public enum AlgorithmType{addAll, onlyPositive, doNothing, fractionalFlowAndSideSpills, applyTemplate};
+	public enum AlgorithmType{addAll, doNothing, applyTemplate};
 	
 	public static AlgorithmBase SelectAlgorithm(AlgorithmType atype, NeighbourhoodMatrix template) {
 		AlgorithmApplyTemplate a = (AlgorithmApplyTemplate) SelectAlgorithm(atype);
@@ -22,13 +22,13 @@ public abstract class AlgorithmBase {
 		switch(atype)
 		{
 		case applyTemplate:
-			return new AlgorithmApplyTemplate();
+			AlgorithmApplyTemplate alg = new AlgorithmApplyTemplate();
+			NeighbourhoodMatrix template = new NeighbourhoodMatrix();
+			template.setCell(2, 1, 1, 0);
+			alg.set_template(template);
+			return alg;
 		case addAll:
 			return new AlgorithmAddAll();
-		case onlyPositive:
-			return new AlgorithmOnlyPositive();
-		case fractionalFlowAndSideSpills:
-			return new AlgorithmFractionalFlowAndSideSpills();
 		case doNothing:
 			return new AlgorithmDoNothing();
 		default:

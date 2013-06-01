@@ -22,7 +22,7 @@ public class MatrixMaker
 	public void createMatrices(int cols, int rows) {
 		_cols = cols;
 		_rows = rows;
-		_matrices = new WindMatrices(cols,rows, AlgorithmBase.SelectAlgorithm(AlgorithmType.fractionalFlowAndSideSpills));
+		_matrices = new WindMatrices(cols,rows, AlgorithmBase.SelectAlgorithm(AlgorithmType.applyTemplate));
 	}
 
 	private WindMatrices _matrices;

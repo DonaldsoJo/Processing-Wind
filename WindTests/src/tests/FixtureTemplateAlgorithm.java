@@ -60,7 +60,7 @@ public class FixtureTemplateAlgorithm {
 	public void applySpillTemplateToAngledWind() {
 		WindMatrices wms = new MatrixMaker(3, 3).setAlgorithm(new AlgorithmApplyTemplate()).setCell(1, 1, -10, 0).matrices();
 		
-		float heading = wms.currentGenMatrix().getCell(1, 1).getWind().heading();
+//		float heading = wms.currentGenMatrix().getCell(1, 1).getWind().heading();
 //		System.out.println("source heading:" + heading + " degrees:" + Math.toDegrees(heading));
 		
 		NeighbourhoodMatrix template = new NeighbourhoodMatrix(3, 3);
@@ -101,7 +101,7 @@ public class FixtureTemplateAlgorithm {
 	public void noDeviationOfVectors(){
 		WindMatrices wms = new MatrixMaker(5, 3).setAlgorithm(new AlgorithmApplyTemplate()).setCell(0, 1, 10, 0).matrices();
 
-		float heading = wms.currentGenMatrix().getCell(0, 1).getWind().heading();
+//		float heading = wms.currentGenMatrix().getCell(0, 1).getWind().heading();
 //		System.out.println("source heading:" + heading + " degrees:" + Math.toDegrees(heading));
 		
 		NeighbourhoodMatrix template = new NeighbourhoodMatrix(3, 3);
