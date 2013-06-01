@@ -18,34 +18,57 @@ public class MyProcessingSketch extends PApplet
 	private WindMatrices _matrices;
 
 	public void setup() {
-//	    size(displayWidth,displayHeight);
-	    size(310,210);
-	    frameRate(1);
+	    size(displayWidth,displayHeight);
+//	    size(310,210);
+	    frameRate(4);
 //	    frameRate(0.2f);
 	    background(100);
 	    
-	    int arrayWidth = 21; 
-	    int arrayHeight = 21; 
-//	    int arrayWidth = width/_resolution; 
-//	    int arrayHeight = height/_resolution; 
+//	    int arrayWidth = 21; 
+//	    int arrayHeight = 21; 
+	    int arrayWidth = width/_resolution; 
+	    int arrayHeight = height/_resolution; 
 	    
 	    AlgorithmBase alg = getAlgorithm();
 	    
 	    _matrices = new WindMatrices(arrayWidth,arrayHeight, alg);
 	    WindMatrix current = _matrices.currentGenMatrix();
 	    
-	    // TODO: check fan out - not working
-	    // TODO: prune very small vectors
 	    // TODO: think about friction
-	    // TODO: think about tail winds
 	    // TODO: draw bolder lines
 	    // TODO: load tests and demos in a friendlier way
-	    // TODO: inject wind continuously
-	    // TODO: colliding winds - cancel out? Push sideways?
+	    // TODO: colliding winds - cancel out? Push sideways? Similar to obstacles
 	    // TODO: introduce obstacles
+	    // TODO: export flow field to Patrick
+	    // TODO: Patrick calls in to the wind library to generate the flow field, supplies parameters, supply obstacles
 	    
 	    loadInitialVectors(current);
 	    
+	}
+
+	public void draw() {
+	    background(100); // reset
+		
+		// add any new wind
+		pump();
+
+		// draw matrix
+	    System.out.println("Energy: " + _matrices.currentGenMatrix().energy());
+		drawWindMatrix(_matrices.currentGenMatrix().getCells());
+		
+		// process the matrix
+		_matrices.process();
+	}
+
+	private void pump() {
+		WindMatrix m = _matrices.currentGenMatrix();
+		int centre = m.getCells()[0].length/2;
+		int loBound = centre-centre/2;
+		int hiBound = centre+centre/2;
+//		System.out.println("centre=" + centre + " lo=" + loBound + " hi=" + hiBound);
+		for(int row=loBound; row<=hiBound; row++){
+			m.setCell(0, row, 10, 0);
+		}
 	}
 
 	public void loadInitialVectors(WindMatrix current) {
@@ -55,17 +78,17 @@ public class MyProcessingSketch extends PApplet
 //		current.setCell(10, 8, 0, -30);
 //		current.setCell(10, 12, 0, 30);
 
-		current.setCell(0, 8, 20, 0);
-	    current.setCell(0, 9, 20, 0);
-	    current.setCell(0, 10, 20, 0);
-	    current.setCell(0, 11, 20, 0);
-	    current.setCell(0, 12, 20, 0);
-
-		current.setCell(20, 8, -20, 0);
-	    current.setCell(20, 9, -20, 0);
-	    current.setCell(20, 10, -20, 0);
-	    current.setCell(20, 11, -20, 0);
-	    current.setCell(20, 12, -20, 0);
+//		current.setCell(0, 8, 20, 0);
+//	    current.setCell(0, 9, 20, 0);
+//	    current.setCell(0, 10, 20, 0);
+//	    current.setCell(0, 11, 20, 0);
+//	    current.setCell(0, 12, 20, 0);
+//
+//		current.setCell(20, 8, -20, 0);
+//	    current.setCell(20, 9, -20, 0);
+//	    current.setCell(20, 10, -20, 0);
+//	    current.setCell(20, 11, -20, 0);
+//	    current.setCell(20, 12, -20, 0);
 
 //	    current.setCell(10, 10, 10, 10);
 //	    current.setCell(10, 10, 0, 10);
@@ -104,24 +127,19 @@ public class MyProcessingSketch extends PApplet
 	public AlgorithmBase getAlgorithm() {
 		AlgorithmBase alg = AlgorithmBase.SelectAlgorithm(AlgorithmType.applyTemplate);
 	    NeighbourhoodMatrix template = new NeighbourhoodMatrix();
-		template.setCell(2, 0, 1, -1, 0.1f);
-		template.setCell(2, 1, 0.8f, 0);
-		template.setCell(2, 2, 1, 1, 0.1f);
+	    // 0.88 0.1
+	    // 0.6 0.3
+	    
+//		template.setCell(0, 1, 0.3f, 0); // tail wind
+//		template.setCell(1, 0, 0, -1, 0.1f);
+		template.setCell(2, 0, 1, -1, 0.3f);
+		template.setCell(2, 1, 0.6f, 0);
+		template.setCell(2, 2, 1, 1, 0.3f);
+//		template.setCell(1, 2, 0, 1, 0.1f);
 	    ((AlgorithmApplyTemplate) alg).set_template(template);
 		return alg;
 	}
 	
-	public void draw() {
-	    // background(100); // reset
-
-		// draw matrix
-	    System.out.println("Energy: " + _matrices.currentGenMatrix().energy());
-		drawWindMatrix(_matrices.currentGenMatrix().getCells());
-		
-		// process the matrix
-		_matrices.process();
-	}
-
 	private int _colorIndex = 0;
 	public void drawWindMatrix(WindCell[][] cells) {
 		changeColor();
