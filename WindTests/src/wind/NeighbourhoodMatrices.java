@@ -7,15 +7,14 @@ public class NeighbourhoodMatrices extends BaseMatrices {
 	}
 	
 	public void update() {
-//		WindCell targetCell = this.otherMatrix().getCell(1, 1);
 		_algorithm.calculateResultVector(this);
 	}
 
 	@Override
 	public NeighbourhoodMatrix[] setupMatrices(int cols, int rows) {
 		NeighbourhoodMatrix matrices[] = new NeighbourhoodMatrix[2];
-		matrices[0] = new NeighbourhoodMatrix(cols, rows);
-		matrices[1] = new NeighbourhoodMatrix(cols, rows);
+		matrices[0] = new NeighbourhoodMatrix();
+		matrices[1] = new NeighbourhoodMatrix();
 		return matrices;
 	}
 

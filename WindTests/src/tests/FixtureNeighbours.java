@@ -9,7 +9,6 @@ import processing.core.PVector;
 import wind.AlgorithmApplyTemplate;
 import wind.BaseMatrices;
 import wind.NeighbourhoodMatrices;
-import wind.NeighbourhoodMatrix;
 import wind.TemplateMatrix;
 import wind.WindCell;
 import wind.WindMatrices;

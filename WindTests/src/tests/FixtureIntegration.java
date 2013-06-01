@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import wind.AlgorithmApplyTemplate;
-import wind.NeighbourhoodMatrix;
 import wind.TemplateMatrix;
 import wind.WindMatrices;
 

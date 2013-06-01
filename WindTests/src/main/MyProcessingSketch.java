@@ -2,7 +2,6 @@ package main;
 import processing.core.*;
 import wind.AlgorithmApplyTemplate;
 import wind.AlgorithmBase;
-import wind.NeighbourhoodMatrix;
 import wind.TemplateMatrix;
 import wind.WindCell;
 import wind.WindMatrices;
