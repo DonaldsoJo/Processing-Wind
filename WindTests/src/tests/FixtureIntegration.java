@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import wind.AlgorithmApplyTemplate;
 import wind.NeighbourhoodMatrix;
+import wind.TemplateMatrix;
 import wind.WindMatrices;
 
 public class FixtureIntegration {
@@ -44,7 +45,7 @@ public class FixtureIntegration {
 	public void conservationOfEnergy() {
 		// set up a matrix with a vector
 		// TODO: create a template matrix different to a neighbour matrix
-		NeighbourhoodMatrix template = new NeighbourhoodMatrix();
+		TemplateMatrix template = new TemplateMatrix();
 		template.setCell(2, 0, 1, -1, 0.1f);
 		template.setCell(2, 1, 1, 0, 0.8f);
 		template.setCell(2, 2, 1, 1, 0.1f);

@@ -14,7 +14,7 @@ public class AlgorithmApplyTemplate extends AlgorithmBase {
 		
 		// clone template as rectified matrix
 		// TODO: do I really need this clone? Use the template as a readonly reference and have a new matrix instead? Returned from getRectified
-		NeighbourhoodMatrix templateCopy = _template.cloneMatrix();
+		TemplateMatrix templateCopy = _template.cloneMatrix();
 		
 		// scalar multiply multiply template by mag to get rectified target
 		for(int col=0; col<3; col++)
@@ -56,13 +56,13 @@ public class AlgorithmApplyTemplate extends AlgorithmBase {
 		return sourceCopy;
 	}
 	
-	private NeighbourhoodMatrix _template;
+	private TemplateMatrix _template;
 
-	public NeighbourhoodMatrix get_template() {
+	public TemplateMatrix get_template() {
 		return _template;
 	}
 
-	public void set_template(NeighbourhoodMatrix template) {
+	public void set_template(TemplateMatrix template) {
 		_template = template;
 	}
 

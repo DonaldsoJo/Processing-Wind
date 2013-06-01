@@ -3,6 +3,7 @@ import processing.core.*;
 import wind.AlgorithmApplyTemplate;
 import wind.AlgorithmBase;
 import wind.NeighbourhoodMatrix;
+import wind.TemplateMatrix;
 import wind.WindCell;
 import wind.WindMatrices;
 import wind.WindMatrix;
@@ -126,7 +127,7 @@ public class MyProcessingSketch extends PApplet
 
 	public AlgorithmBase getAlgorithm() {
 		AlgorithmBase alg = AlgorithmBase.SelectAlgorithm(AlgorithmType.applyTemplate);
-	    NeighbourhoodMatrix template = new NeighbourhoodMatrix();
+		TemplateMatrix template = new TemplateMatrix();
 	    // 0.88 0.1
 	    // 0.6 0.3
 	    

@@ -10,6 +10,7 @@ import wind.AlgorithmApplyTemplate;
 import wind.BaseMatrices;
 import wind.NeighbourhoodMatrices;
 import wind.NeighbourhoodMatrix;
+import wind.TemplateMatrix;
 import wind.WindCell;
 import wind.WindMatrices;
 import wind.WindMatrix;
@@ -53,7 +54,7 @@ public class FixtureNeighbours {
 		
 		WindMatrices matrices = new MatrixMaker(5,5).setCell(2, 2, 11, 0).matrices();
 		AlgorithmApplyTemplate alg = new AlgorithmApplyTemplate();
-		NeighbourhoodMatrix template = new NeighbourhoodMatrix();
+		TemplateMatrix template = new TemplateMatrix();
 		template.setCell(2, 1, 1, 0);
 		alg.set_template(template);
 		matrices.setAlgorithm(alg);
@@ -86,30 +87,30 @@ public class FixtureNeighbours {
 	
 	@Test
 	public void cloneNeighbours() {
-		NeighbourhoodMatrix m = new NeighbourhoodMatrix();
-		NeighbourhoodMatrix n = m.cloneMatrix();
+		TemplateMatrix m = new TemplateMatrix();
+		TemplateMatrix n = m.cloneMatrix();
 		Assert.assertNotSame(m,n);
 	}
 	
 	@Test
 	public void clonedNeighbourCopiesVectorValues() {
-		NeighbourhoodMatrix m = new NeighbourhoodMatrix();
+		TemplateMatrix m = new TemplateMatrix();
 		m.setCell(1, 1, 11, 12);
-		NeighbourhoodMatrix n = m.cloneMatrix();
+		TemplateMatrix n = m.cloneMatrix();
 		Assert.assertEquals(m.getCell(1, 1).getWind().x, n.getCell(1, 1).getWind().x, 0);
 	}
 	
 	@Test
 	public void clonedNeighbourCopiesCellCoordinates() {
-		NeighbourhoodMatrix m = new NeighbourhoodMatrix();
-		NeighbourhoodMatrix n = m.cloneMatrix();
+		TemplateMatrix m = new TemplateMatrix();
+		TemplateMatrix n = m.cloneMatrix();
 		Assert.assertEquals(m.getCell(1, 1).getCol(), n.getCell(1, 1).getCol());
 	}
 	
 	@Test
 	public void clonedNeighbourHasDifferentVectors() {
-		NeighbourhoodMatrix m = new NeighbourhoodMatrix();
-		NeighbourhoodMatrix n = m.cloneMatrix();
+		TemplateMatrix m = new TemplateMatrix();
+		TemplateMatrix n = m.cloneMatrix();
 		Assert.assertNotSame(m.getCell(1, 1).getWind(), n.getCell(1, 1).getWind());
 	}
 	

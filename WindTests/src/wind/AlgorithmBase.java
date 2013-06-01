@@ -12,7 +12,7 @@ public abstract class AlgorithmBase {
 
 	public enum AlgorithmType{addAll, doNothing, applyTemplate};
 	
-	public static AlgorithmBase SelectAlgorithm(AlgorithmType atype, NeighbourhoodMatrix template) {
+	public static AlgorithmBase SelectAlgorithm(AlgorithmType atype, TemplateMatrix template) {
 		AlgorithmApplyTemplate a = (AlgorithmApplyTemplate) SelectAlgorithm(atype);
 		a.set_template(template);
 		return a;
@@ -23,7 +23,7 @@ public abstract class AlgorithmBase {
 		{
 		case applyTemplate:
 			AlgorithmApplyTemplate alg = new AlgorithmApplyTemplate();
-			NeighbourhoodMatrix template = new NeighbourhoodMatrix();
+			TemplateMatrix template = new TemplateMatrix();
 			template.setCell(2, 1, 1, 0);
 			alg.set_template(template);
 			return alg;
