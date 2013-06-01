@@ -3,9 +3,14 @@ package tests;
 import org.junit.Assert;
 import org.junit.Test;
 
+import processing.core.PVector;
+
 import wind.AlgorithmApplyTemplate;
+import wind.AlgorithmBase;
 import wind.TemplateMatrix;
 import wind.WindMatrices;
+import wind.WindMatrix;
+import wind.AlgorithmBase.AlgorithmType;
 
 public class FixtureIntegration {
 
@@ -68,4 +73,13 @@ public class FixtureIntegration {
 		
 	}
 	
+	@Test
+	public void getFlowFieldTest() {
+		int cols = 12;
+		int rows = 23;
+		PVector[][] flowField = WindMatrices.getFlowField(cols, rows);
+		Assert.assertEquals(cols, flowField.length);
+		Assert.assertEquals(rows, flowField[0].length);
+	}
+
 }

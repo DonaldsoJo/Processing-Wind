@@ -9,6 +9,8 @@ public abstract class BaseMatrices {
 		super();
 		_algorithm = updateAlgorithm;
 		_matrices = setupMatrices(cols, rows);
+		_noofCols = cols;
+		_noofRows = rows;
 		initMatrices(cols, rows);
 	}
 
@@ -26,6 +28,16 @@ public abstract class BaseMatrices {
 	}
 	
 	int _currentMatrixIndex = 0;
+	
+	int _noofCols;
+	public int getNoofCols() {
+		return _noofCols;
+	}
+
+	int _noofRows;
+	public int getNoofRows() {
+		return _noofRows;
+	}
 
 	protected WindMatrix[] _matrices;
 

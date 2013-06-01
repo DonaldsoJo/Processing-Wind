@@ -1,5 +1,8 @@
 package wind;
 
+import processing.core.PVector;
+import wind.AlgorithmBase.AlgorithmType;
+
 public class WindMatrices extends BaseMatrices
 {
 	public WindMatrices(int cols, int rows, AlgorithmBase updateAlgorithm)
@@ -55,4 +58,42 @@ public class WindMatrices extends BaseMatrices
 		flipMatrices();
 	}
 
+	public PVector[][] flowField() {
+		// TODO add test
+		PVector[][] flowVectors = new PVector[getNoofCols()][getNoofRows()];
+		for(int col=0; col<getNoofCols(); col++)
+			for(int row=0; row<getNoofRows(); row++) {
+				flowVectors[col][row] = currentGenMatrix().getCells()[col][row].getWind();
+			}
+		return flowVectors;
+	}
+
+	public static PVector[][] getFlowField(int cols, int rows) {
+		AlgorithmBase alg = createAlgorithm();
+	    WindMatrices matrices = new WindMatrices(cols,rows, alg);
+		for (int i=0; i<cols; i++){
+			pump(matrices.currentGenMatrix());
+			matrices.process();
+		}
+		return matrices.flowField();
+	}
+
+	private static void pump( WindMatrix m) {
+		int centre = m.getCells()[0].length/2;
+		int loBound = centre-centre/2;
+		int hiBound = centre+centre/2;
+		for(int row=loBound; row<=hiBound; row++){
+			m.setCell(0, row, 10, 0);
+		}
+	}
+
+	private static AlgorithmBase createAlgorithm() {
+		AlgorithmBase alg = AlgorithmBase.SelectAlgorithm(AlgorithmType.applyTemplate);
+		TemplateMatrix template = new TemplateMatrix();
+		template.setCell(2, 0, 1, -1, 0.1f);
+		template.setCell(2, 1, 0.88f, 0);
+		template.setCell(2, 2, 1, 1, 0.1f);
+	    ((AlgorithmApplyTemplate) alg).set_template(template);
+		return alg;
+	}
 }
