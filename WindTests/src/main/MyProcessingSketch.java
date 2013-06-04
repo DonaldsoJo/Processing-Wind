@@ -20,9 +20,10 @@ public class MyProcessingSketch extends PApplet
 	public void setup() {
 	    size(displayWidth,displayHeight);
 //	    size(310,210);
-	    frameRate(4);
+	    frameRate(25);
 //	    frameRate(0.2f);
-	    background(100);
+//	    background(100);
+		stroke(255,255,0);
 	    
 //	    int arrayWidth = 21; 
 //	    int arrayHeight = 21; 
@@ -34,20 +35,18 @@ public class MyProcessingSketch extends PApplet
 	    _matrices = new WindMatrices(arrayWidth,arrayHeight, alg);
 	    WindMatrix current = _matrices.currentGenMatrix();
 	    
-	    // TODO: think about friction
-	    // TODO: draw bolder lines
 	    // TODO: load tests and demos in a friendlier way
 	    // TODO: colliding winds - cancel out? Push sideways? Similar to obstacles
 	    // TODO: introduce obstacles
-	    // TODO: export flow field to Patrick
 	    // TODO: Patrick calls in to the wind library to generate the flow field, supplies parameters, supply obstacles
+	    // TODO: normalize vectors on output
 	    
 	    loadInitialVectors(current);
 	    
 	}
 
 	public void draw() {
-	    background(100); // reset
+	    background(0); // reset
 		
 		// add any new wind
 		pump();
@@ -142,7 +141,7 @@ public class MyProcessingSketch extends PApplet
 	
 	private int _colorIndex = 0;
 	public void drawWindMatrix(WindCell[][] cells) {
-		changeColor();
+//		changeColor();
 		for(int col=0; col<cells.length; col++ )
 			for(int row=0; row<cells[col].length; row++)
 			{

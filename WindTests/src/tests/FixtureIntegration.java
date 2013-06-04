@@ -6,11 +6,8 @@ import org.junit.Test;
 import processing.core.PVector;
 
 import wind.AlgorithmApplyTemplate;
-import wind.AlgorithmBase;
 import wind.TemplateMatrix;
 import wind.WindMatrices;
-import wind.WindMatrix;
-import wind.AlgorithmBase.AlgorithmType;
 
 public class FixtureIntegration {
 
@@ -62,13 +59,13 @@ public class FixtureIntegration {
 		Assert.assertEquals(10.0f, matrices.currentGenMatrix().energy(), 0);
 		
 		matrices.process();
-		System.out.println("Energy " + matrices.currentGenMatrix().energy());
-		Utils.printMatrixNonZeroValues(matrices.currentGenMatrix(), "after first update");
+//		System.out.println("Energy " + matrices.currentGenMatrix().energy());
+//		Utils.printMatrixNonZeroValues(matrices.currentGenMatrix(), "after first update");
 		Assert.assertEquals(10.0f, matrices.currentGenMatrix().energy(), 0);
 		
 		matrices.process();
-		System.out.println("Energy " + matrices.currentGenMatrix().energy());
-		Utils.printMatrixNonZeroValues(matrices.currentGenMatrix(), "after second update");
+//		System.out.println("Energy " + matrices.currentGenMatrix().energy());
+//		Utils.printMatrixNonZeroValues(matrices.currentGenMatrix(), "after second update");
 		Assert.assertEquals(10.0f, matrices.currentGenMatrix().energy(), 0.1); // leaked some energy
 		
 	}
@@ -77,9 +74,12 @@ public class FixtureIntegration {
 	public void getFlowFieldTest() {
 		int cols = 12;
 		int rows = 23;
-		PVector[][] flowField = WindMatrices.getFlowField(cols, rows);
+		int iterations = 10;
+		WindMatrices ms = new WindMatrices(cols,rows);
+		PVector[][] flowField = ms.getFlowField( iterations);
 		Assert.assertEquals(cols, flowField.length);
 		Assert.assertEquals(rows, flowField[0].length);
+		Assert.assertEquals(1, flowField[0][10].x, 0); // 1 and not 10 because normalized (and we pump the first column at the end now)
 	}
 
 }

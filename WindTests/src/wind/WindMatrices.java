@@ -3,8 +3,13 @@ package wind;
 import processing.core.PVector;
 import wind.AlgorithmBase.AlgorithmType;
 
-public class WindMatrices extends BaseMatrices
+public class WindMatrices extends BaseMatrices implements IFlowField
 {
+	public WindMatrices(int cols, int rows)
+	{
+		super( cols, rows, createAlgorithm());
+	}
+	
 	public WindMatrices(int cols, int rows, AlgorithmBase updateAlgorithm)
 	{
 		super( cols, rows, updateAlgorithm);
@@ -63,19 +68,24 @@ public class WindMatrices extends BaseMatrices
 		PVector[][] flowVectors = new PVector[getNoofCols()][getNoofRows()];
 		for(int col=0; col<getNoofCols(); col++)
 			for(int row=0; row<getNoofRows(); row++) {
-				flowVectors[col][row] = currentGenMatrix().getCells()[col][row].getWind();
+				PVector v = currentGenMatrix().getCells()[col][row].getWind();
+				v.normalize();
+				flowVectors[col][row] = v;
 			}
 		return flowVectors;
 	}
 
-	public static PVector[][] getFlowField(int cols, int rows) {
-		AlgorithmBase alg = createAlgorithm();
-	    WindMatrices matrices = new WindMatrices(cols,rows, alg);
-		for (int i=0; i<cols; i++){
-			pump(matrices.currentGenMatrix());
-			matrices.process();
+	/* (non-Javadoc)
+	 * @see wind.IFlowField#getFlowField(int, int)
+	 */
+	@Override
+	public PVector[][] getFlowField( int iterations) {
+		pump(currentGenMatrix());
+		for (int i=0; i<iterations; i++){
+			process();
+			pump(currentGenMatrix());
 		}
-		return matrices.flowField();
+		return flowField();
 	}
 
 	private static void pump( WindMatrix m) {
@@ -95,5 +105,11 @@ public class WindMatrices extends BaseMatrices
 		template.setCell(2, 2, 1, 1, 0.1f);
 	    ((AlgorithmApplyTemplate) alg).set_template(template);
 		return alg;
+	}
+
+	@Override
+	public void setTemplateCell(int col, int row, float x, float y, float mag) {
+		// TODO Auto-generated method stub
+		
 	}
 }
