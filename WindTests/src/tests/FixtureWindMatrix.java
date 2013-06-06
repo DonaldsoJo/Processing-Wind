@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import processing.core.PVector;
 
+import wind.CellBase;
 import wind.WindCell;
 import wind.WindMatrices;
 import wind.WindMatrix;
@@ -30,14 +31,14 @@ public class FixtureWindMatrix {
 	@Test
 	public void getCellFromMatrix() {
 		WindMatrix matrix = new MatrixMaker().setCell(0,1,1,1).matrices().currentGenMatrix();
-		WindCell left = matrix.getCell(0,1);
+		CellBase left = matrix.getCell(0,1);
 		Assert.assertEquals(1.0f, left.getWind().x, 0);
 	}
 
 	@Test
 	public void getLeft() {
 		WindMatrix matrix = new MatrixMaker().setCell(0,1,1,1).matrices().currentGenMatrix();
-		WindCell left = matrix.getLeft(1,1);
+		CellBase left = matrix.getLeft(1,1);
 		Assert.assertEquals(1.0f, left.getWind().x, 0);
 	}
 
@@ -96,7 +97,7 @@ public class FixtureWindMatrix {
 	public void clearNext()
 	{
 		WindMatrices matrices = new MatrixMaker().setOtherCell(1,1,1,1).matrices();
-		WindCell[][] otherCells = matrices.nextGenMatrix().getCells();
+		CellBase[][] otherCells = matrices.nextGenMatrix().getCells();
 		
 		Assert.assertEquals(1.0f, otherCells[1][1].getWind().x, 0);
 		matrices.clearNextGenCell(1,1);

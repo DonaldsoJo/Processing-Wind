@@ -28,20 +28,20 @@ public class WindMatrices extends BaseMatrices implements IFlowField
 	}
 
 	public void updateCells() {
-		for(WindCell[] cols : currentGenMatrix().getCells())
-			for(WindCell cell: cols)
+		for(CellBase[] cols : currentGenMatrix().getCells())
+			for(CellBase cell: cols)
 			{
 				NeighbourhoodMatrices neighbours = getNeighbours( cell);
 				neighbours.update();
 			}
 	}
 
-	public NeighbourhoodMatrices getNeighbours( WindCell cell) {
-		NeighbourhoodMatrices neighbours = new NeighbourhoodMatrices(3, 3, _algorithm);
+	public NeighbourhoodMatrices getNeighbours( CellBase cell) {
+		NeighbourhoodMatrices neighbours = new NeighbourhoodMatrices( _algorithm);
 		for(int col=0; col<3; col++)
 			for (int row=0; row<3; row++)
 			{
-				WindCell c = currentGenMatrix().getCell(col + cell.getCol() - 1, row + cell.getRow() - 1);
+				CellBase c = currentGenMatrix().getCell(col + cell.getCol() - 1, row + cell.getRow() - 1);
 				neighbours.currentGenMatrix().replaceCell(col,row,c);
 				
 				c = nextGenMatrix().getCell(col + cell.getCol() - 1, row + cell.getRow() - 1);
@@ -51,8 +51,8 @@ public class WindMatrices extends BaseMatrices implements IFlowField
 	}
 
 	public void clearNextGenMatrix() {
-		for (WindCell[] cols : nextGenMatrix().getCells())
-			for (WindCell cell : cols)
+		for (CellBase[] cols : nextGenMatrix().getCells())
+			for (CellBase cell : cols)
 				cell.clearCell();
 	}
 	
@@ -93,16 +93,16 @@ public class WindMatrices extends BaseMatrices implements IFlowField
 		int loBound = centre-centre/2;
 		int hiBound = centre+centre/2;
 		for(int row=loBound; row<=hiBound; row++){
-			m.setCell(0, row, 10, 0);
+			m.setWindCell(0, row, 10, 0);
 		}
 	}
 
 	private static AlgorithmBase createAlgorithm() {
 		AlgorithmBase alg = AlgorithmBase.SelectAlgorithm(AlgorithmType.applyTemplate);
 		TemplateMatrix template = new TemplateMatrix();
-		template.setCell(2, 0, 1, -1, 0.1f);
-		template.setCell(2, 1, 0.88f, 0);
-		template.setCell(2, 2, 1, 1, 0.1f);
+		template.setWindCell(2, 0, 1, -1, 0.1f);
+		template.setWindCell(2, 1, 0.88f, 0);
+		template.setWindCell(2, 2, 1, 1, 0.1f);
 	    ((AlgorithmApplyTemplate) alg).set_template(template);
 		return alg;
 	}

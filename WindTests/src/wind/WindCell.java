@@ -2,7 +2,7 @@ package wind;
 
 import processing.core.PVector;
 
-public class WindCell {
+public class WindCell extends CellBase {
 	
 	public WindCell(int col, int row) {
 		_col = col;
@@ -10,20 +10,12 @@ public class WindCell {
 	}
 
 	private PVector _wind = new PVector();
+	@Override
 	public PVector getWind() {
 		return _wind;
 	}
 
-	private int _col;
-	public int getCol() {
-		return _col;
-	}
-
-	private int _row;
-	public int getRow() {
-		return _row;
-	}
-
+	@Override
 	public void clearCell() {
 		_wind.x = 0;
 		_wind.y = 0;

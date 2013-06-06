@@ -31,7 +31,7 @@ public class FixtureTemplateAlgorithm {
 	public void applyForwardOnlyTemplate() {
 		WindMatrices nms = new MatrixMaker(3, 3).setAlgorithm(new AlgorithmApplyTemplate()).setCell(1, 1, 10, 0).matrices();
 		TemplateMatrix template = new TemplateMatrix();
-		template.setCell(2, 1, 1, 0);
+		template.setWindCell(2, 1, 1, 0);
 		AlgorithmApplyTemplate a = new AlgorithmApplyTemplate();
 		a.set_template(template);
 		
@@ -44,9 +44,9 @@ public class FixtureTemplateAlgorithm {
 	public void applyForwardWithSpillTemplate() {
 		WindMatrices nms = new MatrixMaker(3, 3).setAlgorithm(new AlgorithmApplyTemplate()).setCell(1, 1, 10, 0).matrices();
 		TemplateMatrix template = new TemplateMatrix();
-		template.setCell(2, 0, 1, 1, 0.1f);
-		template.setCell(2, 1, 0.8f, 0);
-		template.setCell(2, 2, 1, 1, 0.2f);
+		template.setWindCell(2, 0, 1, 1, 0.1f);
+		template.setWindCell(2, 1, 0.8f, 0);
+		template.setWindCell(2, 2, 1, 1, 0.2f);
 		AlgorithmApplyTemplate a = new AlgorithmApplyTemplate();
 		a.set_template(template);
 		
@@ -65,9 +65,9 @@ public class FixtureTemplateAlgorithm {
 //		System.out.println("source heading:" + heading + " degrees:" + Math.toDegrees(heading));
 		
 		TemplateMatrix template = new TemplateMatrix();
-		template.setCell(2, 0, 1, 1, 0.1f);
-		template.setCell(2, 1, 0.8f, 0);
-		template.setCell(2, 2, 1, 1, 0.2f);
+		template.setWindCell(2, 0, 1, 1, 0.1f);
+		template.setWindCell(2, 1, 0.8f, 0);
+		template.setWindCell(2, 2, 1, 1, 0.2f);
 		AlgorithmApplyTemplate a = new AlgorithmApplyTemplate();
 		a.set_template(template);
 		
@@ -84,7 +84,7 @@ public class FixtureTemplateAlgorithm {
 	@Test
 	public void rectifiedVectorHasExpectedMagnitudeAndHeading() {
 		TemplateMatrix template = new TemplateMatrix();
-		template.setCell(2, 1, 0.8f, 0);
+		template.setWindCell(2, 1, 0.8f, 0);
 		AlgorithmApplyTemplate a = new AlgorithmApplyTemplate();
 		a.set_template(template);
 
@@ -106,9 +106,9 @@ public class FixtureTemplateAlgorithm {
 //		System.out.println("source heading:" + heading + " degrees:" + Math.toDegrees(heading));
 		
 		TemplateMatrix template = new TemplateMatrix();
-		template.setCell(2, 0, 1, -1, 0.1f);
-		template.setCell(2, 1, 0.8f, 0);
-		template.setCell(2, 2, 1, 1, 0.1f);
+		template.setWindCell(2, 0, 1, -1, 0.1f);
+		template.setWindCell(2, 1, 0.8f, 0);
+		template.setWindCell(2, 2, 1, 1, 0.1f);
 		AlgorithmApplyTemplate a = new AlgorithmApplyTemplate();
 		a.set_template(template);
 		

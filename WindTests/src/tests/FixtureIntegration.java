@@ -47,9 +47,9 @@ public class FixtureIntegration {
 		// set up a matrix with a vector
 		// TODO: create a template matrix different to a neighbour matrix
 		TemplateMatrix template = new TemplateMatrix();
-		template.setCell(2, 0, 1, -1, 0.1f);
-		template.setCell(2, 1, 1, 0, 0.8f);
-		template.setCell(2, 2, 1, 1, 0.1f);
+		template.setWindCell(2, 0, 1, -1, 0.1f);
+		template.setWindCell(2, 1, 1, 0, 0.8f);
+		template.setWindCell(2, 2, 1, 1, 0.1f);
 		AlgorithmApplyTemplate alg = new AlgorithmApplyTemplate();
 		alg.set_template(template);
 		WindMatrices matrices = new MatrixMaker(5,5)

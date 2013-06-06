@@ -24,7 +24,7 @@ public abstract class AlgorithmBase {
 		case applyTemplate:
 			AlgorithmApplyTemplate alg = new AlgorithmApplyTemplate();
 			TemplateMatrix template = new TemplateMatrix();
-			template.setCell(2, 1, 1, 0);
+			template.setWindCell(2, 1, 1, 0);
 			alg.set_template(template);
 			return alg;
 		case addAll:

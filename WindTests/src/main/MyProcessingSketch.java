@@ -2,6 +2,7 @@ package main;
 import processing.core.*;
 import wind.AlgorithmApplyTemplate;
 import wind.AlgorithmBase;
+import wind.CellBase;
 import wind.TemplateMatrix;
 import wind.WindCell;
 import wind.WindMatrices;
@@ -66,7 +67,7 @@ public class MyProcessingSketch extends PApplet
 		int hiBound = centre+centre/2;
 //		System.out.println("centre=" + centre + " lo=" + loBound + " hi=" + hiBound);
 		for(int row=loBound; row<=hiBound; row++){
-			m.setCell(0, row, 10, 0);
+			m.setWindCell(0, row, 10, 0);
 		}
 	}
 
@@ -131,16 +132,16 @@ public class MyProcessingSketch extends PApplet
 	    
 //		template.setCell(0, 1, 0.3f, 0); // tail wind
 //		template.setCell(1, 0, 0, -1, 0.1f);
-		template.setCell(2, 0, 1, -1, 0.3f);
-		template.setCell(2, 1, 0.6f, 0);
-		template.setCell(2, 2, 1, 1, 0.3f);
+		template.setWindCell(2, 0, 1, -1, 0.3f);
+		template.setWindCell(2, 1, 0.6f, 0);
+		template.setWindCell(2, 2, 1, 1, 0.3f);
 //		template.setCell(1, 2, 0, 1, 0.1f);
 	    ((AlgorithmApplyTemplate) alg).set_template(template);
 		return alg;
 	}
 	
 	private int _colorIndex = 0;
-	public void drawWindMatrix(WindCell[][] cells) {
+	public void drawWindMatrix(CellBase[][] cells) {
 //		changeColor();
 		for(int col=0; col<cells.length; col++ )
 			for(int row=0; row<cells[col].length; row++)
@@ -149,7 +150,8 @@ public class MyProcessingSketch extends PApplet
 			}
 	}
 
-	private void drawCell(WindCell cell) {
+	private void drawCell(CellBase cell) {
+		// TODO: handle obstacle cells
 		pushMatrix();		
 //		translate(cell.getCol()*_resolution + _resolution + _xOffset, cell.getRow()*_resolution + _resolution);
 		translate(cell.getCol()*_resolution + _xOffset, cell.getRow()*_resolution);

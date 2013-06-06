@@ -61,8 +61,8 @@ public class MatrixMaker
 		return this;
 	}
 
-	public NeighbourhoodMatrices neighbours(int i, int j) {
-		return _matrices.getNeighbours(new WindCell(1,1));
+	public NeighbourhoodMatrices neighbours(int col, int row) {
+		return _matrices.getNeighbours(new WindCell(col,row));
 	}
 
 	public MatrixMaker setAlgorithm( AlgorithmBase algorithm) {

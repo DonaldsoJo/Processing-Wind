@@ -2,8 +2,8 @@ package wind;
 
 public class NeighbourhoodMatrices extends BaseMatrices {
 
-	public NeighbourhoodMatrices(int cols, int rows, AlgorithmBase updateAlgorithm) {
-		super(cols, rows, updateAlgorithm);
+	public NeighbourhoodMatrices(AlgorithmBase updateAlgorithm) {
+		super(3, 3, updateAlgorithm);
 	}
 	
 	public void update() {
@@ -16,6 +16,11 @@ public class NeighbourhoodMatrices extends BaseMatrices {
 		matrices[0] = new NeighbourhoodMatrix();
 		matrices[1] = new NeighbourhoodMatrix();
 		return matrices;
+	}
+
+	public void setObstacle(int col, int row) {
+		currentGenMatrix().setObstacle(col,row);
+		nextGenMatrix().setObstacle(col,row);
 	}
 
 }

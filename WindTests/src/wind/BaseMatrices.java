@@ -70,10 +70,12 @@ public abstract class BaseMatrices {
 	}
 
 	public void clearNextGenCell(int col, int row) {
-		nextGenMatrix().getCell(col, row).clearCell();
+		
+		CellBase cell = nextGenMatrix().getCell(col, row);
+		if (cell instanceof WindCell) ((WindCell) cell).clearCell();
 	}
 
 	public void updateNextGenCell(int col, int row, PVector newWind) {
-		nextGenMatrix().setCell(col, row, newWind.x, newWind.y);
+		nextGenMatrix().setWindCell(col, row, newWind.x, newWind.y);
 	}
 }

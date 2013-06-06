@@ -8,6 +8,7 @@ import processing.core.PVector;
 
 import wind.AlgorithmApplyTemplate;
 import wind.BaseMatrices;
+import wind.CellBase;
 import wind.NeighbourhoodMatrices;
 import wind.TemplateMatrix;
 import wind.WindCell;
@@ -20,7 +21,7 @@ public class FixtureNeighbours {
 		WindMatrix current = matrices.currentGenMatrix();
 		for( int col=0; col<current.getCells().length; col++)
 		{
-			WindCell[] cells = current.getCells()[col];
+			CellBase[] cells = current.getCells()[col];
 			for (int row=0; row<cells.length; row++)
 			{
 				PVector v = cells[row].getWind();
@@ -54,7 +55,7 @@ public class FixtureNeighbours {
 		WindMatrices matrices = new MatrixMaker(5,5).setCell(2, 2, 11, 0).matrices();
 		AlgorithmApplyTemplate alg = new AlgorithmApplyTemplate();
 		TemplateMatrix template = new TemplateMatrix();
-		template.setCell(2, 1, 1, 0);
+		template.setWindCell(2, 1, 1, 0);
 		alg.set_template(template);
 		matrices.setAlgorithm(alg);
 		NeighbourhoodMatrices neighbours = matrices.getNeighbours(new WindCell(2,2));
@@ -78,7 +79,7 @@ public class FixtureNeighbours {
 		
 		Assert.assertEquals(0.0f, neighbours.nextGenMatrix().getCell(1, 1).getWind().x, 0);
 		
-		neighbours.nextGenMatrix().setCell(1, 1, 12, 6);
+		neighbours.nextGenMatrix().setWindCell(1, 1, 12, 6);
 		
 		Assert.assertEquals(12.0f, neighbours.nextGenMatrix().getCell(1, 1).getWind().x, 0);
 		Assert.assertEquals(12.0f, matrices.nextGenMatrix().getCell(1, 1).getWind().x, 0);		
@@ -94,7 +95,7 @@ public class FixtureNeighbours {
 	@Test
 	public void clonedNeighbourCopiesVectorValues() {
 		TemplateMatrix m = new TemplateMatrix();
-		m.setCell(1, 1, 11, 12);
+		m.setWindCell(1, 1, 11, 12);
 		TemplateMatrix n = m.cloneMatrix();
 		Assert.assertEquals(m.getCell(1, 1).getWind().x, n.getCell(1, 1).getWind().x, 0);
 	}

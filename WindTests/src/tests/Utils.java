@@ -1,6 +1,7 @@
 package tests;
 
 import wind.BaseMatrices;
+import wind.CellBase;
 import wind.WindCell;
 import wind.WindMatrix;
 
@@ -14,10 +15,11 @@ public class Utils {
 	public static void printMatrix(WindMatrix matrix, String title) {
 		System.out.println();
 		System.out.println(title);
-		for(WindCell[] cols : matrix.getCells())
+		for(CellBase[] cols : matrix.getCells())
 		{
-			for(WindCell cell : cols)
+			for(CellBase cell : cols)
 			{
+				// TODO: handle obstacle cells
 				System.out.println( "Col " + cell.getCol() + ", Row " + cell.getRow() + ", xval " + cell.getWind().x + ", yval " + cell.getWind().y);
 			}
 		}
@@ -26,10 +28,11 @@ public class Utils {
 	public static void printMatrixNonZeroValues(WindMatrix matrix, String title) {
 		System.out.println();
 		System.out.println(title);
-		for(WindCell[] cols : matrix.getCells())
+		for(CellBase[] cols : matrix.getCells())
 		{
-			for(WindCell cell : cols)
+			for(CellBase cell : cols)
 			{
+				// TODO: handle obstacle cells
 				if (cell.getWind().mag() > 0)
 					System.out.println( 
 							"col=" + cell.getCol() + 

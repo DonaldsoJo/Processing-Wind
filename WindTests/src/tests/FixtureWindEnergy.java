@@ -17,8 +17,8 @@ public class FixtureWindEnergy {
 	@Test
 	public void individualWindEnergySumsToTotalEnergy() {
 		WindMatrix m = new WindMatrix(5, 6);
-		m.setCell(1, 1, 10, 0);
-		m.setCell(2, 2, 0, 10);
+		m.setWindCell(1, 1, 10, 0);
+		m.setWindCell(2, 2, 0, 10);
 		
 		Assert.assertEquals(20.0f, m.energy());
 	}
