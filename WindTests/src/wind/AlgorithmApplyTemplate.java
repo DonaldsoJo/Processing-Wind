@@ -16,12 +16,14 @@ public class AlgorithmApplyTemplate extends AlgorithmBase {
 		// TODO: do I really need this clone? Use the template as a readonly reference and have a new matrix instead? Returned from getRectified
 		TemplateMatrix templateCopy = _template.cloneMatrix();
 		
-		// scalar multiply multiply template by mag to get rectified target
-		for(int col=0; col<3; col++)
-			for (int row=0; row<3; row++) {
-				getRectifiedTarget(source, templateCopy, col, row);
-			}
+		applyTemplateToLocalCopy(source, templateCopy);
 		
+		transferResultToNextGen(nextgen, source, templateCopy);
+				
+	}
+
+	public void transferResultToNextGen(NeighbourhoodMatrix nextgen,
+			PVector source, TemplateMatrix templateCopy) {
 		// transfer non-zero cells from rectified to correct target octant
 		Octant oct = new Octant(source.heading());
 		for(int col=0; col<3; col++)
@@ -29,11 +31,29 @@ public class AlgorithmApplyTemplate extends AlgorithmBase {
 				PVector v = templateCopy.getCell(col, row).getWind();
 				if (v.mag() > 0){
 					ColAndRow cr = oct.rotatedColAndRow(col, row);
-					PVector target = nextgen.getCell(cr.c, cr.r).getWind();
-					target.add(v);
+					CellBase cell = nextgen.getCell(cr.c, cr.r);
+					if (cell instanceof WindCell){
+						handleWindCellTarget(v, cell);						
+					}
+					else if (cell instanceof ObstacleCell){
+						// TODO: add obstacle handling
+					}
 				}
 			}
-				
+	}
+
+	public void handleWindCellTarget(PVector v, CellBase cell) {
+		PVector target = cell.getWind();
+		target.add(v);
+	}
+
+	public void applyTemplateToLocalCopy(PVector source,
+			TemplateMatrix templateCopy) {
+		// scalar multiply multiply template by mag to get rectified target
+		for(int col=0; col<3; col++)
+			for (int row=0; row<3; row++) {
+				getRectifiedTarget(source, templateCopy, col, row);
+			}
 	}
 
 	public PVector getRectifiedTarget(PVector source, NeighbourhoodMatrix result, int col, int row) {

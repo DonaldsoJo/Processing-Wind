@@ -4,7 +4,6 @@ import wind.AlgorithmApplyTemplate;
 import wind.AlgorithmBase;
 import wind.CellBase;
 import wind.TemplateMatrix;
-import wind.WindCell;
 import wind.WindMatrices;
 import wind.WindMatrix;
 import wind.AlgorithmBase.AlgorithmType;

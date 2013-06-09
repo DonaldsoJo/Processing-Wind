@@ -1,15 +1,12 @@
 package tests;
 
-import static org.junit.Assert.*;
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import wind.AlgorithmApplyTemplate;
 import wind.CellBase;
 import wind.NeighbourhoodMatrices;
 import wind.ObstacleCell;
-import wind.WindCell;
 
 public class FixtureObstacles {
 

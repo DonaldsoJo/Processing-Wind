@@ -2,7 +2,6 @@ package tests;
 
 import wind.BaseMatrices;
 import wind.CellBase;
-import wind.WindCell;
 import wind.WindMatrix;
 
 public class Utils {
