@@ -10,7 +10,7 @@ public abstract class AlgorithmBase {
 
 	public abstract void calculateResultVector(NeighbourhoodMatrices neighbours);
 
-	public enum AlgorithmType{addAll, doNothing, applyTemplate};
+	public enum AlgorithmType{addAll, doNothing, applyTemplate, applyTemplateAndObstacles};
 	
 	public static AlgorithmBase SelectAlgorithm(AlgorithmType atype, TemplateMatrix template) {
 		AlgorithmApplyTemplate a = (AlgorithmApplyTemplate) SelectAlgorithm(atype);
@@ -19,14 +19,21 @@ public abstract class AlgorithmBase {
 	}
 	
 	public static AlgorithmBase SelectAlgorithm(AlgorithmType atype) {
+		TemplateMatrix template;
 		switch(atype)
 		{
-		case applyTemplate:
-			AlgorithmApplyTemplate alg = new AlgorithmApplyTemplate();
-			TemplateMatrix template = new TemplateMatrix();
+		case applyTemplateAndObstacles:
+			AlgorithmTemplateAndObstacles algtao = new AlgorithmTemplateAndObstacles();
+			template = new TemplateMatrix();
 			template.setWindCell(2, 1, 1, 0);
-			alg.set_template(template);
-			return alg;
+			algtao.set_template(template);
+			return algtao;
+		case applyTemplate:
+			AlgorithmApplyTemplate algat = new AlgorithmApplyTemplate();
+			template = new TemplateMatrix();
+			template.setWindCell(2, 1, 1, 0);
+			algat.set_template(template);
+			return algat;
 		case addAll:
 			return new AlgorithmAddAll();
 		case doNothing:

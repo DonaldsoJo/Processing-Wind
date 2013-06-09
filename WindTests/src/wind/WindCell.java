@@ -5,8 +5,7 @@ import processing.core.PVector;
 public class WindCell extends CellBase {
 	
 	public WindCell(int col, int row) {
-		_col = col;
-		_row = row;
+		super(col, row);
 	}
 
 	private PVector _wind = new PVector();

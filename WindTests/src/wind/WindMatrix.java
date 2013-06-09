@@ -62,7 +62,7 @@ public class WindMatrix {
 	}
 
 	public void setObstacle(int col, int row) {
-		_cells[col][row] = new ObstacleCell();
+		_cells[col][row] = new ObstacleCell(col,row);
 	}
 
 }

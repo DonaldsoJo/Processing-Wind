@@ -4,6 +4,12 @@ import processing.core.PVector;
 
 public abstract class CellBase {
 
+	public CellBase(int col, int row) {
+		super();
+		_col = col;
+		_row = row;
+	}
+
 	public abstract PVector getWind();
 	public abstract void clearCell();
 
@@ -12,10 +18,6 @@ public abstract class CellBase {
 
 	public int getCol() {
 		return _col;
-	}
-
-	public CellBase() {
-		super();
 	}
 
 	public int getRow() {

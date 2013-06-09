@@ -7,8 +7,14 @@ public class Octant {
 		_octant = fromHeadingToOctant();
 	}
 
+	public Octant(ColAndRow index) {
+		_index = index;
+		_octant = _octantIndexedByColAndRow[index.r][index.c];
+	}
+
 	private float _heading;
 	private int _octant;
+	private ColAndRow _index;
 	
 	public int octant() {
 		return _octant;
@@ -53,6 +59,23 @@ public class Octant {
 		if ((_heading > -fivePiOver8) && (_heading <= -threePiOver8)) return 6;
 		if ((_heading > -threePiOver8) && (_heading <= -onePiOver8)) return 7;
 		return 0;
+	}
+
+	public Octant clockwise() {
+		int oct = _octant + 1;
+		if (oct > 7) oct = oct - 8;
+		return new Octant(_colsAndRowsIndexedByOctant[oct]);
+	}
+
+	public Octant anticlockwise() {
+		int oct = _octant - 1;
+		if (oct < 0) oct = oct + 8;
+		return new Octant(_colsAndRowsIndexedByOctant[oct]);
+	}
+
+	public ColAndRow getIndex() {
+		// TODO Auto-generated method stub
+		return _colsAndRowsIndexedByOctant[_octant];
 	}
 
 }
