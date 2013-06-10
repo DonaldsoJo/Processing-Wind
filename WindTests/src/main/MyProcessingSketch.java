@@ -5,6 +5,7 @@ import wind.AlgorithmApplyTemplate;
 import wind.AlgorithmBase;
 import wind.AlgorithmTemplateAndObstacles;
 import wind.CellBase;
+import wind.ColAndRow;
 import wind.ObstacleCell;
 import wind.TemplateMatrix;
 import wind.WindCell;
@@ -140,7 +141,20 @@ public class MyProcessingSketch extends PApplet {
 		int hiBound = centre+centre/2;
 
 //		verticalBlock(current, next, loBound, hiBound);
-		diagonalBlock(current, next, loBound, hiBound);
+//		diagonalBlock(current, next, loBound, hiBound);
+		circleBlock(_matrices, loBound, hiBound);
+	}
+
+	private void circleBlock(WindMatrices matrices, int loBound, int hiBound) {
+		for(int col=-15; col<=15; col++){
+			int row = (int) Math.sqrt(225-col*col);
+			int colInc = 60;
+			int rowInc = 60;
+			for (int extraRow=0; extraRow<6; extraRow++){
+				matrices.setObstacle(col+colInc, row+rowInc+extraRow);
+				matrices.setObstacle(col+colInc, -row+rowInc+extraRow);
+			}
+		}	
 	}
 
 	private void diagonalBlock(WindMatrix current, WindMatrix next,

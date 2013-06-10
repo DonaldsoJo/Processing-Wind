@@ -112,4 +112,9 @@ public class WindMatrices extends BaseMatrices implements IFlowField
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void setObstacle(int col, int row) {
+		currentGenMatrix().setObstacle(col, row);
+		nextGenMatrix().setObstacle(col, row);
+	}
 }
