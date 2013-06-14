@@ -7,7 +7,7 @@ import org.junit.Test;
 import wind.AlgorithmTemplateAndObstacles;
 import wind.AlgorithmTemplateAndObstacles.Rotation;
 import wind.CellBase;
-import wind.ColAndRow;
+import wind.Coords;
 import wind.NeighbourhoodMatrices;
 import wind.NeighbourhoodMatrix;
 import wind.ObstacleCell;
@@ -36,47 +36,47 @@ findFirstCell
 		NeighbourhoodMatrices nms = new MatrixMaker(5,5).neighbours(1, 2);
 		NeighbourhoodMatrix nextgen = (NeighbourhoodMatrix) nms.nextGenMatrix();
 		CellBase targetCell = nextgen.getCell(2, 3);
-		ColAndRow result = AlgorithmTemplateAndObstacles.findMatchingCellInNeighbours(targetCell, nextgen);
+		Coords result = AlgorithmTemplateAndObstacles.findMatchingCellInNeighbours(targetCell, nextgen);
 		Assert.assertNotNull(result);
 		// bottom right of neighbours
-		Assert.assertEquals(2, result.c);
-		Assert.assertEquals(2, result.r);
+		Assert.assertEquals(2, result.col);
+		Assert.assertEquals(2, result.row);
 	}
 
 	@Test
 	public void octantClockwiseFromTopLeft(){
-		ColAndRow index = new ColAndRow(0, 0);
+		Coords index = new Coords(0, 0);
 		Octant o = new Octant(index).clockwise();
-		ColAndRow newIndex = o.getIndex();
-		Assert.assertEquals(1, newIndex.c);
-		Assert.assertEquals(0, newIndex.r);
+		Coords newIndex = o.getIndex();
+		Assert.assertEquals(1, newIndex.col);
+		Assert.assertEquals(0, newIndex.row);
 	}
 
 	@Test
 	public void octantAntiClockwiseFromTopLeft(){
-		ColAndRow index = new ColAndRow(0, 0);
+		Coords index = new Coords(0, 0);
 		Octant o = new Octant(index).anticlockwise();
-		ColAndRow newIndex = o.getIndex();
-		Assert.assertEquals(0, newIndex.c);
-		Assert.assertEquals(1, newIndex.r);
+		Coords newIndex = o.getIndex();
+		Assert.assertEquals(0, newIndex.col);
+		Assert.assertEquals(1, newIndex.row);
 	}
 
 	@Test
 	public void octantClockwiseFromBottomRight(){
-		ColAndRow index = new ColAndRow(2, 2);
+		Coords index = new Coords(2, 2);
 		Octant o = new Octant(index).clockwise();
-		ColAndRow newIndex = o.getIndex();
-		Assert.assertEquals(1, newIndex.c);
-		Assert.assertEquals(2, newIndex.r);
+		Coords newIndex = o.getIndex();
+		Assert.assertEquals(1, newIndex.col);
+		Assert.assertEquals(2, newIndex.row);
 	}
 
 	@Test
 	public void octantAntiClockwiseFromBottomRight(){
-		ColAndRow index = new ColAndRow(2, 2);
+		Coords index = new Coords(2, 2);
 		Octant o = new Octant(index).anticlockwise();
-		ColAndRow newIndex = o.getIndex();
-		Assert.assertEquals(2, newIndex.c);
-		Assert.assertEquals(1, newIndex.r);
+		Coords newIndex = o.getIndex();
+		Assert.assertEquals(2, newIndex.col);
+		Assert.assertEquals(1, newIndex.row);
 	}
 
 	@Test
@@ -84,11 +84,11 @@ findFirstCell
 		NeighbourhoodMatrices nms = new MatrixMaker(5,5).neighbours(1, 2);
 		NeighbourhoodMatrix nextgen = (NeighbourhoodMatrix) nms.nextGenMatrix();
 		CellBase targetCell = nextgen.getCell(2, 3);
-		ColAndRow result = AlgorithmTemplateAndObstacles.findFirstCell(targetCell, Rotation.clockwise, nextgen);
+		Coords result = AlgorithmTemplateAndObstacles.findFirstCell(targetCell, Rotation.clockwise, nextgen);
 		Assert.assertNotNull(result);
 		
 		// get the cell in the underlying matrix
-		CellBase c = nextgen.getCell(result.c, result.r);
+		CellBase c = nextgen.getCell(result.col, result.row);
 		Assert.assertEquals(1, c.getCol());
 		Assert.assertEquals(3, c.getRow());
 	}
@@ -98,11 +98,11 @@ findFirstCell
 		NeighbourhoodMatrices nms = new MatrixMaker(5,5).neighbours(1, 2);
 		NeighbourhoodMatrix nextgen = (NeighbourhoodMatrix) nms.nextGenMatrix();
 		CellBase targetCell = nextgen.getCell(2, 3);
-		ColAndRow result = AlgorithmTemplateAndObstacles.findFirstCell(targetCell, Rotation.antiClockwise, nextgen);
+		Coords result = AlgorithmTemplateAndObstacles.findFirstCell(targetCell, Rotation.antiClockwise, nextgen);
 		Assert.assertNotNull(result);
 		
 		// get the cell in the underlying matrix
-		CellBase c = nextgen.getCell(result.c, result.r);
+		CellBase c = nextgen.getCell(result.col, result.row);
 		Assert.assertEquals(2, c.getCol());
 		Assert.assertEquals(2, c.getRow());
 	}

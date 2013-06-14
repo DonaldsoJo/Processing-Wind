@@ -1,11 +1,9 @@
 package main;
 
 import processing.core.*;
-import wind.AlgorithmApplyTemplate;
 import wind.AlgorithmBase;
 import wind.AlgorithmTemplateAndObstacles;
 import wind.CellBase;
-import wind.ColAndRow;
 import wind.ObstacleCell;
 import wind.TemplateMatrix;
 import wind.WindCell;
@@ -44,10 +42,8 @@ public class MyProcessingSketch extends PApplet {
 		// TODO: load tests and demos in a friendlier way
 		// TODO: colliding winds - cancel out? Push sideways? Similar to
 		// obstacles
-		// TODO: introduce obstacles
 		// TODO: Patrick calls in to the wind library to generate the flow
 		// field, supplies parameters, supply obstacles
-		// TODO: normalize vectors on output
 
 		loadInitialVectors(current);
 
@@ -70,8 +66,10 @@ public class MyProcessingSketch extends PApplet {
 	private void pump() {
 		WindMatrix m = _matrices.currentGenMatrix();
 		int centre = m.getCells()[0].length / 2;
-		int loBound = centre - centre / 2;
-		int hiBound = centre + centre / 2;
+//		int loBound = centre - centre / 2;
+//		int hiBound = centre + centre / 2;
+		int loBound = 1; // because of edge block at 0
+		int hiBound = m.getCells()[0].length-2;
 		// System.out.println("centre=" + centre + " lo=" + loBound + " hi=" +
 		// hiBound);
 		for (int row = loBound; row <= hiBound; row++) {
@@ -81,6 +79,7 @@ public class MyProcessingSketch extends PApplet {
 
 	public void loadInitialVectors(WindMatrix current) {
 		block();
+		edgeBlocks();
 
 		// current.setCell(8, 10, -30, 0);
 		// current.setCell(12, 10, 30, 0);
@@ -133,48 +132,66 @@ public class MyProcessingSketch extends PApplet {
 		// current.setCell(0,15,3,-3);
 	}
 
+	private void edgeBlocks() {
+		WindMatrix current = _matrices.currentGenMatrix();
+		int colMax = current.getCells().length-1;
+		int rowMax = current.getCells()[0].length-1;
+
+		rectangularBlock(_matrices, 0, colMax, 0, 0);
+		rectangularBlock(_matrices, 0, colMax, rowMax, rowMax);
+	}
+
 	public void block() {
 		WindMatrix current = _matrices.currentGenMatrix();
-		WindMatrix next = _matrices.nextGenMatrix();
 		int centre = current.getCells()[0].length/2;
 		int loBound = centre-centre/2;
 		int hiBound = centre+centre/2;
 
-//		verticalBlock(current, next, loBound, hiBound);
-//		diagonalBlock(current, next, loBound, hiBound);
-		circleBlock(_matrices, loBound, hiBound);
+//		rectangularBlock(_matrices, 100, 101, loBound, hiBound);
+//		rectangularBlock(_matrices, 80, 100, loBound, loBound+1);
+//		rectangularBlock(_matrices, 80, 100, hiBound, hiBound+1);
+//		diagonalBlock(_matrices, loBound, hiBound);
+		circleBlock(_matrices, 10, 30, 20);
+		circleBlock(_matrices, 9, 40, 60);
+		circleBlock(_matrices, 8, 50, 100);
+		circleBlock(_matrices, 7, 100, 40);
+		circleBlock(_matrices, 6, 120, 80);
 	}
 
-	private void circleBlock(WindMatrices matrices, int loBound, int hiBound) {
-		for(int col=-15; col<=15; col++){
-			int row = (int) Math.sqrt(225-col*col);
-			int colInc = 60;
-			int rowInc = 60;
-			for (int extraRow=0; extraRow<6; extraRow++){
-				matrices.setObstacle(col+colInc, row+rowInc+extraRow);
-				matrices.setObstacle(col+colInc, -row+rowInc+extraRow);
-			}
-		}	
-	}
-
-	private void diagonalBlock(WindMatrix current, WindMatrix next,
-			int loBound, int hiBound) {
-		for(int col=10; col<=12; col++){
-			int colIncrement = 0;
-			for(int row=loBound; row<=hiBound; row++){
-				current.setObstacle(col+colIncrement, row);
-				next.setObstacle(col+colIncrement, row);
-				colIncrement++;
+	private void rectangularBlock(WindMatrices matrices, int loCol,
+			int hiCol, int loRow, int hiRow) {
+		for(int col=loCol; col<=hiCol; col++){
+			for(int row=loRow; row<=hiRow; row++){
+				matrices.setObstacle(col, row);
 			}
 		}
 	}
 
-	private void verticalBlock(WindMatrix current, WindMatrix next, int loBound,
-			int hiBound) {
-		for(int col=10; col<=15; col++){
+	private void circleBlock(WindMatrices matrices, int radius, int colOffset, int rowOffset) {
+		for(int col=-radius; col<=radius; col++){
+			int row = (int) Math.sqrt(radius*radius-col*col);
+			int obstacleColumn = col+colOffset;
+			for (int extraRow=-2; extraRow<3; extraRow++){
+				setObstacle( matrices, obstacleColumn, row+rowOffset+extraRow);
+				setObstacle( matrices, obstacleColumn, -row+rowOffset+extraRow);
+			}
+		}	
+	}
+
+	private void setObstacle(WindMatrices matrices, int col, int row) {
+		if ((col >= 0) && (col<matrices.getNoofCols()))
+			if ((row >= 0) && (row<matrices.getNoofRows())){
+				matrices.setObstacle(col, row);
+			}
+	}
+
+	private void diagonalBlock(WindMatrices matrices,
+			int loBound, int hiBound) {
+		for(int col=10; col<=12; col++){
+			int colIncrement = 0;
 			for(int row=loBound; row<=hiBound; row++){
-				current.setObstacle(col, row);
-				next.setObstacle(col, row);
+				matrices.setObstacle(col+colIncrement, row);
+				colIncrement++;
 			}
 		}
 	}
@@ -188,9 +205,9 @@ public class MyProcessingSketch extends PApplet {
 
 		// template.setCell(0, 1, 0.3f, 0); // tail wind
 		// template.setCell(1, 0, 0, -1, 0.1f);
-		template.setWindCell(2, 0, 1, -1, 0.3f);
-		template.setWindCell(2, 1, 0.6f, 0);
-		template.setWindCell(2, 2, 1, 1, 0.3f);
+		template.setWindCell(2, 0, 1, -1, 0.15f);
+		template.setWindCell(2, 1, 0.8f, 0);
+		template.setWindCell(2, 2, 1, 1, 0.15f);
 		// template.setCell(1, 2, 0, 1, 0.1f);
 		((AlgorithmTemplateAndObstacles) alg).set_template(template); // TODO:
 																		// this

@@ -42,8 +42,8 @@ public class AlgorithmTemplateAndObstacles extends AlgorithmBase {
 	}
 
 	public CellBase getRotatedCellAtOctant(NeighbourhoodMatrix nextgen, Octant sourceOctant, int col, int row) {
-		ColAndRow sourceCr = sourceOctant.rotatedColAndRow(col, row);
-		CellBase targetCell = nextgen.getCell(sourceCr.c, sourceCr.r);
+		Coords sourceCr = sourceOctant.rotatedColAndRow(col, row);
+		CellBase targetCell = nextgen.getCell(sourceCr.col, sourceCr.row);
 		return targetCell;
 	}
 	
@@ -53,6 +53,8 @@ public class AlgorithmTemplateAndObstacles extends AlgorithmBase {
 		// half the inbound vector - the wind goes both ways round the obstacle
 		PVector clockwiseV = splitVector(vTarget, (float) (Math.PI/4));
 		PVector anticlockwiseV = splitVector(vTarget, (float) (-Math.PI/4));
+//		PVector clockwiseV = splitVector(vTarget, (float) (3*Math.PI/4));
+//		PVector anticlockwiseV = splitVector(vTarget, (float) (-3*Math.PI/4));
 		
 		// starting from the target octant (it is an obstacle) look clockwise for the first wind cell
 		assignSplitWindToNextWindCell(clockwiseV, targetCell, Rotation.clockwise, nextgen);
@@ -70,22 +72,22 @@ public class AlgorithmTemplateAndObstacles extends AlgorithmBase {
 
 	public static void assignSplitWindToNextWindCell(
 			PVector vTarget, CellBase targetCell, Rotation direction, NeighbourhoodMatrix nextgen) {
-		ColAndRow firstCell = findFirstCell( targetCell, direction, nextgen);	
+		Coords firstCell = findFirstCell( targetCell, direction, nextgen);	
 		if (firstCell != null){
-			CellBase newTargetCell = nextgen.getCell(firstCell.c, firstCell.r);
+			CellBase newTargetCell = nextgen.getCell(firstCell.col, firstCell.row);
 			newTargetCell.getWind().add(vTarget);			
 		}
 	}
 
-	public static ColAndRow findFirstCell(CellBase targetCell, Rotation direction, NeighbourhoodMatrix nextgen) {
+	public static Coords findFirstCell(CellBase targetCell, Rotation direction, NeighbourhoodMatrix nextgen) {
 		// find where this cell is in the neighbours - TOD: consider passing this in as we surely know it?
 		
-		ColAndRow cellIndexInNeighbours = findMatchingCellInNeighbours(targetCell, nextgen);
+		Coords cellIndexInNeighbours = findMatchingCellInNeighbours(targetCell, nextgen);
 		Octant o = new Octant(cellIndexInNeighbours);
 		
 		o = (direction == Rotation.clockwise) ? o.clockwise() : o.anticlockwise();
 		cellIndexInNeighbours = o.getIndex();
-		CellBase c = nextgen.getCell(cellIndexInNeighbours.c, cellIndexInNeighbours.r);
+		CellBase c = nextgen.getCell(cellIndexInNeighbours.col, cellIndexInNeighbours.row);
 		
 		// get next cell in the direction until a wind found or reached end
 		int cellsInspected = 1;
@@ -93,12 +95,12 @@ public class AlgorithmTemplateAndObstacles extends AlgorithmBase {
 			cellsInspected++;
 			o = (direction == Rotation.clockwise) ? o.clockwise() : o.anticlockwise();
 			cellIndexInNeighbours = o.getIndex();
-			c = nextgen.getCell(cellIndexInNeighbours.c, cellIndexInNeighbours.r);
+			c = nextgen.getCell(cellIndexInNeighbours.col, cellIndexInNeighbours.row);
 		}
 		return (c instanceof WindCell) ? cellIndexInNeighbours : null;
 	}
 
-	public static ColAndRow findMatchingCellInNeighbours(CellBase targetCell,
+	public static Coords findMatchingCellInNeighbours(CellBase targetCell,
 			NeighbourhoodMatrix nextgen) {
 //		System.out.println("Target col=" + targetCell.getCol() + " row=" + targetCell.getRow());
 		for(int col=0; col<nextgen.getCells().length; col++)
@@ -106,7 +108,7 @@ public class AlgorithmTemplateAndObstacles extends AlgorithmBase {
 //				System.out.println("Index col=" + col + " row=" + row);
 				CellBase c = nextgen.getCell(col, row);
 //				System.out.println("Source col=" + c.getCol() + " row=" + c.getRow());
-				if ((targetCell.getCol() == c.getCol()) && (targetCell.getRow() == c.getRow())) return new ColAndRow(col, row);
+				if ((targetCell.getCol() == c.getCol()) && (targetCell.getRow() == c.getRow())) return new Coords(col, row);
 			}
 		return null; // TODO: do we come here from edge cases? Where the target cell is outside the array?
 	}

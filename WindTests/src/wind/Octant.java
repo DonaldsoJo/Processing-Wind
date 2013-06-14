@@ -7,28 +7,26 @@ public class Octant {
 		_octant = fromHeadingToOctant();
 	}
 
-	public Octant(ColAndRow index) {
-		_index = index;
-		_octant = _octantIndexedByColAndRow[index.r][index.c];
+	public Octant(Coords index) {
+		_octant = _octantIndexedByColAndRow[index.row][index.col];
 	}
 
 	private float _heading;
 	private int _octant;
-	private ColAndRow _index;
 	
 	public int octant() {
 		return _octant;
 	}
 	
-	private ColAndRow[] _colsAndRowsIndexedByOctant = {
-			new ColAndRow(2,1), // octant 0
-			new ColAndRow(2,2),
-			new ColAndRow(1,2),
-			new ColAndRow(0,2), // octant 3
-			new ColAndRow(0,1),
-			new ColAndRow(0,0),
-			new ColAndRow(1,0), // octant 6
-			new ColAndRow(2,0)
+	private Coords[] _colsAndRowsIndexedByOctant = {
+			new Coords(2,1), // octant 0
+			new Coords(2,2),
+			new Coords(1,2),
+			new Coords(0,2), // octant 3
+			new Coords(0,1),
+			new Coords(0,0),
+			new Coords(1,0), // octant 6
+			new Coords(2,0)
 	};
 	
 	private int[][] _octantIndexedByColAndRow = {
@@ -37,7 +35,7 @@ public class Octant {
 			{3, 2, 1}
 	};
 
-	public ColAndRow rotatedColAndRow(int col, int row) {
+	public Coords rotatedColAndRow(int col, int row) {
 		int startOctant = _octantIndexedByColAndRow[row][col];
 		int targetOctant = (startOctant + _octant) % 8;
 //		System.out.println("start=" + startOctant + " target=" + targetOctant);
@@ -73,8 +71,7 @@ public class Octant {
 		return new Octant(_colsAndRowsIndexedByOctant[oct]);
 	}
 
-	public ColAndRow getIndex() {
-		// TODO Auto-generated method stub
+	public Coords getIndex() {
 		return _colsAndRowsIndexedByOctant[_octant];
 	}
 

@@ -30,8 +30,8 @@ public class AlgorithmApplyTemplate extends AlgorithmBase {
 			for (int row=0; row<3; row++) {
 				PVector v = templateCopy.getCell(col, row).getWind();
 				if (v.mag() > 0){
-					ColAndRow cr = oct.rotatedColAndRow(col, row);
-					CellBase cell = nextgen.getCell(cr.c, cr.r);
+					Coords cr = oct.rotatedColAndRow(col, row);
+					CellBase cell = nextgen.getCell(cr.col, cr.row);
 					if (cell instanceof WindCell){
 						handleWindCellTarget(v, cell);						
 					}
